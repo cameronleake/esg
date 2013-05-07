@@ -1,0 +1,26 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: esg_development
+  pool: 5
+  username: esg
+  host: localhost
+  password: survive99
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: esg_test
+  pool: 5
+  username: esg
+  host: localhost
+  password: survive99
+
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: esg_production
+#   pool: 5
+#   username: esg
+#   password: survive99
+#   timeout: 5000
