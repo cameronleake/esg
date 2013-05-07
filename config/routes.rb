@@ -1,8 +1,5 @@
 Esg::Application.routes.draw do
 
-  resources :users
-
-
   root :to => "home#index"
   
   match 'ebook' => 'home#ebook'
@@ -10,7 +7,9 @@ Esg::Application.routes.draw do
   match 'blog' => 'articles#index'
   match 'faq' => 'home#faq'
 
+  resources :users
   resources :articles
+  resources :sessions
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
