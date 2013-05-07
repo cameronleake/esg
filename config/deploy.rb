@@ -12,12 +12,12 @@ set :scm, "git"
 set :repository, "git@github.com:cameronleake/#{application}.git"
 set :branch, "master"
 
-set :default_environment, { 
-  'PATH' => "/home/deployer/.rvm/rubies/ruby-1.9.3-p392/bin:/home/deployer/.rvm/gems/ruby-1.9.3-p392/bin:/home/deployer/.rvm/bin:$PATH",
-  'RUBY_VERSION' => 'ruby 1.9.3',
-  'GEM_HOME' => '/home/deployer/.rvm/gems/ruby-1.9.3-p392',
-  'GEM_PATH' => '/home/deployer/.rvm/gems/ruby-1.9.3-p392' 
-}
+# set :default_environment, { 
+#   'PATH' => "/home/deployer/.rvm/rubies/ruby-1.9.3-p392/bin:/home/deployer/.rvm/gems/ruby-1.9.3-p392/bin:/home/deployer/.rvm/bin:$PATH",
+#   'RUBY_VERSION' => 'ruby 1.9.3',
+#   'GEM_HOME' => '/home/deployer/.rvm/gems/ruby-1.9.3-p392',
+#   'GEM_PATH' => '/home/deployer/.rvm/gems/ruby-1.9.3-p392' 
+# }
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
