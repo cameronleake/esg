@@ -16,11 +16,11 @@ test:
   host: localhost
   password: survive99
 
-# production:
-#   adapter: postgresql
-#   encoding: unicode
-#   database: esg_production
-#   pool: 5
-#   username: esg
-#   password: survive99
-#   timeout: 5000
+  # production:
+  #   adapter: postgresql
+  #   encoding: unicode
+  #   database: esg_production
+  #   pool: 5
+  #   host: localhost
+  #   username: esg
+  #   password: survive99
