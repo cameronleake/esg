@@ -1,5 +1,8 @@
 Esg::Application.routes.draw do
 
+  resources :users
+
+
   root :to => "home#index"
   
   match 'ebook' => 'home#ebook'
