@@ -1,7 +1,5 @@
 Esg::Application.routes.draw do
 
-  get "password_resets/new"
-
   root :to => "home#index"
   
   match 'ebook' => 'home#ebook'
@@ -16,6 +14,9 @@ Esg::Application.routes.draw do
   resources :articles
   resources :sessions
   resources :password_resets
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

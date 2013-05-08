@@ -11,6 +11,7 @@ gem 'bootstrap-sass'
 gem 'bootswatch-rails'
 gem 'therubyracer', :require => 'v8'
 gem 'less-rails'
+gem 'activeadmin'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
