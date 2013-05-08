@@ -7,8 +7,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to root_url, notice: "Thank you for signing up!"
+      cookies[:auth_token] = @user.auth_token    # Save new auth_token in a temporary cookie
+      @user.send_welcome_email  
+      redirect_to root_url, notice: "Welcome to Engineering Survival Guide!"
     else
       render "new"
     end

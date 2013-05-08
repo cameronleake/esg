@@ -1,9 +1,16 @@
 class User < ActiveRecord::Base
   has_secure_password
-
   attr_accessible :email, :password, :password_confirmation
+  attr_writer :password_required
+  validates_presence_of :password, :on => :create
+  validates_presence_of :password, :on => :update, :if => Proc.new { |m| m.password_required == true }
+  validates_presence_of :email
   validates_uniqueness_of :email
   before_create { generate_token(:auth_token) }
+  
+  def password_required
+    @password_required || false
+  end
   
   def generate_token(column)
     begin
@@ -16,6 +23,10 @@ class User < ActiveRecord::Base
     self.password_reset_sent_at = Time.zone.now
     save!
     UserMailer.password_reset(self).deliver
+  end
+    
+  def send_welcome_email
+    UserMailer.welcome_message(self).deliver
   end
   
 end
