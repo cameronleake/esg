@@ -9,14 +9,21 @@ Esg::Application.routes.draw do
   match 'signup' => 'users#new'
   match 'login' => 'sessions#new'
   match 'logout' => 'sessions#destroy'
+  match 'contact' => 'contacts#new'
 
   resources :users
   resources :articles
   resources :sessions
   resources :password_resets
+  resources :contacts
+  resources :email_verifications do
+    member do
+      get 'sendmessage'
+    end
+  end
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  devise_for :admin_users, ActiveAdmin::Devise.config
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

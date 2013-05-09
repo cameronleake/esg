@@ -25,7 +25,7 @@ describe "FACTORIES:" do
   end
   
   context "CONTACT Factory:" do
-    xit "Should create a CONTACT with all fields in the CONTACTS table" do
+    it "Should create a CONTACT with all fields in the CONTACTS table" do
       @contact = FactoryGirl.create(:contact)
       Contact.find(:last).name.should eq(@contact.name)
       Contact.find(:last).email.should eq(@contact.email)

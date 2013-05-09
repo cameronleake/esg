@@ -9,10 +9,9 @@ describe "SIGN UP:" do
       fill_in "user_password", :with => @user.password
       fill_in "user_password_confirmation", :with => @user.password
       click_button "Sign Up"
-      pp @user.email
-      pp last_email.to
       last_email.to.should include(@user.email)
       last_email.subject.should include("Welcome")
+      last_email.should have_content(User.find(:last).email_verification_token)
     end
   end
   

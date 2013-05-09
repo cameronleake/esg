@@ -2,6 +2,7 @@ ActiveAdmin.register User do
    menu :priority => 3
    
    filter :email
+   filter :email_verified
    filter :created_at
    filter :updated_at
    filter :password_reset_sent_at
@@ -12,6 +13,11 @@ ActiveAdmin.register User do
    index do
      selectable_column
      column :email
+     column :email_verified, :sortable => :email_verified do |user|
+       div :class => "email_verified" do 
+         user.email_verified
+       end
+     end
      column :created_at
      column :updated_at
      column :password_reset_sent_at
@@ -21,6 +27,7 @@ ActiveAdmin.register User do
    form do |f|                         
      f.inputs "New User" do       
        f.input :email
+       f.input :email_verified
        f.input :password
        f.input :password_confirmation
      end                               

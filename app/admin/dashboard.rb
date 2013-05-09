@@ -5,6 +5,18 @@ ActiveAdmin.register_page "Dashboard" do
   content :title => proc{ I18n.t("active_admin.dashboard") } do
 
     columns do
+        column do
+          panel "Recent Contact Tickets" do
+            table_for Contact.last(5).reverse do
+              column ("subject") {|contact| link_to(contact.subject, admin_contact_path(contact)) } 
+              column :created_at
+            end
+            strong { link_to "View All Contact Tickets", admin_contacts_path }
+          end
+        end
+      end
+
+    columns do
       column do
         panel "Recent Users" do
           table_for User.last(5).reverse do
