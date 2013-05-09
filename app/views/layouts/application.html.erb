@@ -37,7 +37,7 @@
 				      <div class="nav-collapse collapse pull-right">
 				    		<ul class="nav">
 								<% if current_user %>
-									<li><%= link_to "Profile", "#" %></li>
+									<li><%= link_to "Profile", profile_path %></li>
 									<li class="divider-vertical"></li>
 									<li><%= link_to "Logout", logout_path("current"), method: "delete" %></li>
 								<% else %>
