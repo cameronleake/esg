@@ -2,3 +2,9 @@
 
 require ::File.expand_path('../config/environment',  __FILE__)
 run Esg::Application
+
+if Rails.env.production?
+  DelayedJobWeb.use Rack::Auth::Basic do |username, password|
+    username == 'admin' && password == 'survive99'
+  end
+end

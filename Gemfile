@@ -17,6 +17,8 @@ gem 'less-rails'
 gem 'activeadmin'
 gem "factory_girl_rails"
 gem "delayed_job_active_record"
+gem "delayed_job_web"
+gem "daemons"
 
 group :test, :development do
   gem "rspec-rails"

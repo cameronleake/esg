@@ -35,5 +35,7 @@ Esg::Application.routes.draw do
   if Rails.env.development?
     mount MailPreview => 'mail_view'
   end
+  
+  match "/delayed_job" => DelayedJobWeb, :anchor => false
 
 end
