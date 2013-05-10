@@ -1,29 +1,22 @@
-<h1>Contact Us</h1>
+<%- model_class = Contact -%>
 
-<%= form_for @contact do |f| %>
+	<div class="page-header">
+  		<h2>Contact Us</h2>
+	</div>
 
-	<p>Please drop us a line for any suggestions, issues, bugs or just to say hi!</p>
+	<%= simple_form_for @contact, :html => { :class => 'form-horizontal' } do |f| %>
+	
+	<div class="controls">
+		<p>Please drop us a line for any suggestions, issues, bugs or just to say hi!</p>
+	</div>
+	
+	  	<%= f.input :name %>
+	  	<%= f.input :email %>
+	  	<%= f.input :subject, :input_html => { :style => "width:320px" } %>
+	  	<%= f.input :body, as: :text, :label => "Message", :input_html => { :style => "width:320px", :rows => 12 } %>
 
-  	<div class="field">
-   	<%= f.label :name %><br />
-    	<%= f.text_field :name %>
- 	</div>
-
-  	<div class="field">
-    	<%= f.label :email %><br />
-    	<%= f.text_field :email %>
+  	<div class="form-actions">
+   	<%= f.button :submit, :value => "Submit", :class => 'btn-primary' %>
   	</div>
-
-  	<div class="field">
-    	<%= f.label :subject %><br />
-    	<%= f.text_field :subject %>
-  	</div>
-
-  	<div class="field">
-    	<%= f.label :body %><br />
-    	<%= f.text_field :body %>
-  	</div>
-
-  	<div class="actions"><%= f.submit "Submit" %></div>
 
 <% end %>

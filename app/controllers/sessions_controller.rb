@@ -11,15 +11,18 @@ class SessionsController < ApplicationController
       else
         cookies[:auth_token] = @user.auth_token  
       end
-      
+
       if @user.email_verified == false
         redirect_to root_path, :alert => "Email address not yet verified! #{ActionController::Base.helpers.link_to "Click here to send verification email.", sendmessage_email_verification_path(@user)}".html_safe
       else
         redirect_to root_path, :notice => "Logged in!"
       end
       
+    elsif @user && !@user.authenticate(params[:password])
+      flash.now.alert = "Incorrect password."
+      render "new"
     else
-      flash.now.alert = "Invalid email or password"
+      flash.now.alert = "Email address not found. Please sign up!"
       render "new"
     end
   end

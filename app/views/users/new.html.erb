@@ -1,34 +1,16 @@
 <%- model_class = User -%>
 
-<div class="page-header">
-  <h2>Sign Up</h2>
-</div>
+	<div class="page-header">
+	  <h2>Sign Up</h2>
+	</div>
 
-<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+	<%= simple_form_for(@user, :html => {:class => 'form-horizontal' }) do |f| %>
+		<%= f.input :email %>
+		<%= f.input :password %>
+		<%= f.input :password_confirmation %>
+	
+	  	<div class="form-actions">
+	    	<%= f.button :submit, :value => "Sign Up", :class => 'btn-primary' %>
+	  	</div>
 
-  <div class="control-group">
-    <%= f.label :email, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :email, :class => 'text_field' %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :password, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.password_field :password, :class => 'text_field' %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :password_confirmation, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.password_field :password_confirmation, :class => 'text_field' %>
-    </div>
-  </div>
-
-  <div class="form-actions">
-    <%= f.submit nil, :value => "Sign Up", :class => 'btn btn-primary' %>
-  </div>
-
-<% end %>
+	<% end %>

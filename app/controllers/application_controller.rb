@@ -2,7 +2,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   def authorize
-    redirect_to login_url, alert: "Not authorized" if current_user.nil?
+    if current_user.nil?
+      redirect_to login_url, alert: "Not authorized"
+    elsif current_user.email_verified == false
+      redirect_to root_url, :alert => "Email address not yet verified!"
+    end
   end
   
   private

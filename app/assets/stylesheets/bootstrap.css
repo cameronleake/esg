@@ -2881,6 +2881,7 @@ table th[class*="span"],
 
 .dropdown-toggle {
   *margin-bottom: -3px;
+	margin-right: 10px;  /* EDITED FOR ESG*/
 }
 
 .dropdown-toggle:active,
@@ -4408,7 +4409,7 @@ input[type="submit"].btn.btn-mini {
   display: block;
   float: left;
   padding: 20px 20px 20px;
-  margin-left: -20px;
+  margin-left: 0px;  /* EDITED FOR ESG*/
   font-size: 20px;
   font-weight: 200;
   color: #000000;

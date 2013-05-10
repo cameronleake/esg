@@ -9,7 +9,7 @@ class PasswordResetsController < ApplicationController
       @user.delay.send_password_reset
       redirect_to root_url, :notice => "Email sent with password reset instructions."
     else
-      flash.now.alert = "Invalid email address."
+      flash.now.alert = "Email address not found."
       render "new"
     end
   end
@@ -26,7 +26,6 @@ class PasswordResetsController < ApplicationController
     elsif @user.update_attributes(params[:user])
       redirect_to root_path, :notice => "Password has been reset!"
     else
-      flash.now.alert = "Invalid password."      
       render :edit
     end
   end

@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   validates_presence_of :password, :on => :update, :if => Proc.new { |m| m.password_required == true }
   validates_presence_of :email
+  validates :email, format: {
+    with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
+  }
   validates_uniqueness_of :email
   before_create { generate_token(:auth_token) }
   

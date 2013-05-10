@@ -24,7 +24,6 @@ class UsersController < ApplicationController
       @user.delay.send_welcome_email  
       redirect_to root_url, notice: "Welcome to Engineering Survival Guide! Please check your inbox and verify your email address."
     else
-      flash.now.alert = "Invalid email or password."
       render "new"  
     end
   end

@@ -17,6 +17,7 @@ Esg::Application.routes.draw do
   match '500' => 'home#500'  
 
   get 'users', to: 'users#show', as: 'users'
+  get 'reset_password', to: 'password_resets#new', as: 'reset_password'
   
   resources :users
   resources :articles
