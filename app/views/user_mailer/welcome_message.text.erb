@@ -1,7 +1,20 @@
-Hello <%= @user.email %>
+<%= image_tag attachments['Email_Header-ESG.jpg'].url, :alt => 'Email Header - ESG' %>
 
-Welcome to Engineering Survival Guide!
+<h2>Hello <%= @user.email %>!</h2>
 
-To verify this email address for your Engineering Survival Guide account, please follow the link below:
+<strong>Welcome! </strong>The team here at Engineering Survival Guide are very proud to have you onboard as part of our Alpha-release, sharing the journey as we grow and expand.  We are constantly updating, improving and growing bigger and better so check back regularly to see whats new!
 
-<%= edit_email_verification_url(@user.email_verification_token) %>
+<strong>Confirm Email: </strong>To confirm your email address and validate your new account, please follow this link: <strong><%= edit_email_verification_url(@user.email_verification_token) %></strong>
+
+<strong>Account Details: </strong>For your reference your account details are as follows:
+<strong>Email: </strong> <%= "#{@user.email}" %>
+<strong>Password: </strong><%= "#{@user.password}" %>
+
+<strong>Contact Us: </strong>Here at ESG we pride ourselves on User-Driven Development.  That is, we build what you, the user, wants!  We would love to hear what you think of Elephund, any suggestions you have for improvements, new features or anything else you'd like to tell us.  You can contact us at anytime here: <a href="http://www.engineeringsurvivalguide.com/contact" target="_blank">Contact Us</a>
+
+<strong>Login: </strong><a href="http://www.engineeringsurvivalguide.com/login" target="_blank">Log Into Engineering Survival Guide Here</a>
+
+
+
+Copyright: 2013 Engineering Survival Guide, All rights reserved.
+<a href="http://www.engineeringsurvivalguide.com" target="_blank">EngineeringSurvivalGuide.com</a>

@@ -16,10 +16,12 @@ gem 'therubyracer', :require => 'v8'
 gem 'less-rails'
 gem 'activeadmin'
 gem "factory_girl_rails"
+gem "delayed_job_active_record"
 
 group :test, :development do
   gem "rspec-rails"
   gem "growl"
+  gem "mail_view", :git => 'https://github.com/37signals/mail_view.git'
 end
 
 group :test do

@@ -7,8 +7,7 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(params[:contact])
     if @contact.save
-      # @contact.delay.send_contact_form
-      @contact.send_contact_form      
+      @contact.delay.send_contact_form      
       redirect_to root_path, notice: "Form submitted!"
     else
       flash.now.alert = "Please fill in all fields."

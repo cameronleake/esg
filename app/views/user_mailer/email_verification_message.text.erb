@@ -1,5 +1,12 @@
-Hello <%= @user.email %>!
+<%= image_tag attachments['Email_Header-ESG.jpg'].url, :alt => 'Email Header - ESG' %>
+
+<h2>Hello <%= @user.email %>!</h2>
 
 To verify this email address for your Engineering Survival Guide account, please follow the link below:
 
-<%= edit_email_verification_url(@user.email_verification_token) %>
+<strong><%= edit_email_verification_url(@user.email_verification_token) %></strong>
+
+
+
+Copyright: 2013 Engineering Survival Guide, All rights reserved.
+<a href="http://www.engineeringsurvivalguide.com" target="_blank">EngineeringSurvivalGuide.com</a>

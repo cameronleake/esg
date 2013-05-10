@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/37signals/mail_view.git
+  revision: 2e2b00897cb79b1a6924240b43a7521915efe215
+  specs:
+    mail_view (1.0.1)
+      tilt
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -76,6 +83,11 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     commonjs (0.2.6)
+    delayed_job (3.0.5)
+      activesupport (~> 3.0)
+    delayed_job_active_record (0.4.4)
+      activerecord (>= 2.1.0, < 4)
+      delayed_job (~> 3.0)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -273,6 +285,7 @@ DEPENDENCIES
   capistrano
   capybara
   coffee-rails (~> 3.2.1)
+  delayed_job_active_record
   factory_girl_rails
   growl
   guard-livereload
@@ -281,6 +294,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   less-rails
+  mail_view!
   pg
   rails (= 3.2.13)
   rb-fsevent
