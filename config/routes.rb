@@ -32,10 +32,6 @@ Esg::Application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
   
-  if Rails.env.development?
-    mount MailPreview => 'mail_view'
-  end
-  
   match "/delayed_job" => DelayedJobWeb, :anchor => false
 
 end
