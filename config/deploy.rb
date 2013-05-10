@@ -1,5 +1,5 @@
 require "bundler/capistrano"
-require "delayed/recipies"
+require "delayed/recipes"
 
 server "182.160.154.120", :web, :app, :db, primary: true
 
