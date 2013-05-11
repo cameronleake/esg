@@ -65,6 +65,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (0.8.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.0.9)
@@ -226,6 +229,7 @@ GEM
     ref (1.0.4)
     responders (0.9.3)
       railties (~> 3.1)
+    rmagick (2.13.2)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
@@ -295,6 +299,7 @@ DEPENDENCIES
   bootswatch-rails
   capistrano
   capybara
+  carrierwave
   coffee-rails (~> 3.2.1)
   daemons
   delayed_job_active_record
@@ -310,6 +315,7 @@ DEPENDENCIES
   pg
   rails (= 3.2.13)
   rb-fsevent
+  rmagick
   rspec-rails
   sass-rails (~> 3.2.3)
   simple_form

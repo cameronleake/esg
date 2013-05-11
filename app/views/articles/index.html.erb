@@ -13,12 +13,15 @@
 		
 					<div class="page-header">
 						<h3><%= link_to article.title, article_path(article) %></h3>
+						<%= image_tag article.featured_image_url(:thumb).to_s %>
 					</div>
-		
-					<p><%= article.body %></p>
-		
-					<a href=<%= article_path(article) %> class="btn btn-primary">View Post</a>
-		
+					
+					<%= article.body %>	
+							
+					<div class="form-actions">
+						<a href=<%= article_path(article) %> class="btn btn-primary">View</a>
+					</div>
+					
 				</div>
 			<% end %>
 		</div>
@@ -31,8 +34,7 @@
 			<div class="page-header">
 			  	<h3>Subscribe</h3>
 			</div>
-			<p>Sign up to receive the latest on the Blog Posts directly to your inbox!</p>
-				
+			<p>Sign up to receive the latest Blog Posts directly to your inbox!</p>
 				
 			<a href=<%= "#" %> class="btn btn-warning">Subscribe</a>
 		</div>

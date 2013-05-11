@@ -3,10 +3,12 @@
 	<div class="page-header">
   		<h2><%= @article.title %></h2>
 		<p><%= @article.created_at %></p>
+		<p><%= image_tag @article.featured_image_url(:header).to_s %></p>
 	</div>
-
+	
   	<p><%= @article.body %></p>
 
 	<div class="form-actions">
 		<a href=<%= articles_path %> class="btn">Back to the Blog</a>
+		<a href=<%= edit_article_path(@article) %> class="btn btn-warning">Edit</a>
 	</div>

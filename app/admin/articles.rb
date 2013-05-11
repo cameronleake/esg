@@ -11,8 +11,8 @@ ActiveAdmin.register Article do
 
   index do
     selectable_column
+    column :id    
     column :title
-    column :body
     column :created_at
     column :updated_at
     default_actions
@@ -21,9 +21,10 @@ ActiveAdmin.register Article do
   form do |f|                         
     f.inputs "New Article" do       
       f.input :title              
-      f.input :body, as: :text        
+      f.input :body, as: :text   
+      f.input :featured_image, :as => :file
     end                               
     f.actions                         
   end
-  
+
 end

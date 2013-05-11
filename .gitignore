@@ -20,3 +20,6 @@
 # Ignore all .DS_Store files
 *.DS_Store
 /app/views/*.DS_Store
+
+# Ignore all Uploaded Images from Development Env
+/public/uploads
