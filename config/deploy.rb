@@ -63,8 +63,4 @@ namespace :deploy do
     end
   end
   before "deploy", "deploy:check_revision"
-  
-  run "/etc/init.d/unicorn_my_app stop"
-  run "/etc/init.d/unicorn_my_app start"
-  run "sudo service nginx restart"
 end
