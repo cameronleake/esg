@@ -3,7 +3,11 @@ class ArticlesController < ApplicationController
   before_filter :authorize, only: [:edit, :update]
   
   def index
-    @articles = Article.find(:all, :order => "created_at DESC")
+    if params[:tag]
+      @articles = Article.tagged_with(params[:tag]).order("created_at DESC")
+    else
+      @articles = Article.find(:all, :order => "created_at DESC")
+    end
   end
 
   def show

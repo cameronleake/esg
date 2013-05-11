@@ -7,7 +7,7 @@
 			<div class="page-header">
 			  	<h2>Blog</h2>
 			</div>
-
+			
 		 	<% @articles.each do |article| %>
 				<div class="hero-unit">
 		
@@ -20,6 +20,7 @@
 							
 					<div class="form-actions">
 						<a href=<%= article_path(article) %> class="btn btn-primary">View</a>
+						<p><%= display_tag_links(article) %></p>
 					</div>
 					
 				</div>
@@ -30,6 +31,14 @@
 			<div class="page-header">
 			  	<h3>Featured Posts</h3>
 			</div>
+			
+			<div class="page-header">
+			  	<h3>Categories</h3>
+			</div>
+			
+			<% tag_cloud Article.tag_counts, %w{s m l} do |tag| %>
+		    	<h4><%= link_to tag.name, tag_path(tag.name) %></h4>
+		  	<% end %>
 			
 			<div class="page-header">
 			  	<h3>Subscribe</h3>

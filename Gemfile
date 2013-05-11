@@ -22,6 +22,7 @@ gem "daemons"
 gem "simple_form"
 gem "carrierwave"
 gem "rmagick"
+gem "acts-as-taggable-on"
 
 group :test, :development do
   gem "rspec-rails"

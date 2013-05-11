@@ -18,6 +18,7 @@ Esg::Application.routes.draw do
 
   get 'users', to: 'users#show', as: 'users'
   get 'reset_password', to: 'password_resets#new', as: 'reset_password'
+  get 'tags/:tag', to: 'articles#index', as: :tag
   
   resources :users
   resources :articles
