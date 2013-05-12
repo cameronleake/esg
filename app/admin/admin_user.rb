@@ -1,6 +1,6 @@
 ActiveAdmin.register AdminUser do
-  menu :priority => 5
-   
+  menu :priority => 6
+
   filter :email  
   
   config.sort_order = "last_sign_in_at_desc"

@@ -15,7 +15,7 @@ describe "PASSWORD RESETS:" do
   context "When requesting password reset:" do
     it "Emails user with reset link", focus: true do
       visit login_path
-      click_link "Password"
+      click_link "Reset"
       fill_in "Email", :with => @user.email
       click_button "Reset"
       current_path.should eq(root_path)
@@ -25,11 +25,11 @@ describe "PASSWORD RESETS:" do
 
     it "Does not email invalid user when requesting password reset" do
       visit login_path
-      click_link "Password"
+      click_link "Reset"
       fill_in "Email", :with => "nobody@example.com"
       click_button "Reset"
       current_path.should eq(password_resets_path)
-      page.should have_content("Invalid email address")
+      page.should have_content("Email address not found")
       last_email.should be_nil
     end
   end
@@ -54,7 +54,7 @@ describe "PASSWORD RESETS:" do
       visit edit_password_reset_url(@user.password_reset_token)
       click_button "Update"
       current_path.should eq("/password_resets/#{@user.password_reset_token}")
-      page.should have_content("Invalid password")
+      page.should have_content("Incorrect password")
     end
   end
 end

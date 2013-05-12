@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130511133753) do
+ActiveRecord::Schema.define(:version => 20130512144220) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -53,6 +53,16 @@ ActiveRecord::Schema.define(:version => 20130511133753) do
     t.datetime "updated_at",     :null => false
     t.string   "featured_image"
   end
+
+  create_table "blog_comments", :force => true do |t|
+    t.string   "commenter"
+    t.text     "body"
+    t.integer  "article_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "blog_comments", ["article_id"], :name => "index_blog_comments_on_article_id"
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -106,6 +116,8 @@ ActiveRecord::Schema.define(:version => 20130511133753) do
     t.datetime "password_reset_sent_at"
     t.boolean  "email_verified",           :default => false
     t.string   "email_verification_token"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
 end

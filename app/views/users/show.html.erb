@@ -4,23 +4,59 @@
 	 	<h2>Profile</h2>
 	</div>
 
-	<div class="simple_form form-horizontal">
-
-		<dl class="dl-horizontal">
-		  	<dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-		  	<dd><%= @user.email %></dd>
-		</dl>
-
-		<dl class="dl-horizontal">
-		  	<dt><strong>Email Verified:</strong></dt>
-		  	<dd><%= @user.email_verified.yesno %></dd>
-		</dl>
-
-		<div class="form-actions">
-			<a href=<%= edit_user_path(@user) %> class="btn btn-primary">Edit Profile</a>
-			<% if @user.email_verified == false %>
-				<a href=<%= sendmessage_email_verification_path(@user) %> class="btn btn-warning">Send Verification Email</a>
-			<% end %>
-		</div>
+	<div class="tabbable">
+		
+	  <ul class="nav nav-tabs">
+	    <li class="active"><a href="#tab1" data-toggle="tab"><h4>User Details</h4></a></li>
+	    <li><a href="#tab2" data-toggle="tab"><h4>Subscriptions</h4></a></li>
+	    <li><a href="#tab3" data-toggle="tab"><h4>Change Password</h4></a></li>
+	  </ul>
 	
+	  <div class="tab-content">
+	    <div class="tab-pane active" id="tab1">
+	      <h4>You can manage your user account details here.</h4><br \>
+			<div class="simple_form form-horizontal">
+
+				<dl class="dl-horizontal">
+				  	<dt><strong>First Name:</strong></dt>
+				  	<dd><%= @user.first_name %></dd>
+				</dl>
+
+				<dl class="dl-horizontal">
+				  	<dt><strong>Last Name:</strong></dt>
+				  	<dd><%= @user.last_name %></dd>
+				</dl>
+
+				<dl class="dl-horizontal">
+				  	<dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+				  	<dd><%= @user.email %></dd>
+				</dl>
+
+				<dl class="dl-horizontal">
+				  	<dt><strong>Email Verified:</strong></dt>
+				  	<dd><%= @user.email_verified.yesno %></dd>
+				</dl>
+				
+
+
+				<div class="form-actions">
+					<a href=<%= edit_user_path(@user) %> class="btn btn-primary">Edit Profile</a>
+					<% if @user.email_verified == false %>
+						<a href=<%= sendmessage_email_verification_path(@user) %> class="btn btn-warning">Send Verification Email</a>
+					<% end %>
+				</div>
+			</div>
+	    </div>
+	
+	    <div class="tab-pane" id="tab2">
+	      <h4>You can manage your ESG subscriptions here.</h4><br \>
+	      <p>New ESG Blog Posts</p>
+	      <p>New Resources Available for download in the Resource Centre</p>
+	    </div>
+	
+	    <div class="tab-pane" id="tab3">
+	      <h4>You can change your account password here.</h4><br \>
+	    </div>
+	
+	  </div>
 	</div>

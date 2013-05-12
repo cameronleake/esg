@@ -1,5 +1,5 @@
 ActiveAdmin.register Contact do
-  menu :priority => 4
+  menu :priority => 5
   menu :label => "Contact Tickets"
   
   filter :name
@@ -28,6 +28,5 @@ ActiveAdmin.register Contact do
     end                               
     f.actions                         
   end          
-  
   
 end

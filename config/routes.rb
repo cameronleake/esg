@@ -21,15 +21,17 @@ Esg::Application.routes.draw do
   get 'tags/:tag', to: 'articles#index', as: :tag
   
   resources :users
-  resources :articles
+  resources :articles do
+    resources :blog_comments
+  end
   resources :sessions
   resources :password_resets
-  resources :contacts
   resources :email_verifications do
     member do
       get 'sendmessage'
     end
   end
+  resources :contacts
 
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config

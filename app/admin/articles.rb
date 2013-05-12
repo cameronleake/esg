@@ -1,10 +1,11 @@
 ActiveAdmin.register Article do
-  menu :priority => 2
-       
+  menu :priority => 3
+
   filter :title
   filter :body
   filter :created_at   
   filter :updated_at
+  filter :tag_list
   
   config.sort_order = "created_at_desc"
   config.per_page = 15

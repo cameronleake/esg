@@ -9,20 +9,26 @@
 			</div>
 			
 		 	<% @articles.each do |article| %>
-				<div class="hero-unit">
-		
+				<div class="hero-unit hero-unit-articles">
 					<div class="page-header">
 						<h3><%= link_to article.title, article_path(article) %></h3>
-						<%= image_tag article.featured_image_url(:thumb).to_s %>
+						<%= image_tag article.featured_image_url(:thumb).to_s %>	
 					</div>
-					
+				
 					<%= article.body %>	
 							
 					<div class="form-actions">
-						<a href=<%= article_path(article) %> class="btn btn-primary">View</a>
-						<p><%= display_tag_links(article) %></p>
+						<div class="pull-left">
+							<% if article.comments_count(article) > 0 %>
+								<h4>Comments: <span class="badge badge-primary"><%= article.comments_count(article) %></span></h4>
+							<% end %>
+							<h5><%= display_tag_links(article) %></h5>
+						</div>
+						<div class="pull-right">
+							<a href=<%= article_path(article) %> class="btn btn-info">View Post</a>
+						</div>
 					</div>
-					
+				
 				</div>
 			<% end %>
 		</div>
@@ -35,7 +41,7 @@
 			<div class="page-header">
 			  	<h3>Categories</h3>
 			</div>
-			
+		
 			<% tag_cloud Article.tag_counts, %w{s m l} do |tag| %>
 		    	<h4><%= link_to tag.name, tag_path(tag.name) %></h4>
 		  	<% end %>

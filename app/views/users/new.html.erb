@@ -5,6 +5,8 @@
 	</div>
 
 	<%= simple_form_for(@user, :html => {:class => 'form-horizontal' }) do |f| %>
+		<%= f.input :first_name %>
+		<%= f.input :last_name %>
 		<%= f.input :email %>
 		<%= f.input :password %>
 		<%= f.input :password_confirmation %>
