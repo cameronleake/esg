@@ -19,9 +19,9 @@ class FeaturedImageUploader < CarrierWave::Uploader::Base
 
   CarrierWave.configure do |config|
     if Rails.env.production?
-      config.root = "/home/deployer/apps/esg/shared/assets/"
+      config.root = "/home/deployer/apps/esg/shared/"
       def store_dir
-        "assets/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+        "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
       end
     elsif Rails.env.development?
       config.root = "#{Rails.root}/public"
