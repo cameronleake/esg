@@ -57,7 +57,7 @@ module Esg
     config.assets.enabled = true
 
     if Rails.env.production?
-      config.assets.paths << "/home/deployer/apps/esg/shared/"
+      config.assets.paths << "/home/deployer/apps/esg/shared/uploads/"
     end
 
     # Version of your assets, change this if you want to expire all your assets
