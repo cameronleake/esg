@@ -63,6 +63,4 @@ namespace :deploy do
     end
   end
   before "deploy", "deploy:check_revision"
-  
-  sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
 end
