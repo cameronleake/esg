@@ -4,19 +4,23 @@
 	 	<h2>Profile</h2>
 	</div>
 
-	<dl class="dl-horizontal">
-	  	<dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-	  	<dd><%= @user.email %></dd>
-	</dl>
+	<div class="simple_form form-horizontal">
 
-	<dl class="dl-horizontal">
-	  	<dt><strong>Email Verified:</strong></dt>
-	  	<dd><%= @user.email_verified.yesno %></dd>
-	</dl>
+		<dl class="dl-horizontal">
+		  	<dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+		  	<dd><%= @user.email %></dd>
+		</dl>
 
-	<div class="form-actions">
+		<dl class="dl-horizontal">
+		  	<dt><strong>Email Verified:</strong></dt>
+		  	<dd><%= @user.email_verified.yesno %></dd>
+		</dl>
+
+		<div class="form-actions">
 			<a href=<%= edit_user_path(@user) %> class="btn btn-primary">Edit Profile</a>
-		<% if @user.email_verified == false %>
-			<a href=<%= sendmessage_email_verification_path(@user) %> class="btn btn-warning">Send Verification Email</a>
-		<% end %>
+			<% if @user.email_verified == false %>
+				<a href=<%= sendmessage_email_verification_path(@user) %> class="btn btn-warning">Send Verification Email</a>
+			<% end %>
+		</div>
+	
 	</div>

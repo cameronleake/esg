@@ -16,8 +16,15 @@ class FeaturedImageUploader < CarrierWave::Uploader::Base
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+
+  if ENV["RAILS_ENV"] == 'production'
+    def store_dir
+      "/home/deployer/apps/esg/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    end
+  elsif ENV["RAILS_ENV"] == 'development'
+    def store_dir
+      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    end
   end
 
   # Generate Featured Image for Blog Post Blurb
