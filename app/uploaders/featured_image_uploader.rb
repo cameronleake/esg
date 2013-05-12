@@ -19,8 +19,7 @@ class FeaturedImageUploader < CarrierWave::Uploader::Base
 
   CarrierWave.configure do |config|
     if Rails.env.production?
-      config.root = "/Users/cameronleake/Desktop/"      
-      # config.root = "/home/deployer/apps/esg/"
+      config.root = "/home/deployer/apps/esg/"
     elsif Rails.env.development?
       config.root = "#{Rails.root}/public"
     end
