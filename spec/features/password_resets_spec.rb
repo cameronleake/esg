@@ -43,7 +43,7 @@ describe "PASSWORD RESETS:" do
       fill_in "user_password", :with => "New_Password"
       fill_in "user_password_confirmation", :with => "New_Password"
       click_button "Update"
-      current_path.should eq(root_path)
+      current_path.should eq(login_path)
       @new_password = User.first.password_digest
       @new_password.should_not eq(@old_password)
     end
@@ -54,7 +54,6 @@ describe "PASSWORD RESETS:" do
       visit edit_password_reset_url(@user.password_reset_token)
       click_button "Update"
       current_path.should eq("/password_resets/#{@user.password_reset_token}")
-      page.should have_content("Incorrect password")
     end
   end
 end

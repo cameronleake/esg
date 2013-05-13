@@ -12,7 +12,6 @@ ActiveAdmin.register Article do
 
   index do
     selectable_column
-    column :id    
     column :title
     column :tag_list
     column :created_at

@@ -8,7 +8,7 @@ describe "CONTROLLER >> ContactsController:" do
       fill_in "Name", :with => @contact.name
       fill_in "Email", :with => @contact.email
       fill_in "Subject", :with => @contact.subject
-      fill_in "Body", :with => @contact.body
+      fill_in "Message", :with => @contact.body
       click_button "Submit"
       current_path.should eq(root_path)
       Contact.find(:last).name.should eq(@contact.name)
@@ -23,7 +23,7 @@ describe "CONTROLLER >> ContactsController:" do
       fill_in "Name", :with => @contact.name
       fill_in "Email", :with => @contact.email
       fill_in "Subject", :with => @contact.subject
-      fill_in "Body", :with => @contact.body
+      fill_in "Message", :with => @contact.body
       click_button "Submit"
       last_email.to.should include("helpdesk@engineeringsurvivalguide.com")
       last_email.subject.should include(@contact.subject)  

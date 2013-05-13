@@ -4,8 +4,10 @@ ActiveAdmin.register User do
    filter :first_name
    filter :last_name
    filter :email
-   filter :email_verified
    filter :created_at
+   filter :email_verified, :as => :select
+   filter :blog_subscription, :as => :select
+   filter :resources_subscription, :as => :select
    
    config.sort_order = "created_at_desc"
    config.per_page = 15
@@ -16,9 +18,19 @@ ActiveAdmin.register User do
      column :last_name
      column :email
      column :email_verified, :sortable => :email_verified do |user|
-       div :class => "email_verified" do 
-         user.email_verified
+       div :class => "admin-center-column" do 
+         user.email_verified.yesno
        end
+     end
+     column :blog_subscription, :sortable => :blog_subscription do |user|
+        div :class => "admin-center-column" do 
+          user.blog_subscription.yesno
+        end
+     end
+     column :resources_subscription, :sortable => :resources_subscription do |user|
+        div :class => "admin-center-column" do 
+           user.resources_subscription.yesno
+        end
      end
      column :created_at
      default_actions
@@ -29,9 +41,12 @@ ActiveAdmin.register User do
        f.input :first_name
        f.input :last_name
        f.input :email
-       f.input :email_verified
+       f.input :email_verified, :as => :select
        f.input :password
        f.input :password_confirmation
+       f.input :blog_subscription, :as => :select
+       f.input :resources_subscription, :as => :select
+       f.input :avatar, :as => :file
      end                               
      f.actions                         
    end

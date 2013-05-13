@@ -40,7 +40,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Recent Blog Comments" do
           table_for BlogComment.last(5).reverse do
             column ("article") {|blog_comment| link_to(blog_comment.article.title, admin_blog_comment_path(blog_comment)) } 
-            column :commenter
+            column :user
           end
           strong { link_to "View All Blog Comments", admin_blog_comments_path }
         end

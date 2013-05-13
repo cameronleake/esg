@@ -10,7 +10,7 @@
 
 	<div class="form-actions">
 		<div class="pull-right">
-			<a href=<%= articles_path %> class="btn btn-info">Back to the Blog</a>			
+			<a href=<%= articles_path %> class="btn btn-primary">Back to the Blog</a>			
 		</div>
 	</div>
 
@@ -25,9 +25,11 @@
 					<td>
 						<div class="media">
 							<a class="pull-left">
-								<%= image_tag "Default-Profile-Icon.jpg" %>
+
+									<dd><%= display_avatar_image(comment.user) %></dd>
+
 							</a>
-							<h4><%= comment.commenter %></h4>
+							<h4><%= "#{comment.user.first_name} #{comment.user.last_name}" %></h4>
 							<h5><%= comment.created_at.time.to_formatted_s(:long) %></h5>
 						</div>					
 					</td>
@@ -46,7 +48,6 @@
 			
 			<%= simple_form_for([@article, @article.blog_comments.build], :html => {:class => 'form-horizontal' }) do |f| %>
 		  		<%= f.input :body, as: :text, :label => "Comment", :input_html => { :style => "width:400px", :rows => 4 } %>
-				<%= f.input :commenter, :as => :hidden, :input_html => { :value => "#{current_user.first_name} #{current_user.last_name}" } %>
 		
 			  	<div class="form-actions">
 			    	<%= f.button :submit, :value => "Submit", :class => 'btn-primary' %>
@@ -55,7 +56,7 @@
 			
 		<% else %>
 			<div class="form-horizontal comments-links">
-				<p>Sign up or Login to make a comment!</p>
+				<p>Sign up or Login to leave a comment!</p>
 				<a href=<%= signup_path %> class="btn btn-info">Sign Up</a>
 				<a href=<%= login_path %> class="btn">Login</a>	
 			</div>					

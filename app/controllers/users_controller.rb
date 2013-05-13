@@ -1,19 +1,15 @@
 class UsersController < ApplicationController
 
-  def show
-    if current_user
-      @user = current_user
-    else
-      redirect_to login_url, alert: "Not authorized!"
-    end
-  end
-  
   def new
     @user = User.new
   end
   
   def edit
-    @user = current_user
+    if current_user
+      @user = current_user
+    else
+      redirect_to login_url, alert: "Not authorized!"
+    end
   end
   
   def create
@@ -31,7 +27,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update_attributes(params[:user])
-      redirect_to @user, notice: 'Profile was successfully updated.'
+      redirect_to edit_user_path(@user), notice: 'Profile successfully updated.'
     else
       render action: "edit"
     end

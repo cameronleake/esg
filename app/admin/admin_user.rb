@@ -6,11 +6,15 @@ ActiveAdmin.register AdminUser do
   config.sort_order = "last_sign_in_at_desc"
   config.per_page = 15
     
-  index do                            
+  index do                         
     column :email                     
     column :current_sign_in_at        
     column :last_sign_in_at           
-    column :sign_in_count             
+    column :sign_in_count, :sortable => :sign_in_count do |admin_user|
+      div :class => "admin-center-column" do 
+        admin_user.sign_in_count
+      end
+    end           
     default_actions                   
   end                                                      
 

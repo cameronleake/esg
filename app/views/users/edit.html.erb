@@ -1,18 +1,76 @@
 <%- model_class = User -%>
 
 	<div class="page-header">
-  		<h2>Edit Profile</h2>
+	 	<h2>Profile</h2>
 	</div>
 
 	<%= simple_form_for(@user, :html => {:class => 'form-horizontal' }) do |f| %>
- 		<%= f.input :first_name %>
- 		<%= f.input :last_name %>
- 		<%= f.input :email %>
 
-	  	<div class="form-actions">
-	   	<%= f.submit nil, :value => "Update Profile", :class => 'btn btn-primary' %>
-	   	<%= link_to t('.cancel', :default => t("helpers.links.cancel")), users_path, :class => 'btn' %>
-	  	</div>
+	<div class="tabbable">
+
+	  <ul class="nav nav-tabs">
+	    <li class="active"><a href="#tab1" data-toggle="tab"><h4>User Details</h4></a></li>
+	    <li><a href="#tab2" data-toggle="tab"><h4>Password</h4></a></li>
+	    <li><a href="#tab3" data-toggle="tab"><h4>Subscriptions</h4></a></li>
+	    <li><a href="#tab4" data-toggle="tab"><h4>Avatar</h4></a></li>
+	  </ul>
+
+	  <div class="tab-content">
+	    <div class="tab-pane active" id="tab1">
+	      <h4>Manage your account details.</h4><br \>
+			<div class="simple_form form-horizontal">
+
+			 		<%= f.input :first_name %>
+			 		<%= f.input :last_name %>
+			 		<%= f.input :email %>
+
+				<dl class="dl-horizontal">
+				  	<dt><%= f.input :email_verified %></dt>
+				  	<dd><%= @user.email_verified.yesno %></dd>
+				</dl>
+     
+			</div>
+	    </div>
+
+	    <div class="tab-pane" id="tab2">
+	      <h4>Change your account password.</h4><br \>
+
+		  		<%= f.input :password %>
+		  		<%= f.input :password_confirmation %>
+	
+			</div>
+
+	    <div class="tab-pane" id="tab3">
+	      <h4>Manage your ESG subscriptions.</h4><br \>
+	
+	 			<%= f.input :blog_subscription, label: "ESG Blog", as: :select %>
+		 		<%= f.input :resources_subscription, label: "Resource Centre Updates", as: :select %>
+	
+	    </div>
+
+	    <div class="tab-pane" id="tab4">
+	      <h4>Change your avatar.</h4><br \>
+
+			<dl class="dl-horizontal">
+				<% if @user.avatar? %>
+					<dd><%= image_tag @user.avatar_url(:profile).to_s %></dd>
+				<% else %>
+					<dd><%= image_tag "/assets/Default_Profile_Icon.jpg" %></dd>
+				<% end %>
+			</dl>
+			<%= f.input :avatar, as: :file %>
+				
+	
+	    </div>
+	  </div>
+	</div>
+	
+  	<div class="form-actions">
+   	<%= f.submit nil, :value => "Update Profile", :class => 'btn btn-primary' %>
+		<% if @user.email_verified == false %>
+			<a href=<%= sendmessage_email_verification_path(@user) %> class="btn btn-warning">Send Verification Email</a>
+		<% end %>
+   	<%= link_to t('.cancel', :default => t("helpers.links.cancel")), root_path, :class => 'btn' %>
+  	</div>
 
 	<% end %>
-

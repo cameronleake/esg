@@ -9,6 +9,7 @@ describe "EMAIL VERIFICATION:" do
       fill_in "user_password", :with => @user.password
       fill_in "user_password_confirmation", :with => @user.password
       click_button "Sign Up"
+      pp User.find(:last).email_verified
       User.find(:last).email_verified.should be_false
       User.find(:last).email_verification_token.should_not be_nil
       last_email.should have_content(User.find(:last).email_verification_token)

@@ -1,15 +1,32 @@
 class User < ActiveRecord::Base
   has_secure_password
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation, :email_verified, :email_verification_token
+  attr_accessible :first_name
+  attr_accessible :last_name
+  attr_accessible :email
+  attr_accessible :password
+  attr_accessible :password_confirmation
+  attr_accessible :email_verified
+  attr_accessible :email_verification_token
+  attr_accessible :blog_subscription
+  attr_accessible :resources_subscription
+  attr_accessible :avatar
+  
   attr_writer :password_required
+  
   validates_presence_of :first_name, :last_name, :email
   validates_presence_of :password, :on => :create
   validates_presence_of :password, :on => :update, :if => Proc.new { |m| m.password_required == true }
+  validates_uniqueness_of :email
   validates :email, format: {
     with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
   }
-  validates_uniqueness_of :email
+
+  mount_uploader :avatar, AvatarUploader
+  
   before_create { generate_token(:auth_token) }
+  
+  has_many :blog_comments
+  
   
   def password_required
     @password_required || false

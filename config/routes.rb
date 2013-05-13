@@ -6,7 +6,7 @@ Esg::Application.routes.draw do
   match 'resourcecentre' => 'home#resource_centre'
   match 'blog' => 'articles#index'
   match 'faq' => 'home#faq'
-  match "profile" => "users#show"
+  match "profile" => "users#edit"
   match 'signup' => 'users#new'
   match 'login' => 'sessions#new'
   match 'logout' => 'sessions#destroy'
