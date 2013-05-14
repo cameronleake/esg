@@ -1,94 +1,27 @@
 <div id="container">	
-	<div class="row" align="center">
+	<div class="row">
 
 		<div class="page-header" align="left">
-			<h2>Home</h2>
+			<h2>Welcome to Engineering Survival Guide</h2>
 		</div>
 		
-   	<div class="span6">
-			<div class="page-header">
-				<h3>Featured Resources</h3>
-			</div>
-			
-			<div class="accordion" id="featured_resource2">
-				
-				<div class="accordion-group">
-			   	<div class="accordion-heading">
-			      	<a class="accordion-toggle" data-toggle="collapse" data-parent="#featured_resource2" href="#collapse_resource1">
-			        		<strong>Example Resource #1</strong>
-			      	</a>
-			    	</div>
-			    	<div id="collapse_resource1" class="accordion-body collapse in">
-			      	<div class="accordion-inner">
-			        		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis est arcu. Nunc congue feugiat auctor.
-			      	</div>
-			    	</div>
-			  	</div>
-			  
-				<div class="accordion-group">
-			    	<div class="accordion-heading">
-			      	<a class="accordion-toggle" data-toggle="collapse" data-parent="#featured_resource2" href="#collapse_resource2">
-			        		<strong>Example Resource #2</strong>
-			      	</a>
-			    	</div>
-			    	<div id="collapse_resource2" class="accordion-body collapse">
-			      	<div class="accordion-inner">
-			        		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis est arcu. Nunc congue feugiat auctor.
-			      	</div>
-			    	</div>
-			  	</div>
-			</div>
+		<div class="span9">
+			<%= render "featured_articles" %>
 		</div>
-		
-		<div class="span6">
-			<div class="page-header">
-				<h3>Featured Posts</h3>
-			</div>
-			
-			<div class="accordion" id="featured_post2">
-			  	<div class="accordion-group">
-			    	<div class="accordion-heading">
-			      	<a class="accordion-toggle" data-toggle="collapse" data-parent="#featured_post2" href="#collapse_post1">
-			        		<strong>Example Post #1</strong>
-			      	</a>
-			    	</div>
-			    	<div id="collapse_post1" class="accordion-body collapse in">
-			      	<div class="accordion-inner">
-			        		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis est arcu. Nunc congue feugiat auctor.
-			      	</div>
-			    	</div>
-			  	</div>
-			  	<div class="accordion-group">
-			    	<div class="accordion-heading">
-			      	<a class="accordion-toggle" data-toggle="collapse" data-parent="#featured_post2" href="#collapse_post2">
-			        		<strong>Example Post #2</strong>
-			      	</a>
-			    	</div>
-			    	<div id="collapse_post2" class="accordion-body collapse">
-			      	<div class="accordion-inner">
-			        		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis est arcu. Nunc congue feugiat auctor.
-			      	</div>
-			    	</div>
-			  	</div>
-			</div>
-		</div>
-	</div>
 
-	<div class="row" align="center">
-		<div class="span6">
+		<div class="span3" align="center">
 			<div class="page-header">
+				<h3>Account</h3>
+			</div>
+			<a href="login" class="btn btn-primary">Login</a>
+			<a href="signup" class="btn btn-primary">Sign Up</a>
+			
+			<div class="page-header">
+				<br>
 				<h3>Contact Us</h3>
 			</div>
 			<p>You can contact us here, we'd love to hear what you think!</p>
-			<a href="contact" class="btn btn-warning">Contact Us</a>
+			<a href="contact" class="btn btn-primary">Contact Us</a>
 		</div>
-
-		<div class="span6">
-			<div class="page-header">
-				<h3>Login</h3>
-			</div>
-			<a href="login" class="btn btn-warning">Login</a>
-		</div>
-
 	</div>
 </div>

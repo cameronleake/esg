@@ -1,0 +1,31 @@
+<div class="page-header">
+  	<h3>Featured Articles</h3>
+</div>
+
+<table class="table">
+	<% @featured_articles.each do |article| %>
+		<tbody>
+			<tr>
+				<td>
+
+					<div class="media">
+						<h3><%= link_to article.title, article_path(article) %></h3>								
+						<a class="pull-left">
+							<dd><%= image_tag article.featured_image_url(:thumb).to_s %></dd>
+						</a>
+						<h5>
+							<%= article.created_at.time.to_formatted_s(:default) %> -- 
+							<%= display_tag_links(article) %>
+							<% if article.comments_count(article) > 0 %>
+							 	 --  <%= pluralize(article.comments_count(article), 'Comment') %>
+							<% end %>
+						</h5>
+						<%= article.blurb %>
+					</div>
+
+				</td>
+			</tr>
+		</tbody>
+	<% end %>
+</table>
+<h5><%= paginate @featured_articles, :window => 2 %></h5>

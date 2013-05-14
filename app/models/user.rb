@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   
   before_create { generate_token(:auth_token) }
   
-  has_many :blog_comments
+  has_many :blog_comments, :dependent => :destroy
   
   
   def password_required

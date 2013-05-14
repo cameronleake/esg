@@ -19,15 +19,13 @@
 	</div>
 	
 	<table class="table table-striped">
-		<% @article.blog_comments.each do |comment| %>
+		<% @article.blog_comments.order("created_at ASC").each do |comment| %>
 			<thead>
 				<tr>
 					<td class="blog-article-list">
 						<div class="media">
 							<a class="pull-left">
-
-									<dd><%= display_avatar_image(comment.user) %></dd>
-
+								<dd><%= display_avatar_image(comment.user) %></dd>
 							</a>
 							<h4><%= "#{comment.user.first_name} #{comment.user.last_name}" %></h4>
 							<h5><%= comment.created_at.time.to_formatted_s(:long) %></h5>
@@ -46,7 +44,7 @@
 		<% if current_user %>
 			<h3>Add a comment:</h3>
 			
-			<%= simple_form_for([@article, @article.blog_comments.build], :html => {  }) do |f| %>
+			<%= simple_form_for([@article, @article.blog_comments.build]) do |f| %>
 		  		
 				<%= f.input :body, as: :text, :label => false, :input_html => { :class => "blog-comments" } %>					
 						

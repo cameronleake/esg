@@ -4,6 +4,7 @@ ActiveAdmin.register Article do
   filter :title
   filter :blurb
   filter :body
+  filter :featured_article, :as => :select
   filter :created_at   
   filter :updated_at
   filter :tag_list
@@ -15,6 +16,11 @@ ActiveAdmin.register Article do
     selectable_column
     column :title
     column :tag_list
+    column :featured_article, :sortable => :featured_article do |article|
+      div :class => "admin-center-column" do 
+        article.featured_article.yesno
+      end
+    end    
     column :created_at
     column :updated_at
     default_actions
@@ -27,6 +33,7 @@ ActiveAdmin.register Article do
       f.input :body, as: :text
       f.input :tag_list, :label => "Tags (separated by commas)"
       f.input :featured_image, :as => :file
+      f.input :featured_article, :as => :select
     end                               
     f.actions                         
   end

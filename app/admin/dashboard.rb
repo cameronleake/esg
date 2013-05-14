@@ -15,14 +15,14 @@ ActiveAdmin.register_page "Dashboard" do
       end
       
       column do
-        panel "Recent Articles" do
-          table_for Article.last(5).reverse do
+        panel "Currently Featured Articles" do
+          table_for Article.where(:featured_article => true) do
             column ("description") {|article| link_to(article.title, admin_article_path(article)) } 
             column :created_at
           end
           strong { link_to "View All Articles", admin_articles_path }
         end
-      end      
+      end    
     end
     
     columns do
