@@ -23,11 +23,11 @@
 			 		<%= f.input :first_name %>
 			 		<%= f.input :last_name %>
 			 		<%= f.input :email %>
-
-				<dl class="dl-horizontal">
-				  	<dt><%= f.input :email_verified %></dt>
-				  	<dd><%= @user.email_verified.yesno %></dd>
-				</dl>
+	
+					<dl class="dl-horizontal">
+					  	<da>Email Verified: </da>
+					  	<dd><%= @user.email_verified.yesno %></dd>
+					</dl>
      
 			</div>
 	    </div>
@@ -43,8 +43,8 @@
 	    <div class="tab-pane" id="tab3">
 	      <h4>Manage your ESG subscriptions.</h4><br \>
 	
-	 			<%= f.input :blog_subscription, label: "ESG Blog", as: :select %>
-		 		<%= f.input :resources_subscription, label: "Resource Centre Updates", as: :select %>
+	 			<%= f.input :blog_subscription, label: "ESG Blog", as: :select, default: "Yes" %>
+		 		<%= f.input :resources_subscription, label: "Resource Centre Updates", as: :select, default: "Yes" %>
 	
 	    </div>
 
@@ -58,7 +58,7 @@
 					<dd><%= image_tag "/assets/Default_Profile_Icon.jpg" %></dd>
 				<% end %>
 			</dl>
-			<%= f.input :avatar, as: :file %>
+			<%= f.input :avatar, as: :file, label: false %>
 				
 	
 	    </div>

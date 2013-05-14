@@ -854,7 +854,8 @@ dl {
 }
 
 dt,
-dd {
+dd,
+da, { 	/*Added by CL*/
   line-height: 20px;
 }
 
@@ -893,6 +894,17 @@ dd {
 
 .dl-horizontal dd {
   margin-left: 180px;
+}
+
+/*Added by CL*/
+.dl-horizontal da {
+  float: left;
+  width: 160px;
+  overflow: hidden;
+  clear: left;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 hr {

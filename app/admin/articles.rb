@@ -2,6 +2,7 @@ ActiveAdmin.register Article do
   menu :priority => 3
 
   filter :title
+  filter :blurb
   filter :body
   filter :created_at   
   filter :updated_at
@@ -21,7 +22,8 @@ ActiveAdmin.register Article do
   
   form do |f|                         
     f.inputs "New Article" do       
-      f.input :title              
+      f.input :title
+      f.input :blurb, as: :text
       f.input :body, as: :text
       f.input :tag_list, :label => "Tags (separated by commas)"
       f.input :featured_image, :as => :file

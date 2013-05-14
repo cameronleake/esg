@@ -11,6 +11,7 @@ Esg::Application.routes.draw do
   match 'login' => 'sessions#new'
   match 'logout' => 'sessions#destroy'
   match 'contact' => 'contacts#new'
+  match 'subscribe_blog' => 'users#subscribe_blog'
   
   match '404' => 'home#404'
   match '422' => 'home#422'

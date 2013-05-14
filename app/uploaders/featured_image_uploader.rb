@@ -38,8 +38,8 @@ class FeaturedImageUploader < CarrierWave::Uploader::Base
   
   def create_article_featured_image
     manipulate! do |img|
-      img = img.resize_to_fit(740)
-      img = img.crop(0, 0, 740, 160)
+      img = img.resize_to_fill(250, 130)
+      img = img.crop(0, 0, 200, 130)
     end
   end
 

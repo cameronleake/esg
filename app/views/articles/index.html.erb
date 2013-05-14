@@ -8,51 +8,51 @@
 			  	<h2>The Engineering Survival Guide</h2>
 			</div>
 			
-		 	<% @articles.each do |article| %>
-				<div class="hero-unit hero-unit-articles">
-					<div class="page-header">
-						<h3><%= link_to article.title, article_path(article) %></h3>
-						<%= image_tag article.featured_image_url(:thumb).to_s %>	
-					</div>
-				
-					<%= article.body %>	
-							
-					<div class="form-actions">
-						<div class="pull-left">
-							<% if article.comments_count(article) > 0 %>
-								<h4>Comments: <span class="badge badge-primary"><%= article.comments_count(article) %></span></h4>
-							<% end %>
-							<h5><%= display_tag_links(article) %></h5>
-						</div>
-						<div class="pull-right">
-							<a href=<%= article_path(article) %> class="btn btn-primary">View Post</a>
-						</div>
-					</div>
-				
-				</div>
-			<% end %>
+			<table class="table">
+				<% @articles.each do |article| %>
+					<tbody>
+						<tr>
+							<td>
+
+								<div class="media">
+									<h3><%= link_to article.title, article_path(article) %></h3>								
+									<a class="pull-left">
+										<dd><%= image_tag article.featured_image_url(:thumb).to_s %></dd>
+									</a>
+									<h5>
+										<%= article.created_at.time.to_formatted_s(:default) %> -- 
+										<%= display_tag_links(article) %>
+										<% if article.comments_count(article) > 0 %>
+										 	 --  Comments: <span class="badge badge-primary"><%= article.comments_count(article) %></span>
+										<% end %>
+									</h5>
+									<%= article.blurb %>
+								</div>
+		
+							</td>
+						</tr>
+					</tbody>
+				<% end %>
+			</table>
 		</div>
 
 		<div class="span3" align="center">
 			<div class="page-header">
-			  	<h3>Featured Posts</h3>
-			</div>
-			
-			<div class="page-header">
 			  	<h3>Categories</h3>
 			</div>
-		
-			<% tag_cloud Article.tag_counts, %w{s m l} do |tag| %>
+			
+			<% tag_cloud Article.tag_counts.sort { |x, y| x.name <=> y.name }, %w{s m l} do |tag| %>
 		    	<h4><%= link_to tag.name, tag_path(tag.name) %></h4>
 		  	<% end %>
-			
+			<br>
+
 			<div class="page-header">
 			  	<h3>Subscribe</h3>
 			</div>
 			<p>Sign up to receive the latest Blog Posts directly to your inbox!</p>
-				
-			<a href=<%= "#" %> class="btn btn-warning">Subscribe</a>
+			<a href=<%= subscribe_blog_path %> class="btn btn-warning">Subscribe</a>
 		</div>
+		
 	</div>
 </div>
 		

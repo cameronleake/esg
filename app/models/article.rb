@@ -1,5 +1,5 @@
 class Article < ActiveRecord::Base
-  attr_accessible :body, :title, :featured_image, :tag_list
+  attr_accessible :body, :blurb, :title, :featured_image, :tag_list
   validates :title, :presence => true
   
   mount_uploader :featured_image, FeaturedImageUploader

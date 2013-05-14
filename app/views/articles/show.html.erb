@@ -22,7 +22,7 @@
 		<% @article.blog_comments.each do |comment| %>
 			<thead>
 				<tr>
-					<td>
+					<td class="blog-article-list">
 						<div class="media">
 							<a class="pull-left">
 
@@ -47,8 +47,9 @@
 			<h3>Add a comment:</h3>
 			
 			<%= simple_form_for([@article, @article.blog_comments.build], :html => {:class => 'form-horizontal' }) do |f| %>
-		  		<%= f.input :body, as: :text, :label => "Comment", :input_html => { :style => "width:400px", :rows => 4 } %>
-		
+		  		
+				<%= f.input :body, as: :text, :label => false, :input_html => { :class => "blog-comments" } %>					
+						
 			  	<div class="form-actions">
 			    	<%= f.button :submit, :value => "Submit", :class => 'btn-primary' %>
 			  	</div>

@@ -33,4 +33,14 @@ class UsersController < ApplicationController
     end
   end
   
+  def subscribe_blog
+    if current_user
+      @user = current_user
+      @user.update_attributes(:blog_subscription => true)
+      redirect_to articles_path, notice: "You have subscribed to the ESG Blog!  You can manage your subscriptions at any time in your Profile."
+    else
+      redirect_to login_path, alert: "Please Login or Sign Up to subscribe."
+    end
+  end
+  
 end
