@@ -39,7 +39,7 @@ class FeaturedImageUploader < CarrierWave::Uploader::Base
   def create_article_featured_image
     manipulate! do |img|
       img = img.resize_to_fill(250, 130)
-      img = img.crop(0, 0, 200, 130)
+      img = img.crop(Magick::CenterGravity, 200, 130)
     end
   end
 
@@ -51,7 +51,7 @@ class FeaturedImageUploader < CarrierWave::Uploader::Base
   def create_article_header_image
     manipulate! do |img|
       img = img.resize_to_fit(1200)
-      img = img.crop(0, 0, 1200, 240)
+      img = img.crop(Magick::CenterGravity, 1200, 240)
     end
   end
 

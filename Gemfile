@@ -23,6 +23,7 @@ gem "simple_form"
 gem "carrierwave"
 gem "rmagick"
 gem "acts-as-taggable-on"
+gem "kaminari"
 
 group :test, :development do
   gem "rspec-rails"

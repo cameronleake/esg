@@ -4,9 +4,14 @@ class ArticlesController < ApplicationController
   
   def index
     if params[:tag]
-      @articles = Article.tagged_with(params[:tag]).order("created_at DESC")
+      # @articles = Article.order("created_at DESC")
+      @articles = Article.tagged_with(params[:tag]).order("created_at DESC").page(params[:page]).per(5)
+      # Kaminari.paginate_array(@articles).page(params[:page])
+
     else
-      @articles = Article.find(:all, :order => "created_at DESC")
+      @articles = Article.order("created_at DESC").page(params[:page]).per(5)
+      # @articles = Article.find(:all, :order => "created_at DESC")
+      # Kaminari.paginate_array(@articles).page(params[:page])
     end
   end
 

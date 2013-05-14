@@ -313,6 +313,7 @@ DEPENDENCIES
   guard-rspec
   guard-spork
   jquery-rails
+  kaminari
   launchy
   less-rails
   pg
