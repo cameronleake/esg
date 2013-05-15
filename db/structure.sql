@@ -184,7 +184,8 @@ CREATE TABLE contacts (
     subject character varying(255),
     body text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    spam boolean DEFAULT false
 );
 
 
@@ -642,3 +643,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130514133600');
 INSERT INTO schema_migrations (version) VALUES ('20130515053100');
 
 INSERT INTO schema_migrations (version) VALUES ('20130515063833');
+
+INSERT INTO schema_migrations (version) VALUES ('20130515083251');

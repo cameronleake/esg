@@ -4,6 +4,7 @@ ActiveAdmin.register Contact do
   
   filter :name
   filter :email
+  filter :spam, :as => :select
   filter :subject
   
   config.sort_order = "created_at_desc"
@@ -14,7 +15,12 @@ ActiveAdmin.register Contact do
     column :id                            
     column :name                    
     column :email       
-    column :subject        
+    column :subject
+    column :spam, :sortable => :spam do |contact|
+       div :class => "admin-center-column" do 
+          contact.spam.yesno
+       end
+    end    
     column :created_at          
     default_actions                   
   end                                                      
@@ -25,6 +31,7 @@ ActiveAdmin.register Contact do
       f.input :email
       f.input :subject
       f.input :body
+      f.input :spam, :as => :select
     end                               
     f.actions                         
   end          

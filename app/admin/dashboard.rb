@@ -27,12 +27,22 @@ ActiveAdmin.register_page "Dashboard" do
     
     columns do
       column do
-        panel "Recent Contact Tickets" do
-          table_for Contact.last(5).reverse do
+        panel "Recent Valid Contact Tickets" do
+          table_for Contact.where(:spam => false).last(5).reverse do
             column ("subject") {|contact| link_to(contact.subject, admin_contact_path(contact)) } 
             column :created_at
           end
           strong { link_to "View All Contact Tickets", admin_contacts_path }
+        end
+      end
+      
+      column do
+        panel "Recent Spam Contact Tickets" do
+          table_for Contact.where(:spam => true).last(5).reverse do
+             column ("subject") {|contact| link_to(contact.subject, admin_contact_path(contact)) } 
+             column :created_at
+           end
+           strong { link_to "View All Contact Tickets", admin_contacts_path }
         end
       end
     end
@@ -49,7 +59,7 @@ ActiveAdmin.register_page "Dashboard" do
       end      
       
       column do
-        panel "Recent Spam Comments" do
+        panel "Recent Spam Blog Comments" do
           table_for BlogComment.where(:spam => true).last(5).reverse do
             column ("article") {|blog_comment| link_to(blog_comment.article.title, admin_blog_comment_path(blog_comment)) } 
             column :user
