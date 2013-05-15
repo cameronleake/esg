@@ -25,6 +25,7 @@ gem "rmagick"
 gem "acts-as-taggable-on"
 gem "kaminari"
 gem 'pg_search'
+gem 'rakismet'
 
 group :test, :development do
   gem "rspec-rails"

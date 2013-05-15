@@ -35,10 +35,22 @@ ActiveAdmin.register_page "Dashboard" do
           strong { link_to "View All Contact Tickets", admin_contacts_path }
         end
       end
+    end
+   
+    columns do 
+      column do
+        panel "Recent Valid Blog Comments" do
+          table_for BlogComment.where(:spam => false).last(5).reverse do
+            column ("article") {|blog_comment| link_to(blog_comment.article.title, admin_blog_comment_path(blog_comment)) } 
+            column :user
+          end
+          strong { link_to "View All Blog Comments", admin_blog_comments_path }
+        end
+      end      
       
       column do
-        panel "Recent Blog Comments" do
-          table_for BlogComment.last(5).reverse do
+        panel "Recent Spam Comments" do
+          table_for BlogComment.where(:spam => true).last(5).reverse do
             column ("article") {|blog_comment| link_to(blog_comment.article.title, admin_blog_comment_path(blog_comment)) } 
             column :user
           end
@@ -46,5 +58,6 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
     end
+    
   end
 end

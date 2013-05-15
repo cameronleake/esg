@@ -1,0 +1,26 @@
+<div class="page-header">
+  	<h3>Categories</h3>
+</div>
+
+<% tag_cloud Article.tag_counts.sort { |x, y| x.name <=> y.name }, %w{s m l} do |tag| %>
+ 	<h4><%= link_to tag.name, tag_path(tag.name) %></h4>
+<% end %>
+<br>
+
+<form class="form-search">
+	<div class="input-append">
+		<%= form_tag articles_path, method: :get do %>
+			<%= text_field_tag :query, params[:query], :class => "search-query search-field" %>
+			<%= submit_tag "Search", name: nil, :class => "btn btn-primary" %>
+		<% end %>				
+	</div>
+</form>
+<br>
+
+<div class="page-header">
+  	<h3>Subscribe</h3>
+</div>
+<p>Sign up to receive the latest Blog Posts directly to your inbox!</p>
+<a href=<%= subscribe_blog_path %> class="btn btn-warning">Subscribe</a>
+<br>
+<br>

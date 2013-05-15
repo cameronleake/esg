@@ -22,12 +22,12 @@ ActiveAdmin.register User do
          user.email_verified.yesno
        end
      end
-     column :blog_subscription, :sortable => :blog_subscription do |user|
+     column "Blog Sub.", :blog_subscription, :sortable => :blog_subscription do |user|
         div :class => "admin-center-column" do 
           user.blog_subscription.yesno
         end
      end
-     column :resources_subscription, :sortable => :resources_subscription do |user|
+     column "Resource Sub.", :resources_subscription, :sortable => :resources_subscription do |user|
         div :class => "admin-center-column" do 
            user.resources_subscription.yesno
         end

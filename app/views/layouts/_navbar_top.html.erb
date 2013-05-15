@@ -1,0 +1,47 @@
+<div class="navbar navbar-inverse navbar-static-top">
+	<div class="navbar-inner">
+    	<div class="container" style="width: auto;">
+      	<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+      	</button>
+   		<a class="brand" <%= link_to "Engineering Survival Guide", root_path %></a></a>
+		
+      	<!-- Everything you want hidden at 940px or less, place within here -->
+      	<div class="nav-collapse collapse">
+    			<ul class="nav" role="navigation">
+	     			<li class="<%= 'active' if current_page?(ebook_path) %>"><%= link_to "EBook", ebook_path %></li>	
+					<li class="divider-vertical"></li>
+      			<li class="<%= 'active' if current_page?(resourcecentre_path) %>"><%= link_to "Resource Centre", resourcecentre_path %></li>							
+					<li class="divider-vertical"></li>
+      			<li class="<%= 'active' if current_page?(blog_path) %>"><%= link_to "Blog", articles_path %></li>
+					<li class="divider-vertical"></li>
+      			<li class="<%= 'active' if current_page?(faq_path) %>"><%= link_to "FAQ", faq_path %></li>
+	    		</ul>
+	
+				<ul class="nav-collapse collapse pull-right">
+		    		<ul class="nav pull-right">
+						<li id="fat-menu" class="dropdown">
+							<% if current_user %>
+								<a class="dropdown-toggle" data-toggle="dropdown" role="button" href="#"><%= current_user.email %><b class="caret"></b></a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="account">
+									<li><%= link_to "Profile", profile_path %></li>
+									<li class="divider"></li>
+									<li><%= link_to "Logout", logout_path("current"), method: "delete" %></li>
+								</ul>
+							<% else %>
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Account</a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+									<li><%= link_to "Login", login_path %></li>			
+									<li class="divider"></li>
+									<li><%= link_to "Sign Up", signup_path %></li>
+								</ul>
+							<% end %>
+						</li>
+					</ul>
+				</ul>
+			</div>
+		</div>
+	</div>				
+</div>

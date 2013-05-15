@@ -19,7 +19,7 @@
 	</div>
 	
 	<table class="table table-striped">
-		<% @article.blog_comments.order("created_at ASC").each do |comment| %>
+		<% @article.blog_comments.where(:spam => false).order("created_at ASC").each do |comment| %>
 			<thead>
 				<tr>
 					<td class="blog-article-list">
@@ -43,16 +43,12 @@
 	
 		<% if current_user %>
 			<h3>Add a comment:</h3>
-			
 			<%= simple_form_for([@article, @article.blog_comments.build]) do |f| %>
-		  		
-				<%= f.input :body, as: :text, :label => false, :input_html => { :class => "blog-comments" } %>					
-						
+				<%= f.input :body, as: :text, :label => false, :input_html => { :class => "blog-comments", :maxlength => 2000 } %>					
 			  	<div class="form-actions">
 			    	<%= f.button :submit, :value => "Submit", :class => 'btn-primary' %>
 			  	</div>
 			<% end %>
-			
 		<% else %>
 			<div class="form-horizontal comments-links">
 				<p>Sign up or Login to leave a comment!</p>
@@ -60,5 +56,5 @@
 				<a href=<%= login_path %> class="btn">Login</a>	
 			</div>					
 		<% end %>
-
+		
 	</div>

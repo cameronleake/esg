@@ -149,7 +149,8 @@ CREATE TABLE blog_comments (
     article_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    user_id integer
+    user_id integer,
+    spam boolean DEFAULT false
 );
 
 
@@ -639,3 +640,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130514034835');
 INSERT INTO schema_migrations (version) VALUES ('20130514133600');
 
 INSERT INTO schema_migrations (version) VALUES ('20130515053100');
+
+INSERT INTO schema_migrations (version) VALUES ('20130515063833');

@@ -5,8 +5,14 @@ class BlogCommentsController < ApplicationController
     @blog_comment = @article.blog_comments.build(params[:blog_comment])
     @blog_comment.user_id = current_user.id
     if @blog_comment.body?
-      @blog_comment.save!
-      redirect_to article_path(@article), notice: "Comment submitted!"
+      if @blog_comment.spam?
+        @blog_comment.spam = true
+        @blog_comment.save!
+        redirect_to article_path(@article), alert: "We're sorry, this comment has been marked as spam!"
+      else
+        @blog_comment.save!
+        redirect_to article_path(@article), notice: "Comment submitted!"
+      end
     else
       redirect_to article_path(@article), alert: "Cannot submit a blank comment!"
     end

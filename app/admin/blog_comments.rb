@@ -4,6 +4,7 @@ ActiveAdmin.register BlogComment do
   
   filter :article
   filter :user
+  filter :spam, :as => :select
   filter :created_at
   
   config.sort_order = "created_at_desc"
@@ -13,6 +14,11 @@ ActiveAdmin.register BlogComment do
     selectable_column                 
     column :article
     column :user
+    column :spam, :sortable => :spam do |blog_comment|
+       div :class => "admin-center-column" do 
+          blog_comment.spam.yesno
+       end
+    end
     column :created_at               
     default_actions                   
   end                                                      

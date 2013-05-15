@@ -59,5 +59,8 @@ module Esg
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    config.rakismet.key = 'de8faf9dc599'
+    config.rakismet.url = 'www.engineeringsurvivalguide.com'
   end
 end
