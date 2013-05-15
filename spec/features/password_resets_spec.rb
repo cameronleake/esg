@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'helpers/password_resets_helper_spec'
 
 describe "PASSWORD RESETS:" do
 
@@ -14,20 +15,14 @@ describe "PASSWORD RESETS:" do
 
   context "When requesting password reset:" do
     it "Emails user with reset link", focus: true do
-      visit login_path
-      click_link "Reset"
-      fill_in "Email", :with => @user.email
-      click_button "Reset"
+      reset_email_address(@user.email)
       current_path.should eq(root_path)
       page.should have_content("Email sent")
       last_email.to.should include(@user.email)
     end
 
     it "Does not email invalid user when requesting password reset" do
-      visit login_path
-      click_link "Reset"
-      fill_in "Email", :with => "nobody@example.com"
-      click_button "Reset"
+      reset_email_address("nobody@example.com")
       current_path.should eq(password_resets_path)
       page.should have_content("Email address not found")
       last_email.should be_nil

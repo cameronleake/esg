@@ -31,12 +31,9 @@
 									<li><%= link_to "Logout", logout_path("current"), method: "delete" %></li>
 								</ul>
 							<% else %>
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Account</a>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-									<li><%= link_to "Login", login_path %></li>			
-									<li class="divider"></li>
-									<li><%= link_to "Sign Up", signup_path %></li>
-								</ul>
+								<li><%= link_to "Login", login_path %></li>			
+								<li class="divider-vertical"></li>
+								<li><%= link_to "Sign Up", signup_path %></li>
 							<% end %>
 						</li>
 					</ul>

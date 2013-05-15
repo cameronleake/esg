@@ -1,30 +1,19 @@
 require 'spec_helper'
+require 'helpers/contact_us_helper_spec'
 
-describe "CONTROLLER >> ContactsController:" do
+describe "CONTACT US FORM:" do
   context "When submitting a new Contact Us form:" do
     it "Should save all fields in the CONTACTS table" do
       @contact = FactoryGirl.build(:contact)
-      visit contact_path
-      fill_in "Name", :with => @contact.name
-      fill_in "Email", :with => @contact.email
-      fill_in "Subject", :with => @contact.subject
-      fill_in "Message", :with => @contact.body
-      click_button "Submit"
+      submit_contact_us_form(@contact.name, @contact.email, @contact.subject, @contact.body)
       current_path.should eq(root_path)
-      Contact.find(:last).name.should eq(@contact.name)
-      Contact.find(:last).email.should eq(@contact.email)
-      Contact.find(:last).subject.should eq(@contact.subject)
-      Contact.find(:last).body.should eq(@contact.body)          
+      Contact.find(:last).should be_true        
     end    
     
     it "Email should be sent with form details" do
       @contact = FactoryGirl.build(:contact)
-      visit contact_path
-      fill_in "Name", :with => @contact.name
-      fill_in "Email", :with => @contact.email
-      fill_in "Subject", :with => @contact.subject
-      fill_in "Message", :with => @contact.body
-      click_button "Submit"
+      submit_contact_us_form(@contact.name, @contact.email, @contact.subject, @contact.body)
+      last_email.should be_true
       last_email.to.should include("helpdesk@engineeringsurvivalguide.com")
       last_email.subject.should include(@contact.subject)  
     end

@@ -4,6 +4,22 @@ class UsersController < ApplicationController
     @user = User.new
   end
   
+  def index
+    if current_user
+      redirect_to profile_path
+    else
+      redirect_to login_path, alert: "Not logged in!"
+    end
+  end
+  
+  def show
+    if current_user
+      redirect_to profile_path
+    else
+      redirect_to login_path, alert: "Not logged in!"
+    end
+  end
+  
   def edit
     if current_user
       @user = current_user
@@ -37,6 +53,7 @@ class UsersController < ApplicationController
     if current_user
       @user = current_user
       @user.update_attributes(:blog_subscription => true)
+      # Gibbon.new(MAILCHIMP_ESG_BLOG[:API_key]).list_subscribe(:id => MAILCHIMP_ESG_BLOG[:list_id], :email_address => @user.email)
       redirect_to articles_path, notice: "You have subscribed to the ESG Blog!  You can manage your subscriptions at any time in your Profile."
     else
       redirect_to login_path, alert: "Please Login or Sign Up to subscribe."

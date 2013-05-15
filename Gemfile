@@ -26,15 +26,16 @@ gem "acts-as-taggable-on"
 gem "kaminari"
 gem 'pg_search'
 gem 'rakismet'
+gem 'gibbon'
 
 group :test, :development do
   gem "rspec-rails"
+  gem "capybara"
+  gem "launchy"
   gem "growl"
 end
 
 group :test do
-  gem "capybara"
-  gem "launchy"
   gem "rb-fsevent"
   gem "guard-rspec"
   gem "guard-livereload"

@@ -11,7 +11,9 @@ FactoryGirl.define do
   
   factory :article do
     title "Test title"
+    blurb "Test blurb content"
     body "Test body content"
+    featured_article true
   end
   
   factory :contact do

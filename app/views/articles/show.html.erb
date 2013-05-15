@@ -44,7 +44,7 @@
 		<% if current_user %>
 			<h3>Add a comment:</h3>
 			<%= simple_form_for([@article, @article.blog_comments.build]) do |f| %>
-				<%= f.input :body, as: :text, :label => false, :input_html => { :class => "blog-comments", :maxlength => 2000 } %>					
+				<%= f.input :body, as: :text, :label => false, :required => true, :input_html => { :class => "blog-comments", :maxlength => 2000 } %>					
 			  	<div class="form-actions">
 			    	<%= f.button :submit, :value => "Submit", :class => 'btn-primary' %>
 			  	</div>
