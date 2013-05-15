@@ -38,6 +38,14 @@
 		</div>
 
 		<div class="span3" align="center">
+			
+			<%= form_tag articles_path, method: :get do %>
+				<p>
+					<%= text_field_tag :query, params[:query] %>
+					<%= submit_tag "Search", name: nil %>
+				</p>
+			<% end %>
+			
 			<div class="page-header">
 			  	<h3>Categories</h3>
 			</div>

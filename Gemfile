@@ -24,6 +24,7 @@ gem "carrierwave"
 gem "rmagick"
 gem "acts-as-taggable-on"
 gem "kaminari"
+gem 'pg_search'
 
 group :test, :development do
   gem "rspec-rails"
