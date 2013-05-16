@@ -8,24 +8,24 @@
 
 			<%= form_tag sessions_path, { :method => :post, :class => "simple_form form-horizontal" } do %>
 
-					<div class="control-group email required session_email">
-						<label class="email required control-label" for="session_email"><abbr title="required">*</abbr> Email</label>
+					<div class="control-group">
+						<label class="required control-label" for="session_email"><abbr title="required">*</abbr> Email</label>
 						<div class="controls">
 							<%= text_field_tag :email, params[:email], :class => "string email required", :type => "email", :size => 50 %>				
 						</div>
 					</div>
 	
-					<div class="control-group password required session_password">
-						<label class="password required control-label" for="session_password"><abbr title="required">*</abbr> Password</label>
+					<div class="control-group">
+						<label class="required control-label" for="session_password"><abbr title="required">*</abbr> Password</label>
 						<div class="controls">
 							<%= text_field_tag :password, params[:password], :class => "string password required", :type => "password", :size => 50 %>						
 						</div>
 					</div>
 
-					<div class="control-group remember_me session_remember_me">
-						<label class="remember_me control-label" for="remember_me">Remember Me</label>
+					<div class="control-group">
+						<label class="control-label" for="remember_me">Remember Me</label>
 						<div class="controls">
-							<%= check_box_tag :remember_me, 1, params[:remember_me], :class => "boolean remember_me" %>					
+							<%= check_box_tag :remember_me, 1, params[:remember_me], :class => "boolean" %>					
 						</div>
 					</div>
 	
@@ -37,17 +37,7 @@
 		</div>
 		
 		<div class="span3" align="center">
-			<div class="page-header">
-			  	<h4>New User?</h4>
-			</div>
-			<p>Click here to create a new account.</p>
-			<a href=<%= signup_path %> class="btn">Sign Up</a>
-
-			<div class="page-header">
-			  	<h4>Forgotten Password?</h4>
-			</div>
-			<p>Click here to reset your password.</p>
-			<a href=<%= new_password_reset_path %> class="btn">Reset</a>
+			<%= render "sessions_sidebar" %>
 		</div>
 	</div>
 </div>

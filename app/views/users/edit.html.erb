@@ -7,7 +7,6 @@
 	<%= simple_form_for(@user, :html => {:class => 'form-horizontal' }) do |f| %>
 
 	<div class="tabbable">
-
 	  <ul class="nav nav-tabs">
 	    <li class="active"><a href="#tab1" data-toggle="tab"><h4>User Details</h4></a></li>
 	    <li><a href="#tab2" data-toggle="tab"><h4>Password</h4></a></li>
@@ -17,50 +16,19 @@
 
 	  <div class="tab-content">
 	    <div class="tab-pane active" id="tab1">
-	      <h4>Manage your account details.</h4><br \>
-			<div class="simple_form form-horizontal">
-
-			 		<%= f.input :first_name %>
-			 		<%= f.input :last_name %>
-			 		<%= f.input :email %>
-	
-					<dl class="dl-horizontal">
-					  	<da>Email Verified: </da>
-					  	<dd><%= @user.email_verified.yesno %></dd>
-					</dl>
-     
-			</div>
+			<%= render "profile_user_details" %>
 	    </div>
 
 	    <div class="tab-pane" id="tab2">
-	      <h4>Change your account password.</h4><br \>
-
-		  		<%= f.input :password %>
-		  		<%= f.input :password_confirmation %>
-	
-			</div>
+			<%= render "profile_password" %>
+		</div>
 
 	    <div class="tab-pane" id="tab3">
-	      <h4>Manage your ESG subscriptions.</h4><br \>
-	
-	 			<%= f.input :blog_subscription, label: "ESG Blog", as: :select, default: "Yes" %>
-		 		<%= f.input :resources_subscription, label: "Resource Centre Updates", as: :select, default: "Yes" %>
-	
+			<%= render "profile_subscriptions" %>
 	    </div>
 
 	    <div class="tab-pane" id="tab4">
-	      <h4>Change your avatar.</h4><br \>
-
-			<dl class="dl-horizontal">
-				<% if @user.avatar? %>
-					<dd><%= image_tag @user.avatar_url(:profile).to_s %></dd>
-				<% else %>
-					<dd><%= image_tag "/assets/Default_Profile_Icon.jpg" %></dd>
-				<% end %>
-			</dl>
-			<%= f.input :avatar, as: :file, label: false %>
-				
-	
+			<%= render "profile_avatar" %>
 	    </div>
 	  </div>
 	</div>

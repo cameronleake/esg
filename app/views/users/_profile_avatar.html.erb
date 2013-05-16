@@ -1,0 +1,11 @@
+<h4>Change your avatar.</h4><br>
+
+<dl class="dl-horizontal">
+	<% if @user.avatar? %>
+		<dd><%= image_tag @user.avatar_url(:profile).to_s %></dd>
+	<% else %>
+		<dd><%= image_tag "/assets/Default_Profile_Icon.jpg" %></dd>
+	<% end %>
+</dl>
+
+<%= f.input :avatar, as: :file, label: false %>

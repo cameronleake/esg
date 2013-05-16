@@ -40,7 +40,6 @@
 	</table>
 
 	<div class="form-actions">
-	
 		<% if current_user %>
 			<h3>Add a comment:</h3>
 			<%= simple_form_for([@article, @article.blog_comments.build]) do |f| %>
@@ -56,5 +55,4 @@
 				<a href=<%= login_path %> class="btn">Login</a>	
 			</div>					
 		<% end %>
-		
 	</div>

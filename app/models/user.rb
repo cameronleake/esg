@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
+  mount_uploader :avatar, AvatarUploader
   attr_accessible :first_name
   attr_accessible :last_name
   attr_accessible :email
@@ -10,9 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :blog_subscription
   attr_accessible :resources_subscription
   attr_accessible :avatar
-  
   attr_writer :password_required
-  
   validates_presence_of :first_name, :last_name, :email
   validates_presence_of :password, :on => :create
   validates_presence_of :password, :on => :update, :if => Proc.new { |m| m.password_required == true }
@@ -20,22 +19,17 @@ class User < ActiveRecord::Base
   validates :email, format: {
     with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
   }
-
-  mount_uploader :avatar, AvatarUploader
-  
   before_create { generate_token(:auth_token) }
-  
   has_many :blog_comments, :dependent => :destroy
-  
-  
+    
+    
   def password_required
     @password_required || false
   end
     
   def send_password_reset
     generate_token(:password_reset_token)
-    self.password_reset_sent_at = Time.zone.now
-    save!
+    self.password_reset_sent_at = Time.zone.now && save!
     UserMailer.password_reset(self).deliver
   end
 

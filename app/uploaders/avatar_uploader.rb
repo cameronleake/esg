@@ -15,8 +15,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
-  # This is a sensible default for uploaders that are meant to be mounted:
-
   CarrierWave.configure do |config|
     if Rails.env.production?
       config.root = "/home/deployer/apps/esg/shared/"
@@ -53,8 +51,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
     end
   end
 
-  # Add a white list of extensions which are allowed to be uploaded.
-  # For images you might use something like this:
+  # Whitelist for file types allowed to be uploaded.
   def extension_white_list
     %w(jpg jpeg gif png)
   end

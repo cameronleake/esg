@@ -32,11 +32,14 @@ after "deploy:stop",    "delayed_job:stop"
 after "deploy:start",   "delayed_job:start"
 after "deploy:restart", "delayed_job:restart"
 
+after :all
+
 namespace :deploy do
   %w[start stop restart].each do |command|
-    desc "#{command} unicorn server"
+    desc "#{command} unicorn and nginx servers"
     task command, roles: :app, except: {no_release: true} do
       run "/etc/init.d/unicorn_#{application} #{command}"
+      run "#{sudo} service nginx #{command}"
     end
   end
 

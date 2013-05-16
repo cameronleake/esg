@@ -1,23 +1,17 @@
 class UsersController < ApplicationController
+  include UsersHelper
+  before_filter :authorize, only: [:index, :show, :edit]
 
   def new
     @user = User.new
   end
   
   def index
-    if current_user
-      redirect_to profile_path
-    else
-      redirect_to login_path, alert: "Not logged in!"
-    end
+    is_authorized_to_access(current_user)
   end
   
   def show
-    if current_user
-      redirect_to profile_path
-    else
-      redirect_to login_path, alert: "Not logged in!"
-    end
+    is_authorized_to_access(current_user)
   end
   
   def edit

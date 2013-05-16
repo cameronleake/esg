@@ -1,0 +1,11 @@
+<h4>Manage your account details.</h4><br \>
+
+<div class="simple_form form-horizontal">
+	<%= f.input :first_name %>
+	<%= f.input :last_name %>
+	<%= f.input :email %>
+	<dl class="dl-horizontal">
+	  	<da>Email Verified: </da>
+	  	<dd><%= @user.email_verified.yesno %></dd>
+	</dl>
+</div>
