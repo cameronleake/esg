@@ -16,23 +16,23 @@
 
 	  <div class="tab-content">
 	    <div class="tab-pane active" id="tab1">
-			<%= render "profile_user_details" %>
+			<%= render :partial => "profile_user_details", :locals => { :f => f } %>
 	    </div>
 
 	    <div class="tab-pane" id="tab2">
-			<%= render "profile_password" %>
+			<%= render :partial => "profile_subscriptions", :locals => { :f => f } %>
 		</div>
 
 	    <div class="tab-pane" id="tab3">
-			<%= render "profile_subscriptions" %>
+			<%= render :partial => "profile_password", :locals => { :f => f } %>
 	    </div>
 
 	    <div class="tab-pane" id="tab4">
-			<%= render "profile_avatar" %>
+			<%= render :partial => "profile_avatar", :locals => { :f => f } %>
 	    </div>
 	  </div>
 	</div>
-	
+
   	<div class="form-actions">
    	<%= f.submit nil, :value => "Update Profile", :class => 'btn btn-primary' %>
 		<% if @user.email_verified == false %>

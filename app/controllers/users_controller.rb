@@ -36,7 +36,14 @@ class UsersController < ApplicationController
   
   def update
     @user = current_user
+    @current_email = current_user.email
     if @user.update_attributes(params[:user])
+      if @user.email != @current_email
+        @user.email_verified = false
+        @user.save!
+        @user.delay.send_verification_email   
+        flash[:alert] = "You have updated your email address.  Please check your inbox and verify the new email address."
+      end
       redirect_to edit_user_path(@user), notice: 'Profile successfully updated.'
     else
       render action: "edit"

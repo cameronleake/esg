@@ -20,13 +20,14 @@ gem "delayed_job_active_record"
 gem "delayed_job_web"
 gem "daemons"
 gem "simple_form"
-gem "carrierwave"
-gem "rmagick"
-gem "acts-as-taggable-on"
-gem "kaminari"
-gem 'pg_search'
-gem 'rakismet'
-gem 'gibbon'
+gem "carrierwave"           # For image uploading
+gem "rmagick"               # For image editing on upload
+gem "acts-as-taggable-on"   # For blog post tags
+gem "kaminari"              # For pagination
+gem 'pg_search'             # For full-text search using Postgres
+gem 'rakismet'              # For interacting with the Akisment API for spam filtering 
+gem 'gibbon'                # For interacting with the MailChimp API
+
 
 group :test, :development do
   gem "rspec-rails"

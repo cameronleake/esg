@@ -43,7 +43,7 @@ describe "PASSWORD RESETS:" do
       @new_password.should_not eq(@old_password)
     end
     
-    it "Raises an error if password field is blank" do
+    xit "Raises an error if password field is blank" do
       @user.password = SecureRandom.urlsafe_base64
       @user.send_password_reset
       visit edit_password_reset_url(@user.password_reset_token)

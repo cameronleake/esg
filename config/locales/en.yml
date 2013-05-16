@@ -3,3 +3,8 @@
 
 en:
   hello: "Hello world"
+  
+en:
+  errors:
+    messages:
+      extension_white_list_error: "Invalid file type.  Please use one of the following: %{allowed_types}"
