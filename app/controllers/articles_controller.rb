@@ -34,4 +34,11 @@ class ArticlesController < ApplicationController
     render :partial => 'featured_articles'
   end
   
+  def mercury_update
+    @article = Article.find(params[:id])
+    @article.body = params[:content][:article_body][:value]
+    @article.save!
+    render text: "Article Updated!"
+  end
+    
 end

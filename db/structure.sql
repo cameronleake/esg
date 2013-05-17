@@ -248,6 +248,40 @@ ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
 
 
 --
+-- Name: mercury_images; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE mercury_images (
+    id integer NOT NULL,
+    image_file_name character varying(255),
+    image_content_type character varying(255),
+    image_file_size integer,
+    image_updated_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: mercury_images_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mercury_images_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mercury_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mercury_images_id_seq OWNED BY mercury_images.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -408,6 +442,13 @@ ALTER TABLE ONLY delayed_jobs ALTER COLUMN id SET DEFAULT nextval('delayed_jobs_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY mercury_images ALTER COLUMN id SET DEFAULT nextval('mercury_images_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq'::regclass);
 
 
@@ -471,6 +512,14 @@ ALTER TABLE ONLY contacts
 
 ALTER TABLE ONLY delayed_jobs
     ADD CONSTRAINT delayed_jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mercury_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY mercury_images
+    ADD CONSTRAINT mercury_images_pkey PRIMARY KEY (id);
 
 
 --
@@ -645,3 +694,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130515053100');
 INSERT INTO schema_migrations (version) VALUES ('20130515063833');
 
 INSERT INTO schema_migrations (version) VALUES ('20130515083251');
+
+INSERT INTO schema_migrations (version) VALUES ('20130517134731');

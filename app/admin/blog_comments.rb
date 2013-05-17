@@ -1,6 +1,7 @@
 ActiveAdmin.register BlogComment do
   menu :priority => 4
   menu :label => "Blog Comments"
+  menu :parent => "ESG Blog"
   
   filter :article
   filter :user

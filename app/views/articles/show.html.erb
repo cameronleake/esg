@@ -6,12 +6,16 @@
 		<p><%= image_tag @article.featured_image_url(:header).to_s %></p>
 	</div>
 	
-  	<p><%= @article.body %></p>
+	<div id="article_body" class="mercury-region" data-type="editable" data-mercury="full">
+  		<p><%= @article.body.html_safe %></p>
+	</div>
 
 	<div class="form-actions">
 		<div class="pull-right">
 			<a href=<%= articles_path %> class="btn btn-primary">Back to the Blog</a>			
 		</div>
 	</div>
+	
+	<%= link_to "LAUNCH HTML EDITOR", "/editor#{article_path(@article)}", id: "edit_link", data: { save_url: mercury_update_article_path(@article) } %>
 
 	<%= render "article_comments" %>

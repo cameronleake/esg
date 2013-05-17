@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
   end
   
   def authorize_email_verified
-    if current_user.email_verified?
+    if current_user.email_verified == false
+      redirect_to profile_path, alert: "Email not verified! Please verify for access to this resource."
     end
   end
   

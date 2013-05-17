@@ -15,6 +15,7 @@ Esg::Application.routes.draw do
   get 'tags/:tag', to: 'articles#index', as: :tag
   resources :articles do
     resources :blog_comments
+    member { post :mercury_update }
   end
   
 # USERS
@@ -43,10 +44,16 @@ Esg::Application.routes.draw do
     end
   end
 
+# MERCURY EDITOR
+  namespace :mercury do
+    resources :images
+  end
+mount Mercury::Engine => '/'
+
 # ACTIVE ADMIN
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
-
+  
 # OTHER  
   match "/delayed_job" => DelayedJobWeb, :anchor => false
 
