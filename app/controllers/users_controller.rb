@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   include UsersHelper
-  before_filter :authorize, only: [:index, :show, :edit]
+  before_filter :authorize_user_logged_in, only: [:index, :show, :edit]
 
   def new
     @user = User.new

@@ -1,9 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  def authorize
+  def authorize_user_logged_in
     if current_user.nil?
       redirect_to root_path, alert: "Not authorized!"
+    end
+  end
+  
+  def authorize_email_verified
+    if current_user.email_verified?
     end
   end
   

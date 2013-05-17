@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   
-  before_filter :authorize, only: [:edit, :update]
+  before_filter :authorize_user_logged_in, only: [:edit, :update]
   
   def index
     if params[:tag]
