@@ -8,35 +8,49 @@
 
 	<div class="tabbable">
 	  <ul class="nav nav-tabs">
-	    <li class="active"><a href="#tab1" data-toggle="tab"><h4>User Details</h4></a></li>
-	    <li><a href="#tab2" data-toggle="tab"><h4>Password</h4></a></li>
-	    <li><a href="#tab3" data-toggle="tab"><h4>Subscriptions</h4></a></li>
-	    <li><a href="#tab4" data-toggle="tab"><h4>Avatar</h4></a></li>
+	    <li class="active"><a href="#user_details" id="tab1" data-toggle="tab"><h4>User Details</h4></a></li>
+	    <li><a href="#password" id="tab2" data-toggle="tab"><h4>Password</h4></a></li>
+	    <li><a href="#subscriptions" id="tab3" data-toggle="tab"><h4>Subscriptions</h4></a></li>
+	    <li><a href="#avatar" id="tab4" data-toggle="tab"><h4>Avatar</h4></a></li>
 	  </ul>
-
+	
 	  <div class="tab-content">
-	    <div class="tab-pane active" id="tab1">
+	    <div class="tab-pane active" id="user_details">
 			<%= render :partial => "profile_user_details", :locals => { :f => f } %>
 	    </div>
 
-	    <div class="tab-pane" id="tab2">
-			<%= render :partial => "profile_subscriptions", :locals => { :f => f } %>
+	    <div class="tab-pane" id="password">
+			<%= render :partial => "profile_password", :locals => { :f => f } %>
 		</div>
 
-	    <div class="tab-pane" id="tab3">
-			<%= render :partial => "profile_password", :locals => { :f => f } %>
+	    <div class="tab-pane" id="subscriptions">
+			<%= render :partial => "profile_subscriptions", :locals => { :f => f } %>
 	    </div>
 
-	    <div class="tab-pane" id="tab4">
+	    <div class="tab-pane" id="avatar">
 			<%= render :partial => "profile_avatar", :locals => { :f => f } %>
 	    </div>
 	  </div>
 	</div>
+	
+	<script>
+		$(function() { 
+		  $('a[data-toggle="tab"]').on('shown', function (e) {
+		    // Save the latest tab
+		    localStorage.setItem('lastTab', $(e.target).attr('id'));
+		  });
+
+		  // Go to the latest tab, if it exists
+		  var lastTab = localStorage.getItem('lastTab');
+		  if (lastTab) {
+		      $('#'+lastTab).tab('show'); }
+		});
+	</script>
 
   	<div class="form-actions">
-   	<%= f.submit nil, :value => "Update Profile", :class => 'btn btn-primary' %>
+   	<%= f.submit nil, :value => "Save Changes", :class => 'btn btn-primary' %>
 		<% if @user.email_verified == false %>
-			<a href=<%= sendmessage_email_verification_path(@user) %> class="btn btn-warning">Send Verification Email</a>
+			<a href=<%= sendmessage_email_verification_path(@user) %> class="btn btn-success">Send Verification Email</a>
 		<% end %>
    	<%= link_to t('.cancel', :default => t("helpers.links.cancel")), root_path, :class => 'btn' %>
   	</div>

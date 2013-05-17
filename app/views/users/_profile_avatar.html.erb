@@ -1,11 +1,23 @@
 <h4>Change your avatar.</h4><br>
 
+<helper href="#" class="btn btn-info pull-right">HINT</helper>
+
 <dl class="dl-horizontal">
 	<% if @user.avatar? %>
 		<dd><%= image_tag @user.avatar_url(:profile).to_s %></dd>
 	<% else %>
 		<dd><%= image_tag "/assets/Default_Profile_Icon.jpg" %></dd>
 	<% end %>
-</dl>
+</dl>	
 
-<p><%= f.input :avatar, as: :file, label: false %></p>
+	<%= f.input :avatar, as: :file, label: false, :input_html => { :accept => "image/*" } %>
+
+<script>
+  $('helper').popover({
+		placement: 'left',
+		trigger: 'click',
+		title: "<h4>Updating your Avatar</h4>",
+		content: "To update your avatar image, click the \"Choose File\" button to the left and select an image from your computer. <br><br>The allowable file types are: <i><b>jpeg, jpg, gif and png.</b></i> <br><br>The image will automatically be resized and cropped, so make sure your face is in the middle!",
+		html: 'true'
+	});
+</script>

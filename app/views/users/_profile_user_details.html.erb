@@ -1,5 +1,7 @@
 <h4>Manage your account details.</h4><br>
 
+<helper href="#" class="btn btn-info pull-right">HINT</helper>
+
 <div class="simple_form form-horizontal">
 	<%= f.input :first_name %>
 	<%= f.input :last_name %>
@@ -9,3 +11,13 @@
 	  	<dd><%= @user.email_verified.yesno %></dd>
 	</dl>
 </div>
+
+<script>
+  $('helper').popover({
+		placement: 'left',
+		trigger: 'click',
+		title: "<h4>Updating your Details</h4>",
+		content: "<b>Names:</b> You can use any combination of letters and symbols that you require. <br><br><b>Email:</b> Please enter a valid email address.  If you change an existing email address you will be prompted to re-verify this address, and will require this verification to be able to use certain features of the site.",
+		html: 'true'
+	});
+</script>

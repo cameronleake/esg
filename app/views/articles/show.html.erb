@@ -14,45 +14,4 @@
 		</div>
 	</div>
 
-	<div class="page-header">
-		<h3>Comments</h3>
-	</div>
-	
-	<table class="table table-striped">
-		<% @article.blog_comments.where(:spam => false).order("created_at ASC").each do |comment| %>
-			<thead>
-				<tr>
-					<td class="blog-article-list">
-						<div class="media">
-							<a class="pull-left">
-								<dd><%= display_avatar_image(comment.user) %></dd>
-							</a>
-							<h4><%= "#{comment.user.first_name} #{comment.user.last_name}" %></h4>
-							<h5><%= comment.created_at.time.to_formatted_s(:long) %></h5>
-						</div>					
-					</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr><td><%= comment.body %></td></tr>
-			</tbody>
-		<% end %>
-	</table>
-
-	<div class="form-actions">
-		<% if current_user %>
-			<h3>Add a comment:</h3>
-			<%= simple_form_for([@article, @article.blog_comments.build]) do |f| %>
-				<%= f.input :body, as: :text, :label => false, :required => true, :input_html => { :class => "blog-comments", :maxlength => 2000 } %>					
-			  	<div class="form-actions">
-			    	<%= f.button :submit, :value => "Submit", :class => 'btn-primary' %>
-			  	</div>
-			<% end %>
-		<% else %>
-			<div class="form-horizontal comments-links">
-				<p>Sign up or Login to leave a comment!</p>
-				<a href=<%= signup_path %> class="btn btn-info">Sign Up</a>
-				<a href=<%= login_path %> class="btn">Login</a>	
-			</div>					
-		<% end %>
-	</div>
+	<%= render "article_comments" %>
