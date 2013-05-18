@@ -34,6 +34,9 @@ ActiveAdmin.register Article do
       row :title
       row :blurb
       row :body do |article|
+        link_to "LAUNCH HTML EDITOR", "/editor#{article_path(article)}", id: "edit_link"
+      end
+      row :body do |article|
         article.body.html_safe
       end
       row :image do
@@ -45,9 +48,6 @@ ActiveAdmin.register Article do
       end
       row :created_at
       row :updated_at
-      row :body do |article|
-        link_to "LAUNCH HTML EDITOR", "/editor#{article_path(article)}", id: "edit_link"
-      end
     end
     active_admin_comments
   end

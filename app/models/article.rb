@@ -9,6 +9,7 @@ class Article < ActiveRecord::Base
   attr_accessible :featured_article
   validates :title, :presence => true
   has_many :blog_comments, :dependent => :destroy
+  has_many :article_images, :dependent => :destroy
   include PgSearch
   pg_search_scope :search, against: [:title, :body],
     using: {tsearch: {dictionary: "english"}}

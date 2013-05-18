@@ -2,12 +2,23 @@ ActiveAdmin.register BlogComment do
   menu :priority => 4
   menu :label => "Blog Comments"
   menu :parent => "ESG Blog"
+  scope :spam do |blog_comment|
+    blog_comment.where(:spam => true)
+  end
+  scope :all
+  scope :not_spam do |blog_comment|
+    blog_comment.where(:spam => false)
+  end
   
+  
+  # Configuration for Sidebar Filters
   filter :article
   filter :user
   filter :spam, :as => :select
   filter :created_at
-  
+
+
+  # Configuration for Blog Comments Index Page  
   config.sort_order = "created_at_desc"
   config.per_page = 15
   
