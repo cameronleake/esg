@@ -46,7 +46,7 @@ ActiveAdmin.register Article do
       row :created_at
       row :updated_at
       row :body do |article|
-        link_to "LAUNCH HTML EDITOR", "/editor#{article_path(article)}", id: "edit_link", data: { save_url: mercury_update_article_path(article) }
+        link_to "LAUNCH HTML EDITOR", "/editor#{article_path(article)}", id: "edit_link"
       end
     end
     active_admin_comments

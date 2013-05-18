@@ -1,3 +1,14 @@
+<script>
+	// For Handling Mercury Editor
+	jQuery(window).on('mercury:ready', function() { 
+	   var link = $('#edit_link');
+		Mercury.saveUrl = '/articles/' + <%= @article.id %> +"/mercury_update";
+		Mercury.on('saved', function() {
+			alert("Article Saved!");
+		});
+	});
+</script>
+
 <%- model_class = Article -%>
 
 	<div class="page-header">
@@ -15,7 +26,5 @@
 			<a href=<%= articles_path %> class="btn btn-primary">Back to the Blog</a>			
 		</div>
 	</div>
-	
-	<%= link_to "LAUNCH HTML EDITOR", "/editor#{article_path(@article)}", id: "edit_link", data: { save_url: mercury_update_article_path(@article) } %>
 
 	<%= render "article_comments" %>

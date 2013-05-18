@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.body = params[:content][:article_body][:value]
     @article.save!
-    render text: "Article Updated!"
+    render :json => { :redirect_url => admin_article_path(@article) }
   end
     
 end
