@@ -149,7 +149,9 @@ CREATE TABLE articles (
     updated_at timestamp without time zone NOT NULL,
     featured_image character varying(255),
     blurb character varying(255),
-    featured_article boolean DEFAULT false
+    featured_article boolean DEFAULT false,
+    published boolean DEFAULT false,
+    distributed_at timestamp without time zone
 );
 
 
@@ -699,3 +701,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130517134731');
 INSERT INTO schema_migrations (version) VALUES ('20130518143142');
 
 INSERT INTO schema_migrations (version) VALUES ('20130518145720');
+
+INSERT INTO schema_migrations (version) VALUES ('20130519020841');
+
+INSERT INTO schema_migrations (version) VALUES ('20130519131334');

@@ -36,8 +36,8 @@ class ArticleImageUploader < CarrierWave::Uploader::Base
 
   def create_article_medium_image
     manipulate! do |img|
-      img = img.resize_to_fit(300, 300)
-      img = img.crop(Magick::CenterGravity, 300, 300)
+      img = img.resize_to_fit(250, 250)
+      img = img.crop(Magick::CenterGravity, 250, 250)
     end
   end
 

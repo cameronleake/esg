@@ -4,11 +4,15 @@ class Mercury::ImagesController < MercuryController
   
   def create
       @article_image = ArticleImage.new(params[:image])
-      # @current_article = Article.find(params[:article_id])
-      # @article_image.article = @current_article
+      if params[:article_id]
+        @current_article = Article.find(params[:article_id])
+        @article_image.article = @current_article
+      end
       @article_image.save!
       ## Needs to send link to the resized image: @article_image.article_image.image.url(:medium)
-      render :json => @article_image.to_json(:only => :image)
+      
+      # render :json => @article_image.to_json(:only => :image)  THIS WORKS
+      render text: "{\"image\":{\"url\":\"#{@article_image.image.url(:medium).to_s}\"}}"
    end
 
    def destroy

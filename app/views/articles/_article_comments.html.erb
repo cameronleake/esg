@@ -9,7 +9,7 @@
 				<td class="blog-article-list">
 					<div class="media">
 						<a class="pull-left">
-							<dd><%= display_avatar_image(comment.user) %></dd>
+							<dd><%= image_tag(comment.user.avatar.url(:avatar)) %></dd>
 						</a>
 						<h4><%= "#{comment.user.first_name} #{comment.user.last_name}" %></h4>
 						<h5><%= comment.created_at.time.to_formatted_s(:long) %></h5>

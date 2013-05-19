@@ -7,6 +7,8 @@ class Article < ActiveRecord::Base
   attr_accessible :featured_image
   attr_accessible :tag_list
   attr_accessible :featured_article
+  attr_accessible :published
+  attr_accessible :distributed_at
   validates :title, :presence => true
   has_many :blog_comments, :dependent => :destroy
   has_many :article_images, :dependent => :destroy

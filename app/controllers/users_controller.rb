@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   include UsersHelper
   before_filter :authorize_user_logged_in, only: [:index, :show, :edit]
-  before_filter :authorize_email_verified, only: [:subscribe_blog]
 
   def new
     @user = User.new
@@ -26,6 +25,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.email_verification_token = @user.generate_random_token
+    @user.avatar = "/assets/Default_Profile_Icon.jpg"
     if @user.save
       cookies[:auth_token] = @user.auth_token    # Save new auth_token in a temporary cookie
       @user.delay.send_welcome_email  

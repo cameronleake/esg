@@ -1,5 +1,5 @@
 ActiveAdmin.register Contact do
-  menu :priority => 5
+  menu :priority => 10
   menu :label => "Contact Tickets"
   
   filter :name
@@ -26,7 +26,7 @@ ActiveAdmin.register Contact do
   end                                                      
 
   form do |f|                         
-    f.inputs "Contact Ticket Details" do       
+    f.inputs "New Contact Ticket" do       
       f.input :name                
       f.input :email
       f.input :subject

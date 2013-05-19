@@ -14,15 +14,28 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
       
+    end
+
+    columns do
       column do
         panel "Currently Featured Articles" do
           table_for Article.where(:featured_article => true) do
-            column ("description") {|article| link_to(article.title, admin_article_path(article)) } 
+            column ("Article") {|article| link_to(article.title, admin_article_path(article)) } 
             column :created_at
           end
           strong { link_to "View All Articles", admin_articles_path }
         end
-      end    
+      end
+      
+      column do
+        panel "Draft Articles - (Not Yet Published to Blog)" do
+          table_for Article.where(:published => false) do
+            column ("Article") {|article| link_to(article.title, admin_article_path(article)) } 
+            column :created_at
+          end
+          strong { link_to "View All Articles", admin_articles_path }
+        end
+      end
     end
     
     columns do

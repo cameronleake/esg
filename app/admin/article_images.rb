@@ -1,4 +1,5 @@
 ActiveAdmin.register ArticleImage do
+  menu :priority => 2
   menu :parent => "ESG Blog"
   scope :all, :default => true
 
@@ -33,6 +34,9 @@ ActiveAdmin.register ArticleImage do
       row :image do
         image_tag(article_image.image.url(:medium))
       end
+      row :image do
+        article_image.image.url(:medium)
+      end
       row :name
       row :article_id
       row :created_at
@@ -44,7 +48,7 @@ ActiveAdmin.register ArticleImage do
   
   # Configuration for Article Images Edit Page
   form do |f|                         
-    f.inputs "New Article" do       
+    f.inputs "New Article Image" do       
       f.input :image, :as => :file, :input_html => { :accept => "image/*" }
       f.input :name
       f.input :article, :as => :select
