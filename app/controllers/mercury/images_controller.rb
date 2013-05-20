@@ -9,9 +9,7 @@ class Mercury::ImagesController < MercuryController
         @article_image.article = @current_article
       end
       @article_image.save!
-      ## Needs to send link to the resized image: @article_image.article_image.image.url(:medium)
-      
-      # render :json => @article_image.to_json(:only => :image)  THIS WORKS
+      # render :json => @article_image.to_json(:only => :image)  THIS ALSO WORKS
       render text: "{\"image\":{\"url\":\"#{@article_image.image.url(:medium).to_s}\"}}"
    end
 

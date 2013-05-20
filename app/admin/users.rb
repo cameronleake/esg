@@ -1,6 +1,5 @@
 ActiveAdmin.register User do
-  menu :priority => 2
-  menu :parent => "Users"
+  menu :parent => "USERS", :priority => 1
   scope :all, :default => true
   scope :email_not_verified do |users|
     users.where(:email_verified => false)
@@ -71,9 +70,9 @@ ActiveAdmin.register User do
      f.input :email
      f.input :password
      f.input :password_confirmation
-     f.input :email_verified, :as => :select
-     f.input :blog_subscription, :as => :select
-     f.input :resources_subscription, :as => :select
+     f.input :email_verified, :as => :select, :include_blank => false
+     f.input :blog_subscription, :as => :select, :include_blank => false
+     f.input :resources_subscription, :as => :select, :include_blank => false
      f.input :avatar, :as => :file
    end                               
    f.actions                         

@@ -110,8 +110,6 @@ ALTER SEQUENCE admin_users_id_seq OWNED BY admin_users.id;
 
 CREATE TABLE article_images (
     id integer NOT NULL,
-    image character varying(255),
-    article_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     name character varying(255)
@@ -220,7 +218,8 @@ CREATE TABLE contacts (
     body text,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    spam boolean DEFAULT false
+    spam boolean DEFAULT false,
+    status character varying(255) DEFAULT 'OPEN'::character varying
 );
 
 
@@ -705,3 +704,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130518145720');
 INSERT INTO schema_migrations (version) VALUES ('20130519020841');
 
 INSERT INTO schema_migrations (version) VALUES ('20130519131334');
+
+INSERT INTO schema_migrations (version) VALUES ('20130520131336');
+
+INSERT INTO schema_migrations (version) VALUES ('20130520132410');

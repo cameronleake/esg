@@ -1,5 +1,5 @@
 ActiveAdmin.register Tag do
-  menu :parent => "ESG Blog"
+  menu :parent => "ESG BLOG", :priority => 4
   
   
   # Configuration for Tags Index Page
@@ -11,4 +11,14 @@ ActiveAdmin.register Tag do
     column :name
     default_actions
   end
+  
+  
+  # Configuration for Tags Show Page
+  show do |tags|
+    attributes_table do
+      row :name
+    end
+    active_admin_comments
+  end
+  
 end

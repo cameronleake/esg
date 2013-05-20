@@ -2,6 +2,7 @@ class ContactsController < ApplicationController
   
   def new
     @contact = Contact.new
+    @contact.status = "OPEN"
   end
   
   def create

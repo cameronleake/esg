@@ -29,29 +29,39 @@ class ArticleImageUploader < CarrierWave::Uploader::Base
     end
   end
   
-  # Generate Medium Article Image for User
+  # Generate Small Article Image
+  version :small do
+    process :create_article_image_small
+  end
+
+  def create_article_image_small
+    manipulate! do |img|
+      img = img.resize_to_fit(150, 150)
+    end
+  end
+
+  # Generate Medium Article Image
   version :medium do
-    process :create_article_medium_image
+    process :create_article_image_medium
   end
 
-  def create_article_medium_image
+  def create_article_image_medium
     manipulate! do |img|
-      img = img.resize_to_fit(250, 250)
-      img = img.crop(Magick::CenterGravity, 250, 250)
+      img = img.resize_to_fit(300, 300)
+    end
+  end
+  
+  # Generate Large Article Image
+  version :large do
+    process :create_article_image_large
+  end
+
+  def create_article_image_large
+    manipulate! do |img|
+      img = img.resize_to_fit(500, 500)
     end
   end
 
-  # Generate Admin Thumbnail Article Image for User
-  version :thumb do
-    process :create_article_thumb_image
-  end
-
-  def create_article_thumb_image
-    manipulate! do |img|
-      img = img.resize_to_fit(120, 120)
-      img = img.crop(Magick::CenterGravity, 120, 120)
-    end
-  end
 
   # Whitelist for file types allowed to be uploaded.
   def extension_white_list

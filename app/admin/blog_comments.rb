@@ -1,7 +1,5 @@
 ActiveAdmin.register BlogComment do
-  menu :priority => 3
-  menu :label => "Blog Comments"
-  menu :parent => "ESG Blog"
+  menu :parent => "ESG BLOG", :label => "Comments", :priority => 2
   scope :all
   scope :spam do |blog_comment|
     blog_comment.where(:spam => true)
@@ -14,7 +12,7 @@ ActiveAdmin.register BlogComment do
   # Configuration for Sidebar Filters
   filter :comment
   filter :article
-  filter :user, :as => :select
+  filter :user
   filter :spam, :as => :select
   filter :created_at
 
@@ -35,15 +33,12 @@ ActiveAdmin.register BlogComment do
   # Configuration for Blog Comments Show Page
   show do |blog_comment|
     attributes_table do
-      row :article
-      row :user
-      row :user do |blog_comment|
-        link_to blog_comment.user.get_user_email, admin_user_path(blog_comment.user)
-      end
-      row :body
       row :spam do |blog_comment|
         blog_comment.spam.yesno
       end
+      row :article
+      row :user
+      row :body
       row :created_at
       row :updated_at
     end
@@ -54,10 +49,10 @@ ActiveAdmin.register BlogComment do
   # Configuration for Blog Comments Edit Page
   form do |f|                         
    f.inputs "New Blog Comment" do       
-     f.input :article, :as => :select
-     f.input :user, :as => :select
+     f.input :spam, :as => :select, :include_blank => false
+     f.input :article, :as => :select, :include_blank => false
+     f.input :user, :as => :select, :include_blank => false
      f.input :body
-     f.input :spam, :as => :select
    end                               
    f.actions                         
   end

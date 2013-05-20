@@ -1,6 +1,5 @@
 ActiveAdmin.register Article do
-  menu :priority => 1
-  menu :parent => "ESG Blog"
+  menu :parent => "ESG BLOG", :priority => 1
   scope :all, :default => true
   scope :featured_articles do |articles|
     articles.where(:featured_article => true)
@@ -20,8 +19,8 @@ ActiveAdmin.register Article do
   filter :title
   filter :blurb
   filter :body
-  filter :featured_article, :as => :select  
-  filter :published, :as => :select
+  filter :featured_article, :as => :select, :collection => ["Featured", "No"]
+  filter :published, :as => :select, :collection => ["Published", "Draft"]
   filter :tag_list
   filter :distributed_at  
   filter :created_at   
@@ -56,21 +55,21 @@ ActiveAdmin.register Article do
     attributes_table do
       row :title
       row :blurb
-      row :body do |article|
+      row " " do |article|
         link_to "LAUNCH HTML EDITOR", "/editor#{article_path(article)}", id: "edit_link"
       end
       row :body do |article|
         article.body.html_safe
       end
-      row :image do
+      row "Featured Image" do
         image_tag(article.featured_image.url(:thumb))
       end
       row :tag_list
-      row :featured_article do |article|
-        article.featured_article.featured_article
-      end
-      row :published do |article|
+      row "PUBLISHED TO BLOG?" do |article|
         article.published.published_status
+      end
+      row "FEATURED ARTICLE?" do |article|
+        article.featured_article.featured_article
       end
       row :distributed_at
       row :created_at
@@ -85,11 +84,10 @@ ActiveAdmin.register Article do
     f.inputs "New Article" do       
       f.input :title
       f.input :blurb, as: :text, :input_html => { :rows => 6, :maxlength => 255 }
-      f.input :body, as: :text
       f.input :featured_image, :as => :file, :input_html => { :accept => "image/*" }
       f.input :tag_list  #  TODO: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
-      f.input :featured_article, :as => :select
-      f.input :published, :as => :select
+      f.input :featured_article, :as => :select, :include_blank => false, :collection => ["Featured", "No"]
+      f.input :published, :as => :select, :include_blank => false, :collection => ["Published", "Draft"]
     end                               
     f.actions                         
   end

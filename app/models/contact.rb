@@ -1,6 +1,6 @@
 class Contact < ActiveRecord::Base
   include Rakismet::Model
-  attr_accessible :name, :email, :subject, :body
+  attr_accessible :name, :email, :subject, :body, :spam, :status
   validates_presence_of :name, :email, :subject, :body, :on => :create
   rakismet_attrs  :author => proc { :email },
                   :author_email => proc { :email },

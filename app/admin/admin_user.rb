@@ -1,6 +1,5 @@
 ActiveAdmin.register AdminUser do
-  menu :priority => 10
-  menu :parent => "Users"
+  menu :parent => "USERS", :label => "Admin", :priority => 2
   scope :all, :default => true
 
   
