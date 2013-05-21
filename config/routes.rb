@@ -1,12 +1,8 @@
 Esg::Application.routes.draw do
 
-    namespace :mercury do
-      resources :images
-    end
-
   root :to => "home#index"
 
-# HOME
+  # HOME
   match 'ebook' => 'home#ebook'
   match 'resourcecentre' => 'home#resource_centre'
   match 'faq' => 'home#faq'
@@ -14,7 +10,25 @@ Esg::Application.routes.draw do
   match '422' => 'home#422'
   match '500' => 'home#500'
   
-# ARTICLES / BLOG COMMENTS
+  
+  # USERS / SESSIONS / PASSWORD RESETS / EMAIL_VERIFICATIONS
+  match "profile" => "users#edit"
+  match 'signup' => 'users#new'
+  match 'subscribe_blog' => 'users#subscribe_blog'
+  match 'login' => 'sessions#new'
+  match 'logout' => 'sessions#destroy'
+  get 'reset_password', to: 'password_resets#new', as: 'reset_password'
+  resources :users
+  resources :sessions
+  resources :password_resets
+  resources :email_verifications do
+    member do
+      get 'sendmessage'
+    end
+  end
+
+
+  # ARTICLES / BLOG COMMENTS
   match 'blog' => 'articles#index'
   get 'tags/:tag', to: 'articles#index', as: :tag
   resources :articles do
@@ -22,43 +36,32 @@ Esg::Application.routes.draw do
     member { post :mercury_update }
   end
   
-# USERS
-  match "profile" => "users#edit"
-  match 'signup' => 'users#new'
-  match 'subscribe_blog' => 'users#subscribe_blog'
-  match 'login' => 'sessions#new'
-  resources :users
   
-# SESSIONS
-  match 'logout' => 'sessions#destroy'
-  resources :sessions
+  # RESOURCES / REVIEWS / DOWNLOADS
+  resources :resources do
+    resources :reviews
+    resources :downloads
+  end
   
-# CONTACTS
+  
+  # CONTACT TICKETS
   match 'contact' => 'contacts#new'
   resources :contacts
-  
-# PASSWORD_RESETS
-  get 'reset_password', to: 'password_resets#new', as: 'reset_password'
-  resources :password_resets
-  
-# EMAIL_VERIFICATIONS
-  resources :email_verifications do
-    member do
-      get 'sendmessage'
-    end
-  end
 
-# MERCURY EDITOR
+
+  # MERCURY EDITOR
   namespace :mercury do
     resources :images
   end
-mount Mercury::Engine => '/'
+  mount Mercury::Engine => '/'
 
-# ACTIVE ADMIN
+
+  # ACTIVE ADMIN
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
   
-# OTHER  
+  
+  # OTHER  
   match "/delayed_job" => DelayedJobWeb, :anchor => false
 
 end

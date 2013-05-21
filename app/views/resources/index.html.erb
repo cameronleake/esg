@@ -1,0 +1,47 @@
+<div id="container">	
+	<div class="row">
+
+   	<div class="span9">
+			<div class="page-header">
+				<h2>Resource Centre</h2>
+			</div>
+			
+			<table class="table table-striped">
+				<% @resources.each do |resource| %>
+					<thead>
+						<tr>
+							<td class="blog-article-list">
+								<div class="media">
+									<h3><%= link_to resource.name, resource_path(resource) %></h3>	
+									<a class="pull-left">
+										<dd><%= image_tag resource.image %></dd>
+									</a>
+									<h5>
+										<% if resource.review_count(resource) > 0 %>
+										 	 --  <%= pluralize(resource.review_count(resource), 'Review') %>
+										<% end %>
+									</h5>
+									<h5>
+										<% if resource.type = "paid" %>
+											$<%= resource.price %>
+										<% else %>
+										 	FREE
+										<% end %>
+										-- <%= resource.category %>
+									</h5>
+								</div>					
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr><td><%= resource.description %></tr>
+					</tbody>
+				<% end %>
+			</table>
+		</div>
+		
+		<div class="span3" align="center">
+			<%= render "resources_sidebar" %>
+		</div>
+	</div>
+</div>
