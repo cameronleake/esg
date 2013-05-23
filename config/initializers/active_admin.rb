@@ -157,7 +157,7 @@ ActiveAdmin.setup do |config|
   # 
   # To change the default utility navigation to show a link to your website & a logout btn
   # 
-  #   config.namespace :admin do |admin|
+    # config.namespace :admin do |admin|
   #     admin.build_menu :utility_navigation do |menu|
   #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
   #       admin.add_logout_button_to_menu menu
@@ -170,24 +170,24 @@ ActiveAdmin.setup do |config|
   #     admin.build_menu :default do |menu|
   #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
   #     end
-  #   end
+    # end
 
   # == Download Links
-  #
+  # 
   # You can disable download links on resource listing pages,
   # or customize the formats shown per namespace/globally
-  #
+  # 
   # To disable/customize for the :admin namespace:
+  # 
+    config.namespace :admin do |admin|
   #
-  #   config.namespace :admin do |admin|
-  # #
-  # #     # Disable the links entirely
-  # #     admin.download_links = false
-  # #
-  # #     # Only show XML & PDF options
-  #     admin.download_links = [:xml, :pdf, :jpg, :jpeg, :gif, :png]
-  # #
-  #   end
+  #     # Disable the links entirely
+      admin.download_links = false
+  #
+  #     # Only show XML & PDF options
+      # admin.download_links = [:xml, :pdf, :jpg, :jpeg, :gif, :png]
+  #
+    end
 
 
   # == Pagination

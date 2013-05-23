@@ -5,7 +5,19 @@
 			<div class="page-header">
 				<h2>Resource Centre</h2>
 			</div>
-			
+
+			<table class="table">
+				<% @categories.each do |category| %>
+					<thead>
+						<tr><td><h3><%= category.name.pluralize %></h3></td></tr>
+					</thead>
+					<tbody>
+						<tr><td><h5><%= pluralize(category.resources_count(category), 'Resource') %></h5></td></tr>
+					</tbody>
+				<% end %>
+			</table>			
+
+
 			<table class="table table-striped">
 				<% @resources.each do |resource| %>
 					<thead>
@@ -27,7 +39,7 @@
 										<% else %>
 										 	FREE
 										<% end %>
-										-- <%= resource.category %>
+										-- <%= resource.category.name %>
 									</h5>
 								</div>					
 							</td>

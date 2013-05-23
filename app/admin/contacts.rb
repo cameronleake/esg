@@ -56,7 +56,7 @@ ActiveAdmin.register Contact do
   end
     
   
-  # Configuration for Tickets Show Page
+  # Configuration for Tickets Index Page
   form do |f|                         
     f.inputs "New Contact Ticket" do       
       f.input :status, :as => :select, :include_blank => false, :collection => ["OPEN", "CLOSED"]

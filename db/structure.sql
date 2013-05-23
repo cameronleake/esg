@@ -207,6 +207,37 @@ ALTER SEQUENCE blog_comments_id_seq OWNED BY blog_comments.id;
 
 
 --
+-- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE categories (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
+
+
+--
 -- Name: contacts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -328,11 +359,11 @@ CREATE TABLE resources (
     price integer,
     image character varying(255),
     file character varying(255),
-    category character varying(255),
     number_of_downloads integer,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    category_id integer
 );
 
 
@@ -544,6 +575,13 @@ ALTER TABLE ONLY blog_comments ALTER COLUMN id SET DEFAULT nextval('blog_comment
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY contacts ALTER COLUMN id SET DEFAULT nextval('contacts_id_seq'::regclass);
 
 
@@ -634,6 +672,14 @@ ALTER TABLE ONLY articles
 
 ALTER TABLE ONLY blog_comments
     ADD CONSTRAINT blog_comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY categories
+    ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
 
 
 --
@@ -868,3 +914,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130521135242');
 INSERT INTO schema_migrations (version) VALUES ('20130521140527');
 
 INSERT INTO schema_migrations (version) VALUES ('20130521141044');
+
+INSERT INTO schema_migrations (version) VALUES ('20130523134334');
+
+INSERT INTO schema_migrations (version) VALUES ('20130523135439');
