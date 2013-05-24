@@ -4,10 +4,14 @@
    	<div class="span9">
 			<div class="page-header">
 				<h2><%= @category.name.pluralize %></h2>
-			</div>		
+			</div>
 			
+			<% if @tag_name %>
+				<h5>FILTER: <span class="label label-info"><%= @tag_name %><span></h5>
+			<% end %>
+
 			<table class="table table-striped">
-				<% @resources.each do |resource| %>
+				<% @filtered_resources.each do |resource| %>
 					<thead>
 						<tr>
 							<td class="blog-article-list">
@@ -44,4 +48,3 @@
 		</div>
 	</div>
 </div>
-	

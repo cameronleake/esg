@@ -355,7 +355,7 @@ CREATE TABLE resources (
     id integer NOT NULL,
     name character varying(255),
     description character varying(255),
-    type character varying(255),
+    price_type character varying(255),
     price integer,
     image character varying(255),
     file character varying(255),
@@ -918,3 +918,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130521141044');
 INSERT INTO schema_migrations (version) VALUES ('20130523134334');
 
 INSERT INTO schema_migrations (version) VALUES ('20130523135439');
+
+INSERT INTO schema_migrations (version) VALUES ('20130524134643');

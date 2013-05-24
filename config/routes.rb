@@ -30,7 +30,7 @@ Esg::Application.routes.draw do
 
   # ARTICLES / BLOG COMMENTS
   match 'blog' => 'articles#index'
-  get 'tags/:tag', to: 'articles#index', as: :tag
+  get 'articles/tags/:tag', to: 'articles#index', as: :article_tag
   resources :articles do
     resources :blog_comments
     member { post :mercury_update }
@@ -38,6 +38,8 @@ Esg::Application.routes.draw do
   
   
   # CATEGORIES / RESOURCES / REVIEWS / DOWNLOADS
+  get 'categories/tags/:tag', to: 'categories#filtered_index', as: :category_tag
+  get 'categories/:id/tags/:tag', to: 'categories#filtered_show', as: :show_category_tag
   resources :categories do
     resources :resources do
       resources :reviews

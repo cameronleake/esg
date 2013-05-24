@@ -1,4 +1,13 @@
 <div class="page-header">
+  	<h3>Search by Topic</h3>
+</div>
+<% tag_cloud Resource.tag_counts.sort { |x, y| x.name <=> y.name }, %w{s m l} do |tag| %>
+ 	<h4><%= link_to tag.name, category_tag_path(tag.name) %></h4>
+<% end %>
+<br>
+<br>
+
+<div class="page-header">
   	<h3>Most Requested Resources</h3>
 </div>
 <p>Vote for your favourites to get them added to the Resource Centre first!</p>

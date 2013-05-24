@@ -85,7 +85,7 @@ ActiveAdmin.register Article do
       f.input :title
       f.input :blurb, as: :text, :input_html => { :rows => 6, :maxlength => 255 }
       f.input :featured_image, :as => :file, :input_html => { :accept => "image/*" }
-      f.input :tag_list  #  TODO: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
+      f.input :tag_list  #  <TODO>: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
       f.input :featured_article, :as => :select, :include_blank => false, :collection => ["Featured", "No"]
       f.input :published, :as => :select, :include_blank => false, :collection => ["Published", "Draft"]
     end                               

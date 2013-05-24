@@ -16,6 +16,7 @@ ActiveAdmin.register Resource do
   filter :user
   filter :category
   filter :name
+  filter :price_type, :as => :select, :collection => ["Paid", "Free"]
   filter :price
 
 
@@ -25,10 +26,10 @@ ActiveAdmin.register Resource do
   
   index do
    selectable_column
-   column :id
    column :user
    column :category
    column :name
+   column :price_type
    column :price, :sortable => :price do |resource|
      div :class => "admin-center-column" do 
        if resource.price == 0
@@ -54,11 +55,12 @@ ActiveAdmin.register Resource do
       row :category
       row :name
       row :description
-      row :type
+      row :price_type
       row :price
       row :number_of_downloads
       row :file
       row :image
+      row :tag_list
       row :created_at
     end
     active_admin_comments
@@ -72,8 +74,9 @@ ActiveAdmin.register Resource do
      f.input :category, :as => :select, :include_blank => false
      f.input :name
      f.input :description
-     f.input :type
+     f.input :price_type, :as => :select, :include_blank => false, :collection => ["Paid", "Free"]
      f.input :price
+      f.input :tag_list  #  <TODO>: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
      f.input :file, :as => :file
      f.input :image, :as => :file
    end                               

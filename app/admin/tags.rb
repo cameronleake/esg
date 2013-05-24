@@ -1,5 +1,5 @@
 ActiveAdmin.register Tag do
-  menu :parent => "ESG BLOG", :priority => 4
+  menu :parent => "CONFIG", :priority => 1
   
   
   # Configuration for Tags Index Page

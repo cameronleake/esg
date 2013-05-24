@@ -3,7 +3,7 @@
 </div>
 
 <% tag_cloud Article.where(:published => true).tag_counts.sort { |x, y| x.name <=> y.name }, %w{s m l} do |tag| %>
- 	<h4><%= link_to tag.name, tag_path(tag.name) %></h4>
+ 	<h4><%= link_to tag.name, article_tag_path(tag.name) %></h4>
 <% end %>
 <br>
 

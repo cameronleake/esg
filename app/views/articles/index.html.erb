@@ -18,7 +18,7 @@
 									</a>
 									<h5>
 										<%= article.created_at.time.to_formatted_s(:default) %> -- 
-										<%= display_tag_links(article) %>
+										<%= display_article_tag_links(article) %>
 										<% if article.comments_count(article) > 0 %>
 										 	 --  <%= pluralize(article.comments_count(article), 'Comment') %>
 										<% end %>
