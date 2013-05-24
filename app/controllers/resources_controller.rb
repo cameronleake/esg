@@ -1,8 +1,7 @@
 class ResourcesController < ApplicationController
-
-  def index
-    @resources = Resource.find(:all)
-    @categories = Category.find(:all)
+  
+  def show
+    @resource = Resource.find(params[:id])
   end
 
 end

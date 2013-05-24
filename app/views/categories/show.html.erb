@@ -3,20 +3,8 @@
 
    	<div class="span9">
 			<div class="page-header">
-				<h2>Resource Centre</h2>
+				<h2><%= @category.name.pluralize %></h2>
 			</div>
-
-			<table class="table">
-				<% @categories.each do |category| %>
-					<thead>
-						<tr><td><h3><%= category.name.pluralize %></h3></td></tr>
-					</thead>
-					<tbody>
-						<tr><td><h5><%= pluralize(category.resources_count(category), 'Resource') %></h5></td></tr>
-					</tbody>
-				<% end %>
-			</table>			
-
 
 			<table class="table table-striped">
 				<% @resources.each do |resource| %>
@@ -24,7 +12,7 @@
 						<tr>
 							<td class="blog-article-list">
 								<div class="media">
-									<h3><%= link_to resource.name, resource_path(resource) %></h3>	
+									<h3><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h3>	
 									<a class="pull-left">
 										<dd><%= image_tag resource.image %></dd>
 									</a>
@@ -50,10 +38,14 @@
 					</tbody>
 				<% end %>
 			</table>
+			
+			<a href="<%= categories_path %>" class="btn btn-primary">Back to Categories</a>
+			
 		</div>
-		
+			
 		<div class="span3" align="center">
 			<%= render "resources_sidebar" %>
 		</div>
 	</div>
 </div>
+	

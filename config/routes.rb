@@ -37,10 +37,12 @@ Esg::Application.routes.draw do
   end
   
   
-  # RESOURCES / REVIEWS / DOWNLOADS
-  resources :resources do
-    resources :reviews
-    resources :downloads
+  # CATEGORIES / RESOURCES / REVIEWS / DOWNLOADS
+  resources :categories do
+    resources :resources do
+      resources :reviews
+      resources :downloads
+    end
   end
   
   

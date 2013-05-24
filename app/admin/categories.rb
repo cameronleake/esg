@@ -13,6 +13,7 @@ ActiveAdmin.register Category do
   
   index do
     selectable_column
+    column :id
     column :name     
     default_actions                   
   end                                                      

@@ -25,6 +25,7 @@ ActiveAdmin.register Resource do
   
   index do
    selectable_column
+   column :id
    column :user
    column :category
    column :name

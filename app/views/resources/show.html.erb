@@ -1,0 +1,16 @@
+<div id="container">	
+	<div class="row">
+
+   	<div class="span9">
+			<div class="page-header">
+				<h2><%= @resource.name %></h2>
+			</div>
+
+			<a href="<%= category_path(@resource.category_id) %>" class="btn btn-primary">Back to <%= @resource.category.name.pluralize %></a>
+		</div>
+			
+		<div class="span3" align="center">
+
+		</div>
+	</div>
+</div>
