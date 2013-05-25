@@ -5,10 +5,6 @@
 			<div class="page-header">
 				<h2>Resource Centre</h2>
 			</div>
-			
-			<% if @tag_name %>
-				<h5>FILTER: <span class="label label-info"><%= @tag_name %><span></h5>
-			<% end %>
 
 			<table class="table">
 				<% @filtered_categories.each do |category| %>
@@ -17,12 +13,11 @@
 					</thead>
 					<tbody>
 						<tr><td><h5><%= pluralize(category.resources_with_tag(category, @tag_name).count, 'Resource') %></h5></td></tr>
-					</tbody>
-					
+					</tbody>			
 				<% end %>
 			</table>	
 			
-			<a href="<%= categories_path %>" class="btn btn-primary">Back to All Categories</a>		
+			<a href="<%= categories_path %>" class="btn btn-info">Remove Filter</a>		
 		</div>
 		
 		<div class="span3" align="center">

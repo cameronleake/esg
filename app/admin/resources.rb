@@ -62,6 +62,9 @@ ActiveAdmin.register Resource do
       row :image
       row :tag_list
       row :created_at
+      row "Preview Image" do
+        image_tag(resource.image.url(:preview)) if resource.image?
+      end
     end
     active_admin_comments
   end
@@ -76,9 +79,9 @@ ActiveAdmin.register Resource do
      f.input :description
      f.input :price_type, :as => :select, :include_blank => false, :collection => ["Paid", "Free"]
      f.input :price
-      f.input :tag_list  #  <TODO>: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
+     f.input :tag_list  #  <TODO>: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
      f.input :file, :as => :file
-     f.input :image, :as => :file
+     f.input :image, :as => :file, :input_html => { :accept => "image/*" }
    end                               
    f.actions                         
   end

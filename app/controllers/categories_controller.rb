@@ -1,14 +1,14 @@
 class CategoriesController < ApplicationController
 
   def index
-    @categories = Category.order("name ASC").find(:all)
+    @categories = categories_with_resources
   end
   
-  def filtered_index
+  def index_filtered
     if params[:tag]
       @tag_name = params[:tag]
     end
-    @filtered_categories = categories_with_tag(@tag_name)
+    @filtered_categories = categories_with_resources_and_tag(@tag_name)
   end
 
   def show
@@ -16,18 +16,26 @@ class CategoriesController < ApplicationController
     @resources = Resource.order("name ASC").where(:category_id => params[:id])
   end
   
-  def filtered_show
+  def show_filtered
     if params[:tag]
       @tag_name = params[:tag]
     end
-    @category = Category.find(params[:id])    
+    @category = Category.find(params[:id])
     @filtered_resources = resources_with_tag(@category, @tag_name)
   end
   
   
   private
   
-  def categories_with_tag(tag)
+  def categories_with_resources
+    @categories = []
+    Category.order("name ASC").find(:all).each do |category|
+      @categories << category if category.resources.count > 0
+    end
+    @categories
+  end
+
+  def categories_with_resources_and_tag(tag)
     @categories = []
     Category.order("name ASC").find(:all).each do |category|
       category.resources.each do |resource|
@@ -45,7 +53,6 @@ class CategoriesController < ApplicationController
     category.resources.order("name ASC").find(:all).each do |resource|
       if resource.tag_list.include?(tag)
         @resources << resource
-        break
       end
     end
     @resources

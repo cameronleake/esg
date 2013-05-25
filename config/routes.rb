@@ -38,8 +38,9 @@ Esg::Application.routes.draw do
   
   
   # CATEGORIES / RESOURCES / REVIEWS / DOWNLOADS
-  get 'categories/tags/:tag', to: 'categories#filtered_index', as: :category_tag
-  get 'categories/:id/tags/:tag', to: 'categories#filtered_show', as: :show_category_tag
+  get 'categories/tags/:tag', to: 'categories#index_filtered', as: :category_tag
+  get 'categories/:id/tags/:tag', to: 'categories#show_filtered', as: :show_category_tag
+  get 'categories/:category_id/resources/:id/tags/:tag', to: 'resources#show_filtered', as: :show_resource_tag
   resources :categories do
     resources :resources do
       resources :reviews

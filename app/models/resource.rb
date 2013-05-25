@@ -1,5 +1,6 @@
 class Resource < ActiveRecord::Base
   acts_as_taggable
+  mount_uploader :image, ResourceImageUploader
   attr_accessible :category
   attr_accessible :description
   attr_accessible :file

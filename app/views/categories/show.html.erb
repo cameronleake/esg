@@ -13,29 +13,26 @@
 							<td class="blog-article-list">
 								<div class="media">
 									<h3><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h3>	
-									<h5>
-										<% if resource.review_count(resource) > 0 %>
-										 	 --  <%= pluralize(resource.review_count(resource), 'Review') %>
-										<% end %>
-									</h5>
-									<h5>Type: <%= resource.category.name %> -- <%= display_category_tag_links(resource) %> -- Price:  
+									<a class="pull-left">
+										<dd><%= image_tag resource.image_url(:thumb).to_s %></dd>
+									</a>
+									<h5>Type: <%= resource.category.name %> -- <%= display_category_tag_links(resource) %></h5>
+									<h5>Price:  
 										<% if resource.price_type == "Paid" %>
 											$<%= resource.price %>
 										<% else %>
 											FREE
 										<% end %>
 									</h5>
+									<%= resource.description %>
 								</div>					
 							</td>
 						</tr>
 					</thead>
-					<tbody>
-						<tr><td><%= resource.description %></tr>
-					</tbody>
 				<% end %>
 			</table>
 			
-			<a href="<%= categories_path %>" class="btn btn-primary">Back to Categories</a>
+			<a href="<%= categories_path %>" class="btn btn-primary"><< Categories</a>
 			
 		</div>
 			

@@ -5,10 +5,6 @@
 			<div class="page-header">
 				<h2><%= @category.name.pluralize %></h2>
 			</div>
-			
-			<% if @tag_name %>
-				<h5>FILTER: <span class="label label-info"><%= @tag_name %><span></h5>
-			<% end %>
 
 			<table class="table table-striped">
 				<% @filtered_resources.each do |resource| %>
@@ -16,19 +12,19 @@
 						<tr>
 							<td class="blog-article-list">
 								<div class="media">
-									<h3><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h3>	
-									<h5>
-										<% if resource.review_count(resource) > 0 %>
-										 	 --  <%= pluralize(resource.review_count(resource), 'Review') %>
-										<% end %>
-									</h5>
-									<h5>Type: <%= resource.category.name %> -- <%= display_category_tag_links(resource) %> -- Price:  
+									<h3><%= link_to resource.name, show_resource_tag_path(resource.category_id, resource.id) %></h3>	
+									<a class="pull-left">
+										<dd><%= image_tag resource.image_url(:thumb).to_s %></dd>
+									</a>
+									<h5>Type: <%= resource.category.name %> -- <%= display_category_tag_links(resource) %></h5>
+									<h5>Price:  
 										<% if resource.price_type == "Paid" %>
 											$<%= resource.price %>
 										<% else %>
 											FREE
 										<% end %>
 									</h5>
+									<%= resource.description %>
 								</div>					
 							</td>
 						</tr>
@@ -39,7 +35,8 @@
 				<% end %>
 			</table>
 			
-			<a href="<%= categories_path %>" class="btn btn-primary">Back to Categories</a>
+			<a href="<%= category_tag_path(@tag_name) %>" class="btn btn-primary"><< Categories</a>
+			<a href="<%= categories_path %>" class="btn btn-info">Remove Filter</a>				
 			
 		</div>
 			
