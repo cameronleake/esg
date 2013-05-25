@@ -4,29 +4,49 @@
 <% end %>
 
 <div class="page-header">
-  	<h3>Search by Topic</h3>
+  	<h3>Filter by Tags</h3>
 </div>
 <% tag_cloud Resource.tag_counts.sort { |x, y| x.name <=> y.name }, %w{s m l} do |tag| %>
  	<h4><%= link_to tag.name, category_tag_path(tag.name) %></h4>
 <% end %>
 <br>
+
+
+<div class="form-search">
+	<div class="input-append">
+		<%= form_tag({:controller => 'resources', :action => 'search'}, :method => 'get') do %>
+			<%= text_field_tag :query, params[:query], :class => "search-query search-field" %>
+			<%= submit_tag "Search", name: nil, :class => "btn btn-primary" %>
+		<% end %>
+	</div>
+</div>
 <br>
 
-<div class="page-header">
-  	<h3>Most Requested Resources</h3>
-</div>
-<p>Vote for your favourites to get them added to the Resource Centre first!</p>
-<br>
-<br>
-
-<div class="page-header">
-  	<h3>Request a Resource</h3>
-</div>
-<p>Request a resource that you need to get it produced!</p>
-<br>
-<br>
 
 <div class="page-header">
   	<h3>Subscribe</h3>
 </div>
 <p>Sign up to receive updates of the latest resources directly to your inbox!</p>
+
+<!-- Button to trigger modal -->
+<a href="#resources-subscription" role="button" class="btn btn-warning" data-toggle="modal">Subscribe</a>
+ 
+<!-- Modal -->
+<div id="resources-subscription" class="modal hide fade resources-subscription-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+   	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    	<h3 id="myModalLabel">ESG - Resource Centre Subscription</h3>
+  	</div>
+ 	
+	<div class="modal-body">
+   	<p>Subscription to the ESG - Resource Centre is free and will entitle you to receive a weekly digest of new resources, delivered directly to your inbox!</p></br>
+		<p>You can unsubscribe at any time by changing your subscription preferences in your Profile.</p>
+  	</div>
+ 	
+	<div class="modal-footer">
+    	<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<a href=<%= subscribe_resources_path %> class="btn btn-warning">Subscribe Me</a>
+  	</div>
+</div>
+<br>
+<br>

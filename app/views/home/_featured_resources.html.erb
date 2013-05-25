@@ -1,0 +1,30 @@
+<div class="page-header">
+  	<h2>Featured Resources</h2>
+</div>
+
+<table class="table">
+	<% @featured_resources.each do |resource| %>
+		<tbody>
+			<tr>
+				<td>
+					<div class="media">
+						<h3><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h3>								
+						<a class="pull-left">
+							<dd><%= image_tag resource.image_url(:thumb).to_s %></dd>
+						</a>
+						<h5>Type: <%= resource.category.name %> -- <%= display_category_tag_links(resource) %></h5>
+						<h5>Price:  
+							<% if resource.price_type == "Paid" %>
+								$<%= resource.price %>
+							<% else %>
+								FREE
+							<% end %>
+						</h5>
+						<%= resource.description %>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	<% end %>
+</table>
+<h6><%= paginate @featured_resources, :window => 2 %></h6>

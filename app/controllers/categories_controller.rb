@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @resources = Resource.order("name ASC").where(:category_id => params[:id])
+    @resources = Resource.order("name ASC").where(:category_id => params[:id]).page(params[:page]).per(5)
   end
   
   def show_filtered
@@ -21,7 +21,7 @@ class CategoriesController < ApplicationController
       @tag_name = params[:tag]
     end
     @category = Category.find(params[:id])
-    @filtered_resources = resources_with_tag(@category, @tag_name)
+    @filtered_resources = resources_with_tag(@category, @tag_name)      # <TODO> Add Pagination
   end
   
   
@@ -50,7 +50,7 @@ class CategoriesController < ApplicationController
 
   def resources_with_tag(category, tag)
     @resources = []
-    category.resources.order("name ASC").find(:all).each do |resource|
+    @categories = category.resources.order("name ASC").find(:all).each do |resource|
       if resource.tag_list.include?(tag)
         @resources << resource
       end

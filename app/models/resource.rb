@@ -12,13 +12,22 @@ class Resource < ActiveRecord::Base
   attr_accessible :tag_list
   attr_accessible :user_id
   attr_accessible :category_id
+  attr_accessible :featured_resource
   belongs_to :user
   belongs_to :category
   has_many :downloads
   has_many :reviews
-
+  include PgSearch
+  pg_search_scope :search, against: [:name, :description],
+    using: { tsearch: {dictionary: "english", :prefix => true} }
+    
+    
   def review_count(resource)
     resource.reviews.count
+  end
+  
+  def self.text_search(query)
+    search(query)
   end
 
 end

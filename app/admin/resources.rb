@@ -1,26 +1,21 @@
 ActiveAdmin.register Resource do
   menu :parent => "RESOURCES", :priority => 2
   scope :all, :default => true
+  scope :featured_resource do |resource|
+    resource.where(:featured_resource => true)
+  end
   scope :free do |resource|
     resource.where(:price_type => "Free")
   end
   scope :paid do |resource|
     resource.where(:price_type => "Paid")
   end
-  @categories = []
-  Category.find(:all).each do |category|
-    @categories << category
-  end
-  @categories.each do |category|
-    scope "#{category.name.pluralize}" do |resource|
-      resource.where(:category_id => category.id)
-    end
-  end
 
 
   # Configuration for Sidebar Filters
   filter :user
   filter :category
+  filter :featured_resource, :as => :select
   filter :name
   filter :price_type, :as => :select, :collection => ["Paid", "Free"]
   filter :price
@@ -43,9 +38,9 @@ ActiveAdmin.register Resource do
        end
      end
    end
-   column "Downloads", :sortable => :number_of_downloads do |resource|
+   column :featured_resource, :sortable => :featured_resource do |resource|
      div :class => "admin-center-column" do 
-       resource.number_of_downloads
+       resource.featured_resource.featured_article
      end
    end
    default_actions
@@ -65,6 +60,7 @@ ActiveAdmin.register Resource do
       row :file
       row :image
       row :tag_list
+      row :featured_resource
       row :created_at
       row "Preview Image" do
         image_tag(resource.image.url(:preview)) if resource.image?
@@ -86,8 +82,29 @@ ActiveAdmin.register Resource do
      f.input :tag_list  #  <TODO>: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
      f.input :file, :as => :file
      f.input :image, :as => :file, :input_html => { :accept => "image/*" }
+     f.input :featured_resource, :as => :select, :include_blank => false
    end                               
    f.actions                         
+  end
+  
+  
+  # Configuration for Resources Batch Actions
+  ActiveAdmin.register Resource do
+    batch_action :feature, :priority => 1 do |selection|
+      Resource.find(selection).each do |resource|
+        resource.featured_resource = true
+        resource.save
+      end
+      redirect_to admin_resources_path
+    end
+    
+    batch_action "Un-Feature", :priority => 1 do |selection|
+      Resource.find(selection).each do |resource|
+        resource.featured_resource = false
+        resource.save
+      end
+      redirect_to admin_resources_path
+    end
   end
   
 end

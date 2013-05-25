@@ -36,8 +36,8 @@ class ResourceImageUploader < CarrierWave::Uploader::Base
   
   def create_resource_image_thumb
     manipulate! do |img|
-      img = img.resize_to_fill(200)
-      img = img.crop(Magick::CenterGravity, 120, 120)      
+      img = img.resize_to_fill(200, 130)
+      img = img.crop(Magick::CenterGravity, 200, 130)      
       
     end
   end
@@ -54,14 +54,14 @@ class ResourceImageUploader < CarrierWave::Uploader::Base
   end
 
   # Generate Header Resource Image
-  version :header do
-    process :create_resource_image_header
+  version :medium do
+    process :create_resource_image_medium
   end
   
-  def create_resource_image_header
+  def create_resource_image_medium
     manipulate! do |img|
-      img = img.resize_to_fill(900)
-      img = img.crop(Magick::CenterGravity, 900, 150)           
+      img = img.resize_to_fill(200, 300)
+      img = img.crop(Magick::CenterGravity, 200, 300)           
     end
   end
   

@@ -15,9 +15,12 @@
 						<tr><td><h5><%= pluralize(category.resources_with_tag(category, @tag_name).count, 'Resource') %></h5></td></tr>
 					</tbody>			
 				<% end %>
-			</table>	
+			</table>
 			
-			<a href="<%= categories_path %>" class="btn btn-info">Remove Filter</a>		
+			<div class="form-actions">
+				<a href="<%= categories_path %>" class="btn btn-info">Remove Filter</a>	
+			</div>
+			
 		</div>
 		
 		<div class="span3" align="center">

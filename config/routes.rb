@@ -15,6 +15,7 @@ Esg::Application.routes.draw do
   match "profile" => "users#edit"
   match 'signup' => 'users#new'
   match 'subscribe_blog' => 'users#subscribe_blog'
+  match 'subscribe_resources' => 'users#subscribe_resources'  
   match 'login' => 'sessions#new'
   match 'logout' => 'sessions#destroy'
   get 'reset_password', to: 'password_resets#new', as: 'reset_password'
@@ -41,6 +42,7 @@ Esg::Application.routes.draw do
   get 'categories/tags/:tag', to: 'categories#index_filtered', as: :category_tag
   get 'categories/:id/tags/:tag', to: 'categories#show_filtered', as: :show_category_tag
   get 'categories/:category_id/resources/:id/tags/:tag', to: 'resources#show_filtered', as: :show_resource_tag
+  match 'resources/search' => 'resources#search'
   resources :categories do
     resources :resources do
       resources :reviews

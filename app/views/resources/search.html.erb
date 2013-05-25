@@ -3,16 +3,16 @@
 
    	<div class="span9">
 			<div class="page-header">
-				<h2><%= @category.name.pluralize %></h2>
+				<h3>SEARCHING FOR: <span class="label label-info"><%= @search_term %><span></h3>	
 			</div>
-
+			
 			<table class="table table-striped">
-				<% @filtered_resources.each do |resource| %>
+				<% @resources.each do |resource| %>
 					<thead>
 						<tr>
 							<td class="blog-article-list">
 								<div class="media">
-									<h3><%= link_to resource.name, show_resource_tag_path(resource.category_id, resource.id) %></h3>	
+									<h3><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h3>	
 									<a class="pull-left">
 										<dd><%= image_tag resource.image_url(:thumb).to_s %></dd>
 									</a>
@@ -29,21 +29,22 @@
 							</td>
 						</tr>
 					</thead>
-					<tbody>
-						<tr><td><%= resource.description %></tr>
-					</tbody>
 				<% end %>
 			</table>
-
-			<div class="form-actions">
-				<a href="<%= category_tag_path(@tag_name) %>" class="btn btn-primary"><< Categories</a>
-				<a href="<%= categories_path %>" class="btn btn-info">Remove Filter</a>		
-			</div>		
 			
+			<a href="<%= categories_path %>" class="btn btn-info">Clear Search</a>	
 		</div>
-			
+		
 		<div class="span3" align="center">
-			<%= render "resources_sidebar" %>
+			<%= render "categories/resources_sidebar" %>
 		</div>
 	</div>
 </div>
+
+
+
+
+
+<% @resources.each do |resource| %>
+	<p><%= resource.name %></p>
+<% end %>

@@ -36,7 +36,7 @@ class FeaturedImageUploader < CarrierWave::Uploader::Base
   
   def create_article_featured_image
     manipulate! do |img|
-      img = img.resize_to_fill(250, 130)
+      img = img.resize_to_fill(200, 130)
       img = img.crop(Magick::CenterGravity, 200, 130)
     end
   end

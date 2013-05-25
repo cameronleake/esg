@@ -31,8 +31,12 @@
 					</thead>
 				<% end %>
 			</table>
+			<h6><%= paginate @resources, :window => 2 %></h6>
 			
-			<a href="<%= categories_path %>" class="btn btn-primary"><< Categories</a>
+
+			<div class="form-actions">
+				<a href="<%= categories_path %>" class="btn btn-primary"><< Categories</a>			
+			</div>
 			
 		</div>
 			

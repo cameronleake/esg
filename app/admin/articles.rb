@@ -34,12 +34,12 @@ ActiveAdmin.register Article do
   index do
     selectable_column
     column :title
-    column :published, :sortable => :spam do |article|
+    column :published, :sortable => :published do |article|
        div :class => "admin-center-column" do 
           article.published.published_status
        end
     end
-    column :featured_article, :sortable => :spam do |article|
+    column :featured_article, :sortable => :featured_article do |article|
        div :class => "admin-center-column" do 
           article.featured_article.featured_article
        end
@@ -106,6 +106,22 @@ ActiveAdmin.register Article do
     batch_action :draft, :priority => 2 do |selection|
       Article.find(selection).each do |article|
         article.published = false
+        article.save
+      end
+      redirect_to admin_articles_path
+    end
+    
+    batch_action :feature, :priority => 2 do |selection|
+      Article.find(selection).each do |article|
+        article.featured_article = true
+        article.save
+      end
+      redirect_to admin_articles_path
+    end
+    
+    batch_action "Un-Feature", :priority => 2 do |selection|
+      Article.find(selection).each do |article|
+        article.featured_article = false
         article.save
       end
       redirect_to admin_articles_path

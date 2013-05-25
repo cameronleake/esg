@@ -19,7 +19,7 @@ ActiveAdmin.register Category do
 
 
   # Configuration for Categories Show Page
-  show do |contact|
+  show do |category|
     attributes_table do
       row :name
     end

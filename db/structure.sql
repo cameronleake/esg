@@ -359,11 +359,12 @@ CREATE TABLE resources (
     price integer,
     image character varying(255),
     file character varying(255),
-    number_of_downloads integer,
+    number_of_downloads integer DEFAULT 0,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    category_id integer
+    category_id integer,
+    featured_resource boolean DEFAULT false
 );
 
 
@@ -920,3 +921,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130523134334');
 INSERT INTO schema_migrations (version) VALUES ('20130523135439');
 
 INSERT INTO schema_migrations (version) VALUES ('20130524134643');
+
+INSERT INTO schema_migrations (version) VALUES ('20130525121549');
+
+INSERT INTO schema_migrations (version) VALUES ('20130525122152');

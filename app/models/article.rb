@@ -14,7 +14,7 @@ class Article < ActiveRecord::Base
   has_many :article_images, :dependent => :destroy
   include PgSearch
   pg_search_scope :search, against: [:title, :body],
-    using: {tsearch: {dictionary: "english"}}
+    using: {tsearch: {dictionary: "english", :prefix => true}}
   
   
   def comments_count(article)
