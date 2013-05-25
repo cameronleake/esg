@@ -1,12 +1,18 @@
 ActiveAdmin.register Resource do
   menu :parent => "RESOURCES", :priority => 2
   scope :all, :default => true
+  scope :free do |resource|
+    resource.where(:price_type => "Free")
+  end
+  scope :paid do |resource|
+    resource.where(:price_type => "Paid")
+  end
   @categories = []
   Category.find(:all).each do |category|
     @categories << category
   end
   @categories.each do |category|
-    scope "#{category.name}" do |resource|
+    scope "#{category.name.pluralize}" do |resource|
       resource.where(:category_id => category.id)
     end
   end
@@ -26,10 +32,8 @@ ActiveAdmin.register Resource do
   
   index do
    selectable_column
-   column :user
    column :category
    column :name
-   column :price_type
    column :price, :sortable => :price do |resource|
      div :class => "admin-center-column" do 
        if resource.price == 0

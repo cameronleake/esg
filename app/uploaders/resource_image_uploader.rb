@@ -53,7 +53,19 @@ class ResourceImageUploader < CarrierWave::Uploader::Base
     end
   end
 
-
+  # Generate Header Resource Image
+  version :header do
+    process :create_resource_image_header
+  end
+  
+  def create_resource_image_header
+    manipulate! do |img|
+      img = img.resize_to_fill(900)
+      img = img.crop(Magick::CenterGravity, 900, 150)           
+    end
+  end
+  
+  
   # Whitelist for file types allowed to be uploaded.
   def extension_white_list
     %w(jpg jpeg gif png)
