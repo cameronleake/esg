@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
+  helper_method :current_shopping_cart
   before_filter :find_navbar_categories
 
 
@@ -25,6 +26,10 @@ class ApplicationController < ActionController::Base
   
   def current_user
     @current_user ||= User.find_by_auth_token(cookies[:auth_token]) if cookies[:auth_token]
+  end
+
+  def current_shopping_cart
+    @current_shopping_cart ||= ShoppingCart.find_by_cart_token(cookies[:cart_token]) if cookies[:cart_token]
   end
 
 end

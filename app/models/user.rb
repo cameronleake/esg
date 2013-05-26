@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   has_many :resources
   has_many :downloads
   has_many :reviews
+  has_many :shopping_carts
     
     
   def password_required
@@ -42,8 +43,8 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
   
-    def generate_random_token
-     SecureRandom.urlsafe_base64
+  def generate_random_token
+    SecureRandom.urlsafe_base64
   end
     
   def send_welcome_email

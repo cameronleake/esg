@@ -1,0 +1,14 @@
+<div class="page-header">
+  	<h3>Cart Summary</h3>
+</div>
+<% @cart.resources.each do |resource| %>
+	<p><%= resource.name %>: 
+	<b><% if resource.price_type == "Free" %>
+		Free
+	<% else %>	
+		<%= "$" + number_with_precision(resource.price_in_cents/100, :precision => 2) %></p>
+	<% end %></b>
+<% end %>
+<h4>Total: <%= "$" + number_with_precision(@total_cost, :precision => 2) %></h4>
+<br>
+<a href="#" class="btn btn-success">Checkout</a>	

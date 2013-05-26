@@ -28,6 +28,9 @@
 								<a class="dropdown-toggle" data-toggle="dropdown" role="button" href="#"><%= current_user.email %><b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="account">
 									<li><%= link_to "Profile", profile_path %></li>
+									<% if current_shopping_cart %>
+										<li><%= link_to "Shopping Cart", shopping_cart_path(current_shopping_cart) %></li>
+									<% end %>
 									<li class="divider"></li>
 									<li><%= link_to "Logout", logout_path("current"), method: "delete" %></li>
 								</ul>

@@ -19,7 +19,7 @@
 									<h5>Type: <%= resource.category.name %> -- <%= display_category_tag_links(resource) %></h5>
 									<h5>Price:  
 										<% if resource.price_type == "Paid" %>
-											$<%= resource.price %>
+											<%= "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2) %>
 										<% else %>
 											FREE
 										<% end %>

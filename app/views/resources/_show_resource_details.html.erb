@@ -9,10 +9,11 @@
 	</a>
 	<p><b>Description:</b> <%= @resource.description %></p>
 	<p><b>Provider:</b> <%= @resource.user.email %></p>
-	<p><b>Price:</b> $<%= @resource.price %></p>
+	<p><b>Price:</b> <%= "$" + number_with_precision(@resource.price_in_cents.to_f/100, :precision => 2) %></p>
 	<p><b>No. Downloads:</b> <%= @resource.number_of_downloads %></p>
 	<!-- Button to trigger modal -->
-	<a href="#resource-preview" role="button" class="btn btn-success" data-toggle="modal">Preview</a>
+	<a href="#resource-preview" role="button" class="btn" data-toggle="modal">Preview</a>
+	<a href="<%= add_to_cart_path %>" class="btn btn-success">Add to Cart</a>
 </div>
 
  

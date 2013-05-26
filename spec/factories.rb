@@ -23,4 +23,15 @@ FactoryGirl.define do
     body "Example contact us message"
   end
   
+  factory :shopping_cart do
+    cart_token "123456789"
+  end
+
+  factory :resource do
+    name "Test Resource"
+    description "Test Description"
+    price_type "Free"
+    price_in_cents 0
+  end
+  
 end

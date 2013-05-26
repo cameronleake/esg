@@ -356,7 +356,7 @@ CREATE TABLE resources (
     name character varying(255),
     description character varying(255),
     price_type character varying(255),
-    price integer,
+    price_in_cents integer DEFAULT 0,
     image character varying(255),
     file character varying(255),
     number_of_downloads integer DEFAULT 0,
@@ -364,7 +364,8 @@ CREATE TABLE resources (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     category_id integer,
-    featured_resource boolean DEFAULT false
+    featured_resource boolean DEFAULT false,
+    currency character varying(255) DEFAULT 'AUD'::character varying
 );
 
 
@@ -385,6 +386,36 @@ CREATE SEQUENCE resources_id_seq
 --
 
 ALTER SEQUENCE resources_id_seq OWNED BY resources.id;
+
+
+--
+-- Name: resources_shopping_carts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE resources_shopping_carts (
+    id integer NOT NULL,
+    resource_id integer,
+    shopping_cart_id integer
+);
+
+
+--
+-- Name: resources_shopping_carts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE resources_shopping_carts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: resources_shopping_carts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE resources_shopping_carts_id_seq OWNED BY resources_shopping_carts.id;
 
 
 --
@@ -429,6 +460,40 @@ ALTER SEQUENCE reviews_id_seq OWNED BY reviews.id;
 CREATE TABLE schema_migrations (
     version character varying(255) NOT NULL
 );
+
+
+--
+-- Name: shopping_carts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE shopping_carts (
+    id integer NOT NULL,
+    user_id integer,
+    payment_verified boolean DEFAULT false,
+    email_sent boolean DEFAULT false,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    cart_token character varying(255)
+);
+
+
+--
+-- Name: shopping_carts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE shopping_carts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: shopping_carts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE shopping_carts_id_seq OWNED BY shopping_carts.id;
 
 
 --
@@ -611,7 +676,21 @@ ALTER TABLE ONLY resources ALTER COLUMN id SET DEFAULT nextval('resources_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY resources_shopping_carts ALTER COLUMN id SET DEFAULT nextval('resources_shopping_carts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY reviews ALTER COLUMN id SET DEFAULT nextval('reviews_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY shopping_carts ALTER COLUMN id SET DEFAULT nextval('shopping_carts_id_seq'::regclass);
 
 
 --
@@ -716,11 +795,27 @@ ALTER TABLE ONLY resources
 
 
 --
+-- Name: resources_shopping_carts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY resources_shopping_carts
+    ADD CONSTRAINT resources_shopping_carts_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY reviews
     ADD CONSTRAINT reviews_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: shopping_carts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY shopping_carts
+    ADD CONSTRAINT shopping_carts_pkey PRIMARY KEY (id);
 
 
 --
@@ -925,3 +1020,11 @@ INSERT INTO schema_migrations (version) VALUES ('20130524134643');
 INSERT INTO schema_migrations (version) VALUES ('20130525121549');
 
 INSERT INTO schema_migrations (version) VALUES ('20130525122152');
+
+INSERT INTO schema_migrations (version) VALUES ('20130526021320');
+
+INSERT INTO schema_migrations (version) VALUES ('20130526080654');
+
+INSERT INTO schema_migrations (version) VALUES ('20130526084046');
+
+INSERT INTO schema_migrations (version) VALUES ('20130526093518');

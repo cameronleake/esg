@@ -1,18 +1,16 @@
 <div id="container">	
 	<div class="row">
 
-		<div class="page-header" align="left">
-			<h2>Welcome to Engineering Survival Guide</h2>
+		<div class="hero-unit">
+			<div class="page-header" align="left">
+				<h2>Welcome to Engineering Survival Guide</h2>
+			</div>
 		</div>
 		
 		<div class="span9">
-			<div class="hero-unit">
-				<%= render "featured_resources" %>
-			</div>			
-			
-			<div class="hero-unit">
-				<%= render "featured_articles" %>
-			</div>
+			<%= render "featured_resources" %>
+			<%= render "featured_articles" %>
+			<h6><%= paginate @featured_articles, :window => 2 %></h6>
 		</div>
 
 		<div class="span3" align="center">
