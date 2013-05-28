@@ -1,7 +1,6 @@
 <div class="page-header">
-  	<h3>Cart Summary</h3>
+  	<h3>Confirm Order</h3>
 </div>
 <h4>Total: <%= "$" + number_with_precision(@total_cost, :precision => 2) %></h4>
 <br>
-
-<a href="<%= checkout_path %>" class="btn btn-success">Checkout</a>	
+<a href="<%= process_cart_path %>" class="btn btn-danger">Confirm</a>	

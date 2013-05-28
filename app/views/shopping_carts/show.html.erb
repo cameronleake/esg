@@ -7,34 +7,32 @@
 			</div>
 			
 			<table class="table table-striped">
+				<thead>
+					<tr>
+						<td><h4>Item</h4></td>
+						<td><h4>Category</h4></td>
+						<td><h4>Price</h4></td>															
+					</tr>
+				</thead>
+				<tbody>
 				<% @cart_items.each do |resource| %>
-					<thead>
-						<tr>
-							<td class="blog-article-list">
-								<div class="media">
-									<h3><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h3>
-									<a class="pull-left">
-										<dd><%= image_tag resource.image_url(:thumb).to_s %></dd>
-									</a>
-									<div class="pull-right">
-										<a href="<%= remove_from_cart_path(resource.id) %>" class="btn">Remove</a>	
-									</div>
-									<h5>Type: <%= resource.category.name %> -- <%= display_category_tag_links(resource) %></h5>
-									<h5>Price:  
-										<% if resource.price_type == "Paid" %>
-											<%= "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2) %>
-										<% else %>
-											FREE
-										<% end %>x
-									</h5>
-									<%= resource.description %>
-								</div>					
-							</td>
-						</tr>
-					</thead>
+					<tr>
+						<td><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></td>
+						<td><%= resource.category.name %></td>
+						<% if resource.price_type == "Free" %>
+							<td>Free</td>
+						<% else %>
+							<td><%= "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2) %></td>
+						<% end %>
+					</tr>						
 				<% end %>
+					<tr>
+						<td></td>
+						<td><b>Total: </b></td>
+						<td><b><%= "$" + number_with_precision(@total_cost, :precision => 2) %></b></td>
+					</tr>
+				</tbody>				
 			</table>
-			
 		</div>
 				
 		<div class="span3" align="center">

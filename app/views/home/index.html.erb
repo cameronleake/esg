@@ -1,20 +1,26 @@
 <div id="container">	
 	<div class="row">
 
-		<div class="hero-unit">
-			<div class="page-header" align="left">
-				<h2>Welcome to Engineering Survival Guide</h2>
-			</div>
+		<div class="page-header" align="left">
+			<h2>Welcome to Engineering Survival Guide</h2>
 		</div>
 		
-		<div class="span9">
-			<%= render "featured_resources" %>
+		<div class="span6">
 			<%= render "featured_articles" %>
-			<h6><%= paginate @featured_articles, :window => 2 %></h6>
 		</div>
 
-		<div class="span3" align="center">
-			<%= render "index_sidebar" %>
+		<div class="span6">
+			<%= render "featured_resources" %>		
+		</div>
+
+		<div class="span12" align="center">
+			<div class="page-header">
+				<h3>Contact Us</h3>
+			</div>
+			<p>You can contact us here, we'd love to hear what you think!</p>
+			<a href="contact" class="btn btn-primary">Contact Us</a>
+			<br>
+			<br>
 		</div>
 	</div>
 </div>

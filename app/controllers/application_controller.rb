@@ -2,12 +2,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
   helper_method :current_shopping_cart
+  helper_method :authorize_shopping_cart_exists
   before_filter :find_navbar_categories
 
 
   def authorize_user_logged_in
     if current_user.nil?
-      redirect_to root_path, alert: "Not authorized!"
+      redirect_to login_path, alert: "Please login to proceed."
     end
   end
   
@@ -19,6 +20,18 @@ class ApplicationController < ActionController::Base
 
   def find_navbar_categories
     @navbar_categories = Category.order("name ASC").find(:all)
+  end
+  
+  def authorize_shopping_cart_exists
+    if current_shopping_cart.nil?
+      @cart = ShoppingCart.new(:status => "OPEN")
+      @cart.cart_token = @cart.generate_random_token
+      @cart.user = current_user
+      @cart.save
+      @cart.order_number = (@cart.id + 100000)
+      @cart.save
+      cookies.permanent[:cart_token] = @cart.cart_token
+    end
   end
   
   

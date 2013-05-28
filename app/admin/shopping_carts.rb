@@ -2,17 +2,11 @@ ActiveAdmin.register ShoppingCart do
   
   menu :parent => "RESOURCES", :priority => 3
   scope :all, :default => true
-  scope :payment_verified do |cart|
-    cart.where(:payment_verified => true)
+  scope :open_orders do |cart|
+    cart.where(:status => "OPEN")
   end
-  scope :payment_not_verified do |cart|
-    cart.where(:payment_verified => false)
-  end
-  scope :email_sent do |cart|
-    cart.where(:email_sent => true)
-  end
-  scope :email_not_sent do |cart|
-    cart.where(:email_sent => false)
+  scope :closed_orders do |cart|
+    cart.where(:status => "CLOSE")
   end
   
 
@@ -20,14 +14,17 @@ ActiveAdmin.register ShoppingCart do
   filter :user
   filter :payment_verified, :as => :select
   filter :email_sent, :as => :select
+  filter :status, :as => :select, :include_blank => false, :collection => SHOPPING_CART_STATUSES
 
 
   # Configuration for Shopping Carts Index Page
-  config.sort_order = "category ASC"
+  config.sort_order = "created_at_desc"
   config.per_page = 15
   
   index do
    selectable_column
+   column :order_number
+   column :status
    column :user
    column :payment_verified, :sortable => :payment_verified do |cart|
      div :class => "admin-center-column" do 
@@ -47,6 +44,8 @@ ActiveAdmin.register ShoppingCart do
   # Configuration for Shopping Carts Show Page
   show do |cart|
     attributes_table do
+      row :order_number
+      row :status
       row :user
       row "Cart Contents" do
         table_for(cart.resources, :sortable => true) do
@@ -76,41 +75,16 @@ ActiveAdmin.register ShoppingCart do
   end
   
   
-  # # Configuration for Resources Edit Page
-  # form do |f|                         
-  #  f.inputs "New User" do       
-  #    f.input :user
-  #    f.input :category, :as => :select, :include_blank => false
-  #    f.input :name
-  #    f.input :description
-  #    f.input :price_type, :as => :select, :include_blank => false, :collection => ["Paid", "Free"]
-  #    f.input :price_in_cents
-  #    f.input :tag_list  #  <TODO>: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
-  #    f.input :file, :as => :file, :input_html => { :accept => "application/pdf" }, hint: resource.file_url
-  #    f.input :image, :as => :file, :input_html => { :accept => "image/*" }, hint: image_tag(resource.image.url(:thumb))
-  #    f.input :featured_resource, :as => :select, :include_blank => false
-  #  end                               
-  #  f.actions                         
-  # end
-  # 
-  # 
-  # # Configuration for Resources Batch Actions
-  # ActiveAdmin.register Resource do
-  #   batch_action :feature, :priority => 1 do |selection|
-  #     Resource.find(selection).each do |resource|
-  #       resource.featured_resource = true
-  #       resource.save
-  #     end
-  #     redirect_to admin_resources_path
-  #   end
-  # 
-  #   batch_action "Un-Feature", :priority => 1 do |selection|
-  #     Resource.find(selection).each do |resource|
-  #       resource.featured_resource = false
-  #       resource.save
-  #     end
-  #     redirect_to admin_resources_path
-  #   end
-  # end
+  # Configuration for Shopping Carts Edit Page
+  form do |f|                         
+   f.inputs "New Shopping Cart" do       
+     f.input :order_number
+     f.input :status, :as => :select, :include_blank => false, :collection => SHOPPING_CART_STATUSES
+     f.input :user
+     f.input :payment_verified, :as => :select, :include_blank => false
+     f.input :email_sent, :as => :select, :include_blank => false
+   end                               
+   f.actions                         
+  end
   
 end

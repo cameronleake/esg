@@ -1,5 +1,5 @@
 class Download < ActiveRecord::Base
-  attr_accessible :expiry, :link, :link_verified, :resource_id, :user_id
+  attr_accessible :expiry, :link, :link_valid, :resource_id, :shopping_cart_id
   belongs_to :resource
-  belongs_to :user
+  belongs_to :shopping_cart
 end

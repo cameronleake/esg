@@ -1,7 +1,7 @@
 <div id="container">	
 	<div class="row">
 
-   	<div class="span9">			
+   	<div class="span12">			
 			<%= render "show_resource_details" %>
 			
 			<div class="form-actions">
@@ -9,10 +9,6 @@
 				<a href="<%= category_path(@resource.category_id) %>" class="btn btn-primary"><< <%= @resource.category.name.pluralize %></a>
 			</div>
 			
-		</div>
-			
-		<div class="span3" align="center">
-			<%= render "categories/resources_sidebar" %>
 		</div>
 	</div>
 </div>
