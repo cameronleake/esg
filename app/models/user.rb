@@ -43,10 +43,6 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
   
-  def generate_random_token
-    SecureRandom.urlsafe_base64
-  end
-    
   def send_welcome_email
     UserMailer.welcome_message(self).deliver
   end

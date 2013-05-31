@@ -61,8 +61,12 @@ class ShoppingCartsController < ApplicationController
   end
   
   def generate_download_links(cart)
+    @expiry_time = DateTime.now + DOWNLOAD_EXPIRY_HOURS.hours
     cart.resources.each do |resource|
-      cart.downloads << Download.new(:shopping_cart_id => cart.id, :resource_id => resource.id)
+      cart.downloads << Download.new( :shopping_cart_id => cart.id, 
+                                      :resource_id => resource.id, 
+                                      :download_token => generate_random_token, 
+                                      :expiry_time => @expiry_time)
     end
   end
 

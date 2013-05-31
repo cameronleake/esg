@@ -1,3 +1,12 @@
 <h3>Engineering Survival Guide</h3>
 <h4>Name: <%= "#{@cart.user.first_name} #{@cart.user.last_name}" %></h4>
-<h4>Order Number: <%= @cart.order_number %></h4
+<h4>Order Number: <%= @cart.order_number %></h4>
+
+<h4>Download Links:</h4>
+<p>Click links to download your resources.</p>
+<p>Please Note: These links are valid for 24 hours only.</p>
+<p>Please access before: <%= @cart.downloads.first.expiry_time.time.to_formatted_s(:long) %></p>
+
+<% @cart.downloads.each do |download| %>
+	<h5><a href=<%= "http://localhost:3000/downloads/#{download.download_token}" %> target="_blank"><%= "Download: #{download.resource.name}" %></a></h5>
+<% end %>

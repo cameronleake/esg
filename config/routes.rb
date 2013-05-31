@@ -4,7 +4,6 @@ Esg::Application.routes.draw do
 
    # HOME
    match 'ebook' => 'home#ebook'
-   match 'resourcecentre' => 'home#resource_centre'
    match 'faq' => 'home#faq'
    match '404' => 'home#404'
    match '422' => 'home#422'
@@ -38,7 +37,7 @@ Esg::Application.routes.draw do
    end
 
 
-   # CATEGORIES / RESOURCES / REVIEWS / DOWNLOADS
+   # CATEGORIES / RESOURCES / REVIEWS
    get 'categories/tags/:tag', to: 'categories#index_filtered', as: :category_tag
    get 'categories/:id/tags/:tag', to: 'categories#show_filtered', as: :show_category_tag
    get 'categories/:category_id/resources/:id/tags/:tag', to: 'resources#show_filtered', as: :show_resource_tag
@@ -46,17 +45,17 @@ Esg::Application.routes.draw do
    resources :categories do
     resources :resources do
       resources :reviews
-      resources :downloads
     end
    end
 
 
-   # SHOPPING_CARTS
+   # SHOPPING_CARTS / DOWNLOADS
    get 'shopping_cart/:id', to: 'shopping_carts#show', as: :shopping_cart
    get 'resources/:id/add_to_cart', to: 'shopping_carts#add_to_cart', as: :add_to_cart
    get 'resources/:id/remove_from_cart', to: 'shopping_carts#remove_from_cart', as: :remove_from_cart
    match 'checkout' => 'shopping_carts#checkout'
    match 'process_cart' => 'shopping_carts#process_cart'
+   get 'downloads/:download_token', to: 'downloads#resource_download', as: :resource_download
 
 
    # CONTACT_TICKETS

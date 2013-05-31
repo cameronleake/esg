@@ -6,7 +6,7 @@ ActiveAdmin.register Download do
   # Configuration for Sidebar Filters
   filter :resource
   filter :shopping_cart
-  filter :link_valid, :as => :select
+  filter :link_expired, :as => :select
   filter :expiry_time
 
 
@@ -22,11 +22,11 @@ ActiveAdmin.register Download do
      end
    end
    column :resource
-   column :link_valid# , :sortable => :link_valid do |download|
-   #      div :class => "admin-center-column" do 
-   #        download.link_valid.yesno
-   #      end
-   #    end
+   column :link_expired, :sortable => :link_expired do |download|
+           div :class => "admin-center-column" do 
+             download.link_expired.yesno
+           end
+         end
    column :expiry_time
    default_actions
   end

@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   before_filter :find_navbar_categories
 
 
+  def generate_random_token
+    SecureRandom.urlsafe_base64
+  end
+  
   def authorize_user_logged_in
     if current_user.nil?
       redirect_to login_path, alert: "Please login to proceed."
@@ -25,7 +29,7 @@ class ApplicationController < ActionController::Base
   def authorize_shopping_cart_exists
     if current_shopping_cart.nil?
       @cart = ShoppingCart.new(:status => "OPEN")
-      @cart.cart_token = @cart.generate_random_token
+      @cart.cart_token = generate_random_token
       @cart.user = current_user
       @cart.save
       @cart.order_number = (@cart.id + 100000)

@@ -8,7 +8,7 @@
 		<dd><%= image_tag @resource.image_url(:medium).to_s %></dd>
 	</a>
 	<p><b>Description:</b> <%= @resource.description %></p>
-	<p><b>Provider:</b> <%= @resource.user.email %></p>
+	<p><b>Provider:</b></p>
 	<p><b>Price:</b> <%= "$" + number_with_precision(@resource.price_in_cents.to_f/100, :precision => 2) %></p>
 	<p><b>No. Downloads:</b> <%= @resource.number_of_downloads %></p>
 	<!-- Button to trigger modal -->

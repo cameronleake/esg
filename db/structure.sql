@@ -318,13 +318,13 @@ ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
 
 CREATE TABLE downloads (
     id integer NOT NULL,
-    link character varying(255),
-    link_valid boolean,
+    link_expired boolean DEFAULT false,
     expiry_time timestamp without time zone,
     resource_id integer,
     shopping_cart_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    download_token character varying(255)
 );
 
 
@@ -1040,3 +1040,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130528100831');
 INSERT INTO schema_migrations (version) VALUES ('20130528121905');
 
 INSERT INTO schema_migrations (version) VALUES ('20130528133418');
+
+INSERT INTO schema_migrations (version) VALUES ('20130531113931');
+
+INSERT INTO schema_migrations (version) VALUES ('20130531114607');

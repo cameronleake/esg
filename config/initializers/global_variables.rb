@@ -6,3 +6,6 @@ MAILCHIMP_ESG_BLOG = { :API_key => "46321100908d098dcb744572daac886b-us7", :list
 # Resources
 PRICE_TYPES = ["Paid", "Free"]
 SHOPPING_CART_STATUSES = ["OPEN", "CLOSED"]
+
+# Downloads
+DOWNLOAD_EXPIRY_HOURS = 24

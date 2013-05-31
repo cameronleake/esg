@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-    @user.email_verification_token = @user.generate_random_token
+    @user.email_verification_token = generate_random_token
     @user.avatar = "/assets/Default_Profile_Icon.jpg"
     if @user.save
       cookies[:auth_token] = @user.auth_token    # Save new auth_token in a temporary cookie
