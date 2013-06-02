@@ -17,6 +17,12 @@ class UsersController < ApplicationController
   def edit
     if current_user
       @user = current_user
+      @downloads = []
+      @user.shopping_carts.each do |cart|
+        cart.downloads.each do |download|
+          @downloads << download
+        end
+      end
     else
       redirect_to login_url, alert: "Not authorized!"
     end

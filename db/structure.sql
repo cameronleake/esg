@@ -324,7 +324,9 @@ CREATE TABLE downloads (
     shopping_cart_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    download_token character varying(255)
+    download_token character varying(255),
+    number_of_downloads integer DEFAULT 0,
+    purchase_price_in_cents integer
 );
 
 
@@ -359,7 +361,6 @@ CREATE TABLE resources (
     price_in_cents integer DEFAULT 0,
     image character varying(255),
     file character varying(255),
-    number_of_downloads integer DEFAULT 0,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -424,13 +425,14 @@ ALTER SEQUENCE resources_shopping_carts_id_seq OWNED BY resources_shopping_carts
 
 CREATE TABLE reviews (
     id integer NOT NULL,
-    title character varying(255),
     body character varying(255),
     rating integer,
     resource_id integer,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    spam boolean DEFAULT false,
+    title character varying(255)
 );
 
 
@@ -1044,3 +1046,15 @@ INSERT INTO schema_migrations (version) VALUES ('20130528133418');
 INSERT INTO schema_migrations (version) VALUES ('20130531113931');
 
 INSERT INTO schema_migrations (version) VALUES ('20130531114607');
+
+INSERT INTO schema_migrations (version) VALUES ('20130602022212');
+
+INSERT INTO schema_migrations (version) VALUES ('20130602032057');
+
+INSERT INTO schema_migrations (version) VALUES ('20130602080452');
+
+INSERT INTO schema_migrations (version) VALUES ('20130602083258');
+
+INSERT INTO schema_migrations (version) VALUES ('20130602083915');
+
+INSERT INTO schema_migrations (version) VALUES ('20130602091014');

@@ -9,16 +9,22 @@
 	</a>
 	<p><b>Description:</b> <%= @resource.description %></p>
 	<p><b>Provider:</b></p>
-	<p><b>Price:</b> <%= "$" + number_with_precision(@resource.price_in_cents.to_f/100, :precision => 2) %></p>
-	<p><b>No. Downloads:</b> <%= @resource.number_of_downloads %></p>
-	<!-- Button to trigger modal -->
+	<p><b>Price:</b>
+		<% if @resource.price_in_cents > 0 %>
+			<%= "$" + number_with_precision(@resource.price_in_cents.to_f/100, :precision => 2) %>
+		<% else %>
+			Free
+		<% end %>
+	</p>
+	<p><b>Downloads:</b> <%= @resource.number_of_downloads(@resource) %></p>
+	<p><b>Reviews:</b> <%= @resource.number_of_reviews(@resource) %></p>
+	<a href="#resource-preview" role="button" class="btn" data-toggle="modal">Preview</a>
 	<% if already_in_cart(@resource) %>
 		<h4>Item is already in Shopping Cart.</h4>
 		<a href="<%= shopping_cart_path %>" class="btn btn-success">Cart</a>
 	<% else %>
 		<a href="<%= add_to_cart_path %>" class="btn btn-success">Add to Cart</a>	
 	<% end %>
-	<a href="#resource-preview" role="button" class="btn" data-toggle="modal">Preview</a>
 </div>
 
  

@@ -62,5 +62,7 @@ module Esg
     
     config.rakismet.key = 'de8faf9dc599'
     config.rakismet.url = 'www.engineeringsurvivalguide.com'
+    
+    config.assets.initialize_on_precompile = false
   end
 end

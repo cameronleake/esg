@@ -1,10 +1,10 @@
 <%- model_class = User -%>
 
-	<div class="page-header">
-	 	<h2>Profile</h2>
-	</div>
+<div class="page-header">
+ 	<h2>Profile</h2>
+</div>
 
-	<%= simple_form_for(@user, :html => {:class => 'form-horizontal' }) do |f| %>
+<%= simple_form_for(@user, :html => {:class => 'form-horizontal' }) do |f| %>
 
 	<div class="tabbable">
 	  <ul class="nav nav-tabs">
@@ -12,6 +12,7 @@
 	    <li><a href="#password" id="tab2" data-toggle="tab"><h4>Password</h4></a></li>
 	    <li><a href="#subscriptions" id="tab3" data-toggle="tab"><h4>Subscriptions</h4></a></li>
 	    <li><a href="#avatar" id="tab4" data-toggle="tab"><h4>Avatar</h4></a></li>
+	    <li><a href="#downloads" id="tab5" data-toggle="tab"><h4>Downloads</h4></a></li>
 	  </ul>
 	
 	  <div class="tab-content">
@@ -30,23 +31,13 @@
 	    <div class="tab-pane" id="avatar">
 			<%= render :partial => "profile_avatar", :locals => { :f => f } %>
 	    </div>
+
+	    <div class="tab-pane" id="downloads">
+			<%= render :partial => "profile_downloads", :locals => { :f => f } %>
+	    </div>
 	  </div>
 	</div>
 	
-	<script>
-		$(function() { 
-		  $('a[data-toggle="tab"]').on('shown', function (e) {
-		    // Save the latest tab
-		    localStorage.setItem('lastTab', $(e.target).attr('id'));
-		  });
-
-		  // Go to the latest tab, if it exists
-		  var lastTab = localStorage.getItem('lastTab');
-		  if (lastTab) {
-		      $('#'+lastTab).tab('show'); }
-		});
-	</script>
-
   	<div class="form-actions">
    	<%= f.submit nil, :value => "Save Changes", :class => 'btn btn-primary' %>
 		<% if @user.email_verified == false %>
@@ -55,4 +46,19 @@
    	<%= link_to t('.cancel', :default => t("helpers.links.cancel")), root_path, :class => 'btn' %>
   	</div>
 
-	<% end %>
+<% end %>
+
+	
+<script>
+	$(function() { 
+	  $('a[data-toggle="tab"]').on('shown', function (e) {
+	    // Save the latest tab
+	    localStorage.setItem('lastTab', $(e.target).attr('id'));
+	  });
+
+	  // Go to the latest tab, if it exists
+	  var lastTab = localStorage.getItem('lastTab');
+	  if (lastTab) {
+	      $('#'+lastTab).tab('show'); }
+	});
+</script>

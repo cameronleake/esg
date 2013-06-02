@@ -24,7 +24,11 @@ class Resource < ActiveRecord::Base
     using: { tsearch: {dictionary: "english", :prefix => true} }
     
     
-  def review_count(resource)
+  def number_of_downloads(resource)
+    resource.downloads.count
+  end
+    
+  def number_of_reviews(resource)
     resource.reviews.count
   end
   

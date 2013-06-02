@@ -8,5 +8,5 @@
 <p>Please access before: <%= @cart.downloads.first.expiry_time.time.to_formatted_s(:long) %></p>
 
 <% @cart.downloads.each do |download| %>
-	<h5><a href=<%= "http://localhost:3000/downloads/#{download.download_token}" %> target="_blank"><%= "Download: #{download.resource.name}" %></a></h5>
+	<h5><a href=<a href="<%= resource_download_path(download.download_token) %>" target="_blank"><%= "Download: #{download.resource.name}" %></a></h5>
 <% end %>

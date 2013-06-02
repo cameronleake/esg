@@ -9,6 +9,8 @@
 				<a href="<%= category_path(@resource.category_id) %>" class="btn btn-primary"><< <%= @resource.category.name.pluralize %></a>
 			</div>
 			
+			<%= render "resource_reviews" %>
+			
 		</div>
 	</div>
 </div>

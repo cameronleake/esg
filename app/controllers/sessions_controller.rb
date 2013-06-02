@@ -17,7 +17,12 @@ class SessionsController < ApplicationController
   
   def destroy
     cookies.delete(:auth_token)
-    cookies.delete(:cart_token)
+    if cookies[:cart_token]
+      @cart = ShoppingCart.find_by_cart_token(cookies[:cart_token])
+      @cart.status = "Abandoned"
+      @cart.save!
+      cookies.delete(:cart_token)
+    end
     redirect_to root_url, notice: "Logged out!"
   end
 

@@ -7,17 +7,17 @@
 			</div>
 			
 			<p>Welcome to ESG's Resource Centre.  Check out all of our resources available for you to download!</p>
+			<br>
 			
-			<table class="table">
-				<% @categories.each do |category| %>
-					<thead>
-						<tr><td><h3><%= link_to category.name.pluralize, category_path(category) %></h3></td></tr>
-					</thead>
-					<tbody>
-						<tr><td><h5><%= pluralize(category.resources_count(category), 'Resource') %></h5></td></tr>
-					</tbody>	
-				<% end %>
-			</table>			
+			<% @categories.each_with_index do |category, i| %>
+				<div class="span4">
+					<div class="hero-unit">
+						<h3><%= link_to category.name.pluralize, category_path(category) %></h3>
+						<h4><%= pluralize(category.resources_count(category), 'Resource') %></h4>
+						<h5><%= pluralize(category.number_of_downloads(category), 'Download') %></h5>
+					</div>
+				</div>
+			<% end %>
 		</div>
 		
 		<div class="span3" align="center">

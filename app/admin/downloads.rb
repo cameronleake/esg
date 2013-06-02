@@ -8,8 +8,8 @@ ActiveAdmin.register Download do
   filter :shopping_cart
   filter :link_expired, :as => :select
   filter :expiry_time
-
-
+  
+  
   # Configuration for Resources Index Page
   config.sort_order = "created_at_desc"
   config.per_page = 15
@@ -22,11 +22,16 @@ ActiveAdmin.register Download do
      end
    end
    column :resource
+   column "Downloads" do |download|
+     div :class => "admin-center-column" do 
+       download.number_of_downloads
+     end
+   end
    column :link_expired, :sortable => :link_expired do |download|
-           div :class => "admin-center-column" do 
-             download.link_expired.yesno
-           end
-         end
+     div :class => "admin-center-column" do 
+       download.link_expired.yesno
+     end
+   end
    column :expiry_time
    default_actions
   end

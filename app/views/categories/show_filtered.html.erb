@@ -23,6 +23,10 @@
 										<% else %>
 											FREE
 										<% end %>
+										<% if resource.number_of_downloads(resource) > 0 %>
+										 	-- <%= pluralize(resource.number_of_downloads(resource), "Download") %><% end %>
+										<% if resource.number_of_reviews(resource) > 0 %>
+										 	-- <%= pluralize(resource.number_of_reviews(resource), "Review") %><% end %>										
 									</h5>
 									<%= resource.description %>
 								</div>					

@@ -38,8 +38,8 @@ ActiveAdmin.register_page "Dashboard" do
       
       column do
         div :class => "admin-center-column" do 
-          panel "Spam in Past 7 Days" do
-            h1 BlogComment.where(:spam => true).where("created_at >= ?", 1.week.ago).count
+          panel "Spam Reviews" do
+            h1 Review.where(:spam => true).count
           end
         end
       end

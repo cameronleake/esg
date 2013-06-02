@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   
   def authorize_shopping_cart_exists
     if current_shopping_cart.nil?
-      @cart = ShoppingCart.new(:status => "OPEN")
+      @cart = ShoppingCart.new(:status => "Open")
       @cart.cart_token = generate_random_token
       @cart.user = current_user
       @cart.save

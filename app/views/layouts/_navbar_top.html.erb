@@ -29,8 +29,9 @@
 								<ul class="dropdown-menu" role="menu" aria-labelledby="account">
 									<li><%= link_to "Profile", profile_path %></li>
 									<% if current_shopping_cart %>
-										<li><%= link_to "Shopping Cart", shopping_cart_path(current_shopping_cart) %></li>
+										<li><%= link_to "Shopping Cart", shopping_cart_path %></li>
 									<% end %>
+									<li><%= link_to "Contact Us", contact_path %></li>
 									<li class="divider"></li>
 									<li><%= link_to "Logout", logout_path("current"), method: "delete" %></li>
 								</ul>
@@ -44,5 +45,5 @@
 				</ul>
 			</div>
 		</div>
-	</div>				
+	</div>			
 </div>

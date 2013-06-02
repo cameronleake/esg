@@ -7,6 +7,7 @@
  *= require bootstrap_and_overrides
  *= require bootstrap
  *= require bootstrap-responsive
+ *= require dataTables/jquery.dataTables.bootstrap
  *= require blog_comments
  *= require articles
  *= require contacts

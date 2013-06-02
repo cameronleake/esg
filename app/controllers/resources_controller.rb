@@ -2,6 +2,7 @@ class ResourcesController < ApplicationController
   
   def show
     @resource = Resource.find(params[:id])
+    @category = Category.find(@resource.category_id)
   end
   
   def show_filtered
@@ -9,6 +10,7 @@ class ResourcesController < ApplicationController
       @tag_name = params[:tag]
     end
     @resource = Resource.find(params[:id])
+    @category = Category.find(@resource.category_id)
   end
   
   def search

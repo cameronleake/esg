@@ -25,7 +25,6 @@ ActiveAdmin.register ShoppingCart do
    selectable_column
    column :order_number
    column :status
-   column :user
    column :payment_verified, :sortable => :payment_verified do |cart|
      div :class => "admin-center-column" do 
        cart.payment_verified.yesno

@@ -7,6 +7,14 @@ class Category < ActiveRecord::Base
     category.resources.count
   end
   
+  def number_of_downloads(category)
+    @download_count
+    category.resources.each do |resource|
+      @download_count =+ resource.downloads.count
+    end
+    return @download_count
+  end
+  
   def resources_with_tag(category, tag)
     @resources = []
     category.resources.each do |resource|

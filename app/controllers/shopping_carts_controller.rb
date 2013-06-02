@@ -16,7 +16,7 @@ class ShoppingCartsController < ApplicationController
       redirect_to shopping_cart_path(@cart), :alert => "Item is already in your cart!"
     else
       @cart.resources << @resource_to_add
-      redirect_to shopping_cart_path(@cart), :notice => "Item has been added to your cart!"
+      redirect_to shopping_cart_path, :notice => "Item has been added to your cart!"
     end
   end
   
@@ -40,12 +40,11 @@ class ShoppingCartsController < ApplicationController
     # if # Payment is verified
     #   @cart.payment_verified = true
     # end
-    # # Generate Download Links, (as Download objects associated with the relevant Shopping Cart model)
     generate_download_links(@cart)
     if @cart.delay.send_download_links_email
       @cart.email_sent = true
     end
-    @cart.save
+    @cart.save!
     cookies.delete(:cart_token)
     redirect_to root_path, :notice => "Order Processed.  You will recieve an email with your download links shortly!"
   end
@@ -63,11 +62,14 @@ class ShoppingCartsController < ApplicationController
   def generate_download_links(cart)
     @expiry_time = DateTime.now + DOWNLOAD_EXPIRY_HOURS.hours
     cart.resources.each do |resource|
+      @purchase_price = resource.price_in_cents
       cart.downloads << Download.new( :shopping_cart_id => cart.id, 
                                       :resource_id => resource.id, 
                                       :download_token => generate_random_token, 
-                                      :expiry_time => @expiry_time)
+                                      :expiry_time => @expiry_time,
+                                      :purchase_price_in_cents => @purchase_price)
     end
+    cart.save!
   end
 
 end
