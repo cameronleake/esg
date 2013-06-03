@@ -5,14 +5,14 @@ class ShoppingCartsController < ApplicationController
   def show
     @cart = current_shopping_cart
     @cart_items = @cart.resources
-    @total_cost = @cart.total_cart_cost(@cart)/100
+    @total_cost = @cart.total_cart_cost/100
   end
   
   def add_to_cart
     @user = current_user
     @resource_to_add = Resource.find(params[:id])
     @cart = current_shopping_cart
-     if resource_already_in_cart(@resource_to_add, @cart)
+     if @cart.resource_already_in_cart(@resource_to_add)
       redirect_to shopping_cart_path(@cart), :alert => "Item is already in your cart!"
     else
       @cart.resources << @resource_to_add
@@ -30,7 +30,7 @@ class ShoppingCartsController < ApplicationController
   def checkout
     @cart = current_shopping_cart
     @cart_items = @cart.resources
-    @total_cost = @cart.total_cart_cost(@cart)/100
+    @total_cost = @cart.total_cart_cost/100
   end
   
   def process_cart
@@ -40,36 +40,13 @@ class ShoppingCartsController < ApplicationController
     # if # Payment is verified
     #   @cart.payment_verified = true
     # end
-    generate_download_links(@cart)
+    @cart.generate_download_links
     if @cart.delay.send_download_links_email
       @cart.email_sent = true
     end
     @cart.save!
     cookies.delete(:cart_token)
     redirect_to root_path, :notice => "Order Processed.  You will recieve an email with your download links shortly!"
-  end
-  
-  
-  private
-  
-  def resource_already_in_cart(resource_to_add, cart)
-    cart.resources.each do |resource|
-      return true if resource_to_add.id == resource.id
-    end
-    return false
-  end
-  
-  def generate_download_links(cart)
-    @expiry_time = DateTime.now + DOWNLOAD_EXPIRY_HOURS.hours
-    cart.resources.each do |resource|
-      @purchase_price = resource.price_in_cents
-      cart.downloads << Download.new( :shopping_cart_id => cart.id, 
-                                      :resource_id => resource.id, 
-                                      :download_token => generate_random_token, 
-                                      :expiry_time => @expiry_time,
-                                      :purchase_price_in_cents => @purchase_price)
-    end
-    cart.save!
   end
 
 end

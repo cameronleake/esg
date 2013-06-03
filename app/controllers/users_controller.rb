@@ -17,12 +17,7 @@ class UsersController < ApplicationController
   def edit
     if current_user
       @user = current_user
-      @downloads = []
-      @user.shopping_carts.each do |cart|
-        cart.downloads.each do |download|
-          @downloads << download
-        end
-      end
+      @downloads = @user.get_downloads_list
     else
       redirect_to login_url, alert: "Not authorized!"
     end
@@ -31,9 +26,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.email_verification_token = generate_random_token
-    @user.avatar = "/assets/Default_Profile_Icon.jpg"
+    @user.avatar = DEFAULT_AVATAR_PATH
     if @user.save
-      cookies[:auth_token] = @user.auth_token    # Save new auth_token in a temporary cookie
+      cookies[:auth_token] = @user.auth_token
       @user.delay.send_welcome_email  
       redirect_to root_url, notice: "Welcome to Engineering Survival Guide! Please check your inbox and verify your email address."
     else
@@ -46,8 +41,7 @@ class UsersController < ApplicationController
     @current_email = current_user.email
     if @user.update_attributes(params[:user])
       if @user.email != @current_email
-        @user.email_verified = false
-        @user.save!
+        @user.un_verify_email
         @user.delay.send_verification_email   
         flash[:alert] = "You have updated your email address.  Please check your inbox and verify the new email address."
       end
@@ -61,7 +55,7 @@ class UsersController < ApplicationController
     if current_user
       @user = current_user
       @user.update_attributes(:blog_subscription => true)
-      # Gibbon.new(MAILCHIMP_ESG_BLOG[:API_key]).list_subscribe(:id => MAILCHIMP_ESG_BLOG[:list_id], :email_address => @user.email)  <TODO>
+      # <TODO> Gibbon.new(MAILCHIMP_ESG_BLOG[:API_key]).list_subscribe(:id => MAILCHIMP_ESG_BLOG[:list_id], :email_address => @user.email)
       redirect_to articles_path, notice: "You have subscribed to the ESG Blog!"
     else
       redirect_to login_path, alert: "Please Login or Sign up to subscribe."
@@ -72,7 +66,7 @@ class UsersController < ApplicationController
     if current_user
       @user = current_user
       @user.update_attributes(:resources_subscription => true)
-      # Gibbon.new(MAILCHIMP_ESG_BLOG[:API_key]).list_subscribe(:id => MAILCHIMP_ESG_BLOG[:list_id], :email_address => @user.email)  <TODO>
+      # <TODO> Gibbon.new(MAILCHIMP_ESG_BLOG[:API_key]).list_subscribe(:id => MAILCHIMP_ESG_BLOG[:list_id], :email_address => @user.email)
       redirect_to categories_path, notice: "You have subscribed to the ESG Blog!"
     else
       redirect_to login_path, alert: "Please Login or Sign up to subscribe."

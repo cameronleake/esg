@@ -1,5 +1,4 @@
 ActiveAdmin.register ShoppingCart do
-  
   menu :parent => "RESOURCES", :priority => 3
   scope :all, :default => true
   scope :open_orders do |cart|

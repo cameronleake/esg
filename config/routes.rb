@@ -38,9 +38,9 @@ Esg::Application.routes.draw do
 
 
    # CATEGORIES / RESOURCES / REVIEWS
-   get 'categories/tags/:tag', to: 'categories#index_filtered', as: :category_tag
-   get 'categories/:id/tags/:tag', to: 'categories#show_filtered', as: :show_category_tag
-   get 'categories/:category_id/resources/:id/tags/:tag', to: 'resources#show_filtered', as: :show_resource_tag
+   get 'categories/tags/:tag', to: 'categories#index', as: :category_tag
+   get 'categories/:id/tags/:tag', to: 'categories#show', as: :show_category_tag
+   get 'categories/:category_id/resources/:id/tags/:tag', to: 'resources#show', as: :show_resource_tag
    match 'resources/search' => 'resources#search'
    resources :categories do
     resources :resources do

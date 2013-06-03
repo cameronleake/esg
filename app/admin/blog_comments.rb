@@ -56,4 +56,5 @@ ActiveAdmin.register BlogComment do
    end                               
    f.actions                         
   end
+  
 end

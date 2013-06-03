@@ -325,7 +325,7 @@ CREATE TABLE downloads (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     download_token character varying(255),
-    number_of_downloads integer DEFAULT 0,
+    times_accessed integer DEFAULT 0,
     purchase_price_in_cents integer
 );
 
@@ -1058,3 +1058,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130602083258');
 INSERT INTO schema_migrations (version) VALUES ('20130602083915');
 
 INSERT INTO schema_migrations (version) VALUES ('20130602091014');
+
+INSERT INTO schema_migrations (version) VALUES ('20130603132043');

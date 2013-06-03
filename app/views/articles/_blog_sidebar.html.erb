@@ -18,14 +18,11 @@
 <br>
 
 
-<% unless current_user.blog_subscription %>
-
+<% unless current_user && current_user.blog_subscription %>
 	<div class="page-header">
 	  	<h3>Subscribe</h3>
 	</div>
 	<p>Sign up to receive the latest Blog Posts directly to your inbox!</p>
-
-	<!-- Button to trigger modal -->
 	<a href="#blog-subscription" role="button" class="btn btn-warning" data-toggle="modal">Subscribe</a>
  
 	<!-- Modal -->
@@ -47,5 +44,4 @@
 	</div>
 	<br>
 	<br>
-	
 <% end %>

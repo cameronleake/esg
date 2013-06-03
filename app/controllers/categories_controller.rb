@@ -2,26 +2,19 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = categories_with_resources
-  end
-  
-  def index_filtered
     if params[:tag]
       @tag_name = params[:tag]
+      @filtered_categories = categories_with_resources_and_tag(@tag_name)
     end
-    @filtered_categories = categories_with_resources_and_tag(@tag_name)
   end
 
   def show
     @category = Category.find(params[:id])
     @resources = Resource.order("name ASC").where(:category_id => params[:id]).page(params[:page]).per(5)
-  end
-  
-  def show_filtered
     if params[:tag]
       @tag_name = params[:tag]
+      @filtered_resources = resources_with_tag(@category, @tag_name)      # <TODO> Add Pagination
     end
-    @category = Category.find(params[:id])
-    @filtered_resources = resources_with_tag(@category, @tag_name)      # <TODO> Add Pagination
   end
   
   

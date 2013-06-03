@@ -9,7 +9,7 @@ ActiveAdmin.register Review do
   # Configuration for Sidebar Filters
   filter :resource
   filter :user
-  filter :rating, as: :select, :include_blank => false, :collection => [1, 2, 3, 4, 5]
+  filter :rating, as: :select, :include_blank => false, :collection => RESOURCE_RATINGS
   filter :spam
   filter :body
 
@@ -58,7 +58,7 @@ ActiveAdmin.register Review do
    f.inputs "New Review" do       
      f.input :resource, :include_blank => false
      f.input :user, :include_blank => false
-     f.input :rating, as: :select, :include_blank => false, :collection => [1, 2, 3, 4, 5]
+     f.input :rating, as: :select, :include_blank => false, :collection => RESOURCE_RATINGS
      f.input :title
      f.input :body
      f.input :spam, as: :select, :include_blank => false

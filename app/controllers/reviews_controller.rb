@@ -6,16 +6,15 @@ class ReviewsController < ApplicationController
     @review = @resource.reviews.build(params[:review])
     @review.user_id = current_user.id
     
-    # If review is not spam and not blank
-    if @review.body? && @review.spam?
+    if @review.body? && @review.title? && @review.spam?
       @review.spam = true
       @review.save!
       redirect_to category_resource_path(@category, @resource), alert: "We're sorry, this review has been marked as spam!"
-    elsif @review.body?
+    elsif @review.body? && @review.title?
       @review.save!
       redirect_to category_resource_path(@category, @resource), notice: "Review submitted!"
     else
-      redirect_to category_resource_path(@category, @resource), alert: "Cannot submit a blank review!"
+      redirect_to category_resource_path(@category, @resource), alert: "Review must have a Title and a Review!"
     end
   end
   

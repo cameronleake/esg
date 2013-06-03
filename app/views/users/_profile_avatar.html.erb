@@ -3,11 +3,7 @@
 <helper href="#" class="btn btn-info pull-right">HINT</helper>
 
 <dl class="dl-horizontal">
-	<% if @user.avatar? %>
-		<dd><%= image_tag @user.avatar_url(:profile).to_s %></dd>
-	<% else %>
-		<dd><%= image_tag "/assets/Default_Profile_Icon.jpg" %></dd>
-	<% end %>
+	<dd><%= image_tag(@user.avatar.url(:profile)) %></dd>
 </dl>	
 
 	<%= f.input :avatar, as: :file, label: false, :input_html => { :accept => "image/*" } %>

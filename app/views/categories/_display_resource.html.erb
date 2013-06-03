@@ -1,0 +1,30 @@
+<thead>
+	<tr>
+		<td class="blog-article-list">
+			<div class="media">
+				
+				<% if @tag_name != nil %>
+					<h3><%= link_to resource.name, show_resource_tag_path(resource.category_id, resource.id) %></h3>
+				<% else %>
+					<h3><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h3>
+				<% end %>
+				<a class="pull-left">
+					<dd><%= image_tag resource.image_url(:thumb).to_s %></dd>
+				</a>
+				<h5>Type: <%= resource.category.name %> -- <%= display_category_tag_links(resource) %></h5>
+				<h5>Price:  
+					<% if resource.price_type == "Paid" %>
+						<%= "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2) %>
+					<% else %>
+						FREE
+					<% end %>
+					<% if resource.number_of_downloads > 0 %>
+					 	-- <%= pluralize(resource.number_of_downloads, "Download") %><% end %>
+					<% if resource.number_of_reviews > 0 %>
+					 	-- <%= pluralize(resource.number_of_reviews, "Review") %><% end %>										
+				</h5>
+				<%= resource.description %>
+			</div>					
+		</td>
+	</tr>
+</thead>

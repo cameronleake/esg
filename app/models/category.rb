@@ -3,24 +3,24 @@ class Category < ActiveRecord::Base
   has_many :resources
   
   
-  def resources_count(category)
-    category.resources.count
+  def resources_count
+    self.resources.count
   end
   
-  def number_of_downloads(category)
-    @download_count
-    category.resources.each do |resource|
-      @download_count =+ resource.downloads.count
+  def number_of_downloads
+    @download_count = 0
+    self.resources.each do |resource|
+      @download_count += resource.downloads.count
     end
     return @download_count
   end
   
-  def resources_with_tag(category, tag)
+  def resources_with_tag(tag)
     @resources = []
-    category.resources.each do |resource|
+    self.resources.each do |resource|
       @resources << resource if resource.tag_list.include?(tag)
     end
-    @resources
+    return @resources
   end
   
 end

@@ -1,0 +1,36 @@
+<div class="form-actions">
+	<% if current_user %>
+		<h3>Add a review:</h3>
+		<%= simple_form_for([@category, @resource, @resource.reviews.build], :html => { :class => 'form-horizontal' }) do |f| %>
+			<%= f.input :rating, as: :select, :include_blank => false, :collection => [1, 2, 3, 4, 5], :selected => 5 %>					
+			<%= f.input :title, :required => true, :input_html => { :class => 'subject-field' } %>
+			<%= f.input :body, as: :text, :label => "Review", :required => true, :input_html => { :class => "resource-reviews", :maxlength => 2000 } %>					
+		  	<div class="form-actions">
+				<a href="#submit_comment" role="button" class="btn btn-primary" data-toggle="modal">Submit</a>
+		  	</div>
+
+			<!-- Modal Window -->
+			<div id="submit_comment" class="modal hide fade blog-subscription-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-header">
+			   	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			    	<h3 id="myModalLabel">The Engineering Survival Guide</h3>
+			  	</div>
+
+				<div class="modal-body">
+			   	<p>Are you sure you want to submit this review?</p>
+			  	</div>
+
+				<div class="modal-footer">
+			    	<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+				  	<%= f.button :submit, :value => "Submit Review", :class => 'btn-warning' %>
+			  	</div>
+			</div>
+		<% end %>
+	<% else %>
+		<div class="form-horizontal comments-links">
+			<p>Sign up or Login to submit a review!</p>
+			<a href=<%= signup_path %> class="btn btn-info">Sign Up</a>
+			<a href=<%= login_path %> class="btn">Login</a>	
+		</div>					
+	<% end %>
+</div>

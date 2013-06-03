@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "MODEL >> send_password_resets:" do
   let(:user) { FactoryGirl.build(:user) }
     
-  xit "Generates a unique password_reset_token each time" do
+  it "Generates a unique password_reset_token each time" do
     user.send_password_reset
     last_token = user.password_reset_token
     user.send_password_reset

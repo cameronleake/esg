@@ -3,14 +3,9 @@ class ResourcesController < ApplicationController
   def show
     @resource = Resource.find(params[:id])
     @category = Category.find(@resource.category_id)
-  end
-  
-  def show_filtered
     if params[:tag]
       @tag_name = params[:tag]
     end
-    @resource = Resource.find(params[:id])
-    @category = Category.find(@resource.category_id)
   end
   
   def search

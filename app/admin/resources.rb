@@ -17,7 +17,7 @@ ActiveAdmin.register Resource do
   filter :category
   filter :featured_resource, :as => :select
   filter :name
-  filter :price_type, :as => :select, :collection => PRICE_TYPES
+  filter :price_type, :as => :select, :collection => RESOURCE_PRICE_TYPES
   filter :price_in_cents
 
 
@@ -59,7 +59,9 @@ ActiveAdmin.register Resource do
       row "Price" do
          "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2)
       end
-      row :number_of_downloads
+      row :number_of_downloads do
+        resource.number_of_downloads
+      end
       row :featured_resource do
         resource.featured_resource.yesno
       end
@@ -82,7 +84,7 @@ ActiveAdmin.register Resource do
      f.input :category, :as => :select, :include_blank => false
      f.input :name
      f.input :description
-     f.input :price_type, :as => :select, :include_blank => false, :collection => PRICE_TYPES
+     f.input :price_type, :as => :select, :include_blank => false, :collection => RESOURCE_PRICE_TYPES
      f.input :price_in_cents
      f.input :tag_list  #  <TODO>: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
      f.input :file, :as => :file, :input_html => { :accept => "application/pdf" }, hint: resource.file_url

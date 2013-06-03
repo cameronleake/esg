@@ -55,4 +55,19 @@ class User < ActiveRecord::Base
     email
   end
   
+  def get_downloads_list
+    @downloads = []
+    self.shopping_carts.each do |cart|
+      cart.downloads.each do |download|
+        @downloads << download
+      end
+    end
+    return @downloads
+  end
+  
+  def un_verify_email
+    self.email_verified = false
+    self.save!
+  end
+  
 end

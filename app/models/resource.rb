@@ -7,7 +7,6 @@ class Resource < ActiveRecord::Base
   attr_accessible :file
   attr_accessible :image
   attr_accessible :name
-  attr_accessible :number_of_downloads
   attr_accessible :price_in_cents
   attr_accessible :price_type
   attr_accessible :tag_list
@@ -24,12 +23,12 @@ class Resource < ActiveRecord::Base
     using: { tsearch: {dictionary: "english", :prefix => true} }
     
     
-  def number_of_downloads(resource)
-    resource.downloads.count
+  def number_of_downloads
+    self.downloads.count
   end
     
-  def number_of_reviews(resource)
-    resource.reviews.count
+  def number_of_reviews
+    self.reviews.count
   end
   
   def self.text_search(query)

@@ -13,7 +13,7 @@ ActiveAdmin.register Contact do
   
   
   # Configuration for Sidebar Filters
-  filter :status, :as => :select, :collection => ["OPEN", "CLOSED"]
+  filter :status, :as => :select, :collection => CONTACT_TICKET_STATUSES
   filter :spam, :as => :select
   filter :name
   filter :email
@@ -59,7 +59,7 @@ ActiveAdmin.register Contact do
   # Configuration for Tickets Index Page
   form do |f|                         
     f.inputs "New Contact Ticket" do       
-      f.input :status, :as => :select, :include_blank => false, :collection => ["OPEN", "CLOSED"]
+      f.input :status, :as => :select, :include_blank => false, :collection => CONTACT_TICKET_STATUSES
       f.input :spam, :as => :select, :include_blank => false
       f.input :name                
       f.input :email

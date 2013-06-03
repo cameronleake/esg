@@ -25,6 +25,17 @@ class ApplicationController < ActionController::Base
   def find_navbar_categories
     @navbar_categories = Category.order("name ASC").find(:all)
   end
+
+    
+  private
+  
+  def current_user
+    @current_user ||= User.find_by_auth_token(cookies[:auth_token]) if cookies[:auth_token]
+  end
+
+  def current_shopping_cart
+    @current_shopping_cart ||= ShoppingCart.find_by_cart_token(cookies[:cart_token]) if cookies[:cart_token]
+  end
   
   def authorize_shopping_cart_exists
     if current_shopping_cart.nil?
@@ -38,15 +49,4 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  
-  private
-  
-  def current_user
-    @current_user ||= User.find_by_auth_token(cookies[:auth_token]) if cookies[:auth_token]
-  end
-
-  def current_shopping_cart
-    @current_shopping_cart ||= ShoppingCart.find_by_cart_token(cookies[:cart_token]) if cookies[:cart_token]
-  end
-
 end
