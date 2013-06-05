@@ -1,5 +1,6 @@
 FactoryGirl.define do
 
+
   factory :user do
     first_name "Test"
     last_name "User"
@@ -9,12 +10,14 @@ FactoryGirl.define do
     email_verification_token "987654321"
   end
   
+  
   factory :article do
     title "Test title"
     blurb "Test blurb content"
     body "Test body content"
     featured_article true
   end
+  
   
   factory :contact do
     name "Example User Name"
@@ -23,9 +26,16 @@ FactoryGirl.define do
     body "Example contact us message"
   end
   
+  
   factory :shopping_cart do
     cart_token "123456789"
   end
+
+
+  factory :category do
+    name "Test Category"
+  end
+  
 
   factory :resource do
     name "Test Resource"
@@ -33,5 +43,4 @@ FactoryGirl.define do
     price_type "Free"
     price_in_cents 0
   end
-  
 end

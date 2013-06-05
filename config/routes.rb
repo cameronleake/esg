@@ -18,21 +18,21 @@ Esg::Application.routes.draw do
    match 'login' => 'sessions#new'
    match 'logout' => 'sessions#destroy'
    get 'reset_password', to: 'password_resets#new', as: 'reset_password'
-   resources :users
-   resources :sessions
-   resources :password_resets
-   resources :email_verifications do
-    member do
-      get 'sendmessage'
-    end
+   resources :users, :only => [:index, :show, :new, :create, :edit, :update]
+   resources :sessions, :only => [:new, :create, :destroy]
+   resources :password_resets, :only => [:new, :create, :edit, :update]
+   resources :email_verifications, :only => [:edit, :update] do
+     member do
+       get 'sendmessage'
+     end
    end
 
 
    # ARTICLES / BLOG_COMMENTS
    match 'blog' => 'articles#index'
    get 'articles/tags/:tag', to: 'articles#index', as: :article_tag
-   resources :articles do
-    resources :blog_comments
+   resources :articles, :only => [:index, :show, :edit, :update, :featured_articles] do
+    resources :blog_comments, :only => [:create]
     member { post :mercury_update }
    end
 
@@ -42,9 +42,9 @@ Esg::Application.routes.draw do
    get 'categories/:id/tags/:tag', to: 'categories#show', as: :show_category_tag
    get 'categories/:category_id/resources/:id/tags/:tag', to: 'resources#show', as: :show_resource_tag
    match 'resources/search' => 'resources#search'
-   resources :categories do
-    resources :resources do
-      resources :reviews
+   resources :categories, :only => [:index, :show] do
+    resources :resources, :only => [:show, :search] do
+      resources :reviews, :only => [:new, :create]
     end
    end
 
@@ -60,7 +60,7 @@ Esg::Application.routes.draw do
 
    # CONTACT_TICKETS
    match 'contact' => 'contacts#new'
-   resources :contacts
+   resources :contacts, :only => [:new, :create]
 
 
    # MERCURY_EDITOR

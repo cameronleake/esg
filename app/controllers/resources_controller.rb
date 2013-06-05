@@ -8,6 +8,7 @@ class ResourcesController < ApplicationController
     end
   end
   
+  
   def search
     @search_term = params[:query]
     @resources = Resource.text_search(params[:query])

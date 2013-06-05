@@ -1,26 +1,39 @@
 require 'spec_helper'
+require 'helpers/login_helper_spec'
+
 
 describe "SHOPPING CART:" do
   
-  before(:all) do
-    @cart = FactoryGirl.create(:shopping_cart)
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+    login_user(@user.email, @user.password)
   end
   
-  after(:all) do
-    @cart.destroy 
+  after(:each) do
+    @user.destroy
   end
   
   context "When viewing the cart show page:" do
+    
     it "User can remove items from the cart" do
+      @category = FactoryGirl.create(:category)
+      @resources = []
       3.times do
-        @cart.resources << FactoryGirl.create(:resource)
+        @resources << FactoryGirl.create(:resource, :category => @category)
       end
+      
+      @resources.each do |resource|
+        visit category_resource_path(resource.category_id, resource.id)
+        click_link("Add to Cart")
+      end
+      
+      @cart = ShoppingCart.where(:user_id => @user.id).last
       @initial_count = @cart.resources.count
-      @record_to_delete = Resource.find(:first)
-      @cart.resources.delete @record_to_delete    # <TODO> Reference helper method for Shopping Cart Controller
+      visit shopping_cart_path
+      first(:link, "Remove").click
       @final_count = @cart.resources.count
       @initial_count.should eq(@final_count + 1)
     end
   end
-
+  
 end

@@ -20,8 +20,8 @@
 	<p><b>Reviews:</b> <%= @resource.number_of_reviews %></p>
 	<a href="#resource-preview" role="button" class="btn" data-toggle="modal">Preview</a>
 	<% if already_in_cart(@resource) %>
+		<a href="<%= shopping_cart_path %>" class="btn btn-success">View Cart</a>
 		<h4>Item is already in Shopping Cart.</h4>
-		<a href="<%= shopping_cart_path %>" class="btn btn-success">Cart</a>
 	<% else %>
 		<a href="<%= add_to_cart_path %>" class="btn btn-success">Add to Cart</a>	
 	<% end %>

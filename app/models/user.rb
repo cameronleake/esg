@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
   has_many :blog_comments, :dependent => :destroy
   has_many :resources
   has_many :downloads, :through => :shopping_carts
-  has_many :reviews
-  has_many :shopping_carts
+  has_many :reviews, :dependent => :destroy
+  has_many :shopping_carts, :dependent => :destroy
     
     
   def password_required
@@ -33,7 +33,8 @@ class User < ActiveRecord::Base
     
   def send_password_reset
     generate_token(:password_reset_token)
-    self.password_reset_sent_at = Time.zone.now && save!
+    self.password_reset_sent_at = DateTime.now
+    self.save!
     UserMailer.password_reset(self).deliver
   end
 

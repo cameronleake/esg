@@ -1,28 +1,23 @@
 class UsersController < ApplicationController
   include UsersHelper
-  before_filter :authorize_user_logged_in, only: [:index, :show, :edit]
+  before_filter :authorize_user_logged_in, only: [:index, :show, :edit, :update]
 
-  def new
-    @user = User.new
-  end
-  
+
   def index
     is_authorized_to_access(current_user)
   end
+
   
   def show
     is_authorized_to_access(current_user)
   end
-  
-  def edit
-    if current_user
-      @user = current_user
-      @downloads = @user.get_downloads_list
-    else
-      redirect_to login_url, alert: "Not authorized!"
-    end
+
+
+  def new
+    @user = User.new
   end
-  
+
+
   def create
     @user = User.new(params[:user])
     @user.email_verification_token = generate_random_token
@@ -35,6 +30,17 @@ class UsersController < ApplicationController
       render "new"  
     end
   end
+  
+   
+  def edit
+    if current_user
+      @user = current_user
+      @downloads = @user.get_downloads_list
+    else
+      redirect_to login_url, alert: "Not authorized!"
+    end
+  end
+
   
   def update
     @user = current_user

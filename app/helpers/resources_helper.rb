@@ -6,12 +6,14 @@ module ResourcesHelper
   
   def already_in_cart(resource)
     @resource = resource
-    authorize_shopping_cart_exists
-    @cart = current_shopping_cart
-    if @cart.resources.include?(@resource)
-      return true
-    else
-      return false
+    if current_user
+      authorize_shopping_cart_exists
+      @cart = current_shopping_cart
+      if @cart.resources.include?(@resource)
+        return true
+      else
+        return false
+      end
     end
   end
   

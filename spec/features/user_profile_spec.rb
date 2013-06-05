@@ -21,7 +21,7 @@ describe "USER PROFILE:" do
       fill_in "user_first_name", :with => ""
       fill_in "user_last_name", :with => ""
       fill_in "user_email", :with => ""
-      click_button "Update Profile"
+      click_button "Save Changes"
       page.should have_content("can't be blank")
     end
     
@@ -36,7 +36,7 @@ describe "USER PROFILE:" do
       visit profile_path
       page.should_not have_content("Send Verification Email")
       fill_in "user_email", :with => "new_email@example.com"
-      click_button "Update Profile"
+      click_button "Save Changes"
       page.should have_content("Send Verification Email")
     end
   end
@@ -46,7 +46,7 @@ describe "USER PROFILE:" do
       visit profile_path
       path = File.join(::Rails.root, "/public/test_uploads/Default_Profile_Icon.jpg")
       attach_file("user_avatar", path)
-      click_button "Update Profile"
+      click_button "Save Changes"
       page.should_not have_content("Invalid file type")
     end
     
@@ -54,13 +54,13 @@ describe "USER PROFILE:" do
       visit profile_path
       path = File.join(::Rails.root, "/public/test_uploads/test.txt")
       attach_file("user_avatar", path)
-      click_button "Update Profile"
+      click_button "Save Changes"
       page.should have_content("Invalid file type")
     end
     
     it "Displays a default image if none has been uploaded" do
       visit profile_path
-      page.should have_xpath('//img[@src="/assets/Default_Profile_Icon.jpg"]')
+      page.should have_xpath('//img[@src="/assets/fallback/profile_Default_Profile_Icon.jpg"]')
     end
   end
 end

@@ -15,8 +15,8 @@ class Resource < ActiveRecord::Base
   attr_accessible :featured_resource
   belongs_to :user
   belongs_to :category
-  has_many :downloads
-  has_many :reviews
+  has_many :downloads, :dependent => :destroy
+  has_many :reviews, :dependent => :destroy
   has_and_belongs_to_many :shopping_carts
   include PgSearch
   pg_search_scope :search, against: [:name, :description],
