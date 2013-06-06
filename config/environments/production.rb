@@ -66,4 +66,14 @@ Esg::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   config.action_mailer.default_url_options = { :host => "www.engineeringsurvivalguide.com" }
+  
+  # PayPal Integration    # <TODO> Add Production PayPal API Credentials from Business Account
+  # config.after_initialize do
+  #   ActiveMerchant::Billing::Base.mode = :test
+  #   ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+  #     :login => "cameronleake7-facilitator_api1.gmail.com",
+  #     :password => "1370434556",
+  #     :signature => "AO6wMAPYpUHCVgYaDu8lF5Ufsm-qAStZfpWF.TGsVwEqsjyfd5ScPcLI"
+  #   )
+  end
 end

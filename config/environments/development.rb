@@ -36,4 +36,14 @@ Esg::Application.configure do
   config.assets.debug = true
   
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
+  
+  # PayPal Integration
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+      :login => "cameronleake7-facilitator_api1.gmail.com",
+      :password => "1370434556",
+      :signature => "AO6wMAPYpUHCVgYaDu8lF5Ufsm-qAStZfpWF.TGsVwEqsjyfd5ScPcLI"
+    )
+  end
 end

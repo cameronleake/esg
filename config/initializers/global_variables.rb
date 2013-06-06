@@ -20,3 +20,6 @@ CONTACT_TICKET_STATUSES = ["OPEN", "CLOSED"]
 
 # Users
 DEFAULT_AVATAR_PATH = "/assets/Default_Profile_Icon.jpg"
+
+# Checkout
+CREDIT_CARD_TYPE_SELECTION = [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]]

@@ -28,7 +28,8 @@ gem 'pg_search'             # For full-text search using Postgres
 gem 'rakismet'              # For interacting with the Akisment API for spam filtering 
 gem 'gibbon'                # For interacting with the MailChimp API
 gem 'mercury-rails'         # For editing HTML in the browser
-gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'    # For JS Datatables
+gem 'activemerchant'        # For Paypal Integeration
 
 group :test, :development do
   gem "rspec-rails"

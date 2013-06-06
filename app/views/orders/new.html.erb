@@ -1,0 +1,32 @@
+<div id="container">	
+	<div class="row">
+
+   	<div class="span9">
+			<div class="page-header">
+				<h2>Checkout</h2>
+			</div>
+			
+			<p>Once you confirm your order, you will be sent an email containing links to download each item in your cart.</p>
+			<p>The links will stay active for 24 hours.</p>
+			<br>
+			
+			<%= simple_form_for @order, :html => { :class => 'form-horizontal' } do |f| %>
+
+		  		<%= f.input :first_name, :input_html => { :value => current_user.first_name } %>
+		  		<%= f.input :last_name, :input_html => { :value => current_user.last_name } %>
+		  		<%= f.input :card_type, as: :select, :include_blank => false, :collection => CREDIT_CARD_TYPE_SELECTION %>
+				<%= f.input :card_number %>
+				<%= f.input :card_verification, :label => "Card Verification Value (CVV)" %>
+	  			<%= f.input :card_expires_on, :discard_day => true, :start_year => Date.today.year, :add_month_numbers => true %>		
+
+			  	<div class="form-actions">
+					<a href="<%= shopping_cart_path(@cart) %>" class="btn btn-primary"><< Shopping Cart</a>
+			  	</div>
+			</div>
+		
+			<div class="span3" align="center">
+				<%= render :partial => "checkout_sidebar", :locals => { :f => f} %>
+			</div>		
+		<% end %>
+	</div>
+</div>
