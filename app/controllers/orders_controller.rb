@@ -1,4 +1,12 @@
 class OrdersController < ApplicationController
+       
+
+  def new
+    @order = Order.new(:express_token => params[:token])
+    @cart = current_shopping_cart
+    @cart_items = @cart.resources
+    @total_cost = @cart.total_cart_cost/100         
+  end
 
 
   def express
@@ -9,79 +17,58 @@ class OrdersController < ApplicationController
     )
     redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
   end
-
-  
-  def new
-    @order = Order.new(:express_token => params[:token])
-    @cart = current_shopping_cart
-    @cart_items = @cart.resources
-    @total_cost = @cart.total_cart_cost/100         
-  end
   
   
-  def review
-    @order = Order.new(:express_token => params[:token])
-  end
-
-
-  # This method processes payments via the Credit Card Input Form
-  def create
-    @cart = current_shopping_cart
-    @cart_items = @cart.resources
-    @total_cost = @cart.total_cart_cost/100
-    @order = Order.new(:express_token => params[:token])   
-    @order.ip_address = request.remote_ip      
-    if @order.save
-      if @order.purchase
-        redirect_to order_completed_path, :notice => "Order Processed.  You will recieve an email with your download links shortly!" 
-      else
-        flash[:error] = @order.transactions.last.message
-        render :action => "failure"
-      end
-    else
-      flash[:error] = @order.errors.full_messages.join(' | ')
-      render :action => 'new'
-    end
-  end                    
-  
-           
-  # This method processes payments via the PayPal Express Checkout
-  def process_order
-    @order = Order.new(:express_token => params[:token])   
-    @order.ip_address = request.remote_ip      
-    if @order.save
-      if @order.purchase
-        redirect_to order_completed_path, :notice => "Order Processed.  You will recieve an email with your download links shortly!" 
-      else
-        flash[:error] = @order.transactions.last.message
-        render :action => "failure"
-      end
+  def create    
+    @order = current_shopping_cart.build_order(params[:order])    
+    @order.status = "New"     
+    @order.ip_address = request.remote_ip   
+    if @order.save!
+      cookies[:order_id] = @order.id
+      redirect_to review_order_path
     else
       flash[:error] = @order.errors.full_messages.join(' | ')
       render :action => 'new'
     end 
-  end
+  end                    
+        
   
-  
-  def completed
-    # <TODO>
-  end
-  
-  
-  def process_cart    # <TODO> Depricated Method.
-    @user = current_user
-    @cart = current_shopping_cart
-    # # ---------- Process Payments Here ----------
-    # if # Payment is verified
-    #   @cart.payment_verified = true
-    # end
-    @cart.generate_download_links
-    if @cart.delay.send_download_links_email
-      @cart.email_sent = true
+  def review   
+    if params[:token]
+      @order = Order.new(:express_token => params[:token])       
+      @order.status = "New"
+      @order.ip_address = request.remote_ip   
+      if @order.save!
+        cookies[:order_id] = @order.id 
+        @payment_type = "PayPal Express Payment"
+        @total_cost = current_shopping_cart.total_cart_cost    
+      else   
+        xxx  # <TODO> Put something useful here.        
+      end
+    else       
+      @order = Order.find(cookies[:order_id])
+      @payment_type = "Standard Payment"     
+      @total_cost = current_shopping_cart.total_cart_cost
     end
-    @cart.save!
-    cookies.delete(:cart_token)
-    redirect_to root_path, :notice => "Order Processed.  You will recieve an email with your download links shortly!"
   end
+  
+                                                                     
+  def process_order                               
+    @order = Order.find(cookies[:order_id])    
+    @cart = current_shopping_cart   
+    if @order.purchase(@cart)
+      @cart.generate_download_links
+      if @cart.delay.send_download_links_email
+        @cart.email_sent = true
+      end
+      @cart.save!
+      cookies.delete(:order_id)
+      cookies.delete(:cart_token)       
+      redirect_to order_completed_path, :notice => "Order Processed.  You will recieve an email with your download links shortly!" 
+    else
+      flash[:error] = "#{@order.transactions.last.message} #{@order.card_number} #{@order.card_verification}"
+      render :action => "failure"
+    end
+  end   
   
 end

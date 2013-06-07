@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
       @cart.save
       @cart.order_number = (@cart.id + 100000)
       @cart.save
-      cookies.permanent[:cart_token] = @cart.cart_token
+      cookies[:cart_token] = @cart.cart_token
     end
   end
   

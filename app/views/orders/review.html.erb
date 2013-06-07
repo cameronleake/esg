@@ -4,7 +4,13 @@
    	<div class="span9">
 			<div class="page-header">
 				<h2>3. Review Order Details</h2>
-			</div>           
+			</div>         
+			
+			<h3><%= @payment_type %>: <%= "$" + number_with_precision(@total_cost/100, :precision => 2) %></h3>
+			<h3>Card Type: <%= @order.card_type %></h3> 
+			<h3>Card Number: <%= @order.card_number %></h3>
+			<h3>CCV: <%= @order.card_verification %></h3>
+			<br>  
 				
 			<p>Name: <%=h @order.first_name %> <%=h @order.last_name %></p>
 			<p>Email: <%= @order.email %></p>  
@@ -13,7 +19,7 @@
 			<p><%= @order.city %>, <%= @order.zip %></p>
 			<p><%= @order.state %>, <%= @order.country %></p>															
 			<br>                                                
-			<%= @order.attributes %>
+			<%= @order.attributes %>  
 			<br>
 			<p><b>TODO: Display Shopping Cart Contents.</b></p>  
                     

@@ -15,7 +15,7 @@ class Order < ActiveRecord::Base
   attr_accessible :express_token
   attr_accessible :express_payer_id
   attr_accessible :card_number
-  attr_accessible :card_verification
+  attr_accessible :card_verification 
   attr_accessor :card_number, :card_verification    # This will store these variables in memory, but not the database.
   belongs_to :shopping_cart
   has_many :transactions, :class_name => "OrderTransaction"
@@ -23,10 +23,12 @@ class Order < ActiveRecord::Base
   validate :validate_card, :on => :create  
   
   
-  def purchase
-    response =  process_purchase
-    transactions.create!(:action => "purchase", :amount => price_in_cents, :response => response)
-    shopping_cart.update_attribute(:purchased_at, Time.now) if response.success?
+  def purchase(cart) 
+    @cart = cart        
+    @price_in_cents = @cart.total_cart_cost   
+    response = process_purchase
+    transactions.create!(:action => "purchase", :amount => @price_in_cents, :response => response)
+    @cart.update_attribute(:purchased_at, Time.now) if response.success?
     response.success?
   end
 
@@ -48,19 +50,19 @@ class Order < ActiveRecord::Base
     end
   end        
   
-  
-  def price_in_cents
+ 
+  def price_in_cents       
     shopping_cart.total_cart_cost
   end
-  
-  
+
+
   private     
-  
+
   def process_purchase            
     if express_token.blank?
-      STANDARD_GATEWAY.purchase(price_in_cents, credit_card, standard_purchase_options)       
+      STANDARD_GATEWAY.purchase(@price_in_cents, credit_card, standard_purchase_options)       
     else
-      EXPRESS_GATEWAY.purchase(price_in_cents, express_purchase_options)              
+      EXPRESS_GATEWAY.purchase(@price_in_cents, express_purchase_options)              
     end
   end                                                                                                                                   
                                                         

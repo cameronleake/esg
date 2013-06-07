@@ -9,7 +9,8 @@
 			<%= simple_form_for @order, :html => { :class => 'form-horizontal' } do |f| %>
 			
 				<%= f.input :first_name, :input_html => { :value => current_user.first_name } %>
-		  		<%= f.input :last_name, :input_html => { :value => current_user.last_name } %>
+		  		<%= f.input :last_name, :input_html => { :value => current_user.last_name } %>  
+				<%= f.input :email, :input_html => { :value => current_user.email } %>
 		  		<%= f.input :card_type, as: :select, :include_blank => false, :collection => CREDIT_CARD_TYPE_SELECTION %>
 				<%= f.input :card_number %>
 				<%= f.input :card_verification, :label => "Card Verification Value (CVV)" %>

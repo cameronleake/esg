@@ -408,7 +408,8 @@ CREATE TABLE orders (
     express_token character varying(255),
     express_payer_id character varying(255),
     street2 character varying(255),
-    email character varying(255)
+    email character varying(255),
+    status character varying(255)
 );
 
 
@@ -1184,3 +1185,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130607052439');
 INSERT INTO schema_migrations (version) VALUES ('20130607065217');
 
 INSERT INTO schema_migrations (version) VALUES ('20130607081531');
+
+INSERT INTO schema_migrations (version) VALUES ('20130607124533');
