@@ -53,13 +53,17 @@ Esg::Application.routes.draw do
    match 'shopping_cart' => 'shopping_carts#show'
    get 'resources/:id/add_to_cart', to: 'shopping_carts#add_to_cart', as: :add_to_cart
    get 'resources/:id/remove_from_cart', to: 'shopping_carts#remove_from_cart', as: :remove_from_cart
-   match 'process_cart' => 'shopping_carts#process_cart'
+   get 'order_completed', to: 'orders#completed', as: :order_completed      
+   get 'review_order', to: 'orders#review', as: :review_order     
    get 'downloads/:download_token', to: 'downloads#resource_download', as: :resource_download
 
 
    # ORDERS
    resources :orders    # <TODO> Clean up Routes for Checkout Process
+   get 'express_order', to: 'orders#express', as: :express_order
    match 'checkout' => 'orders#new'
+   match 'confirmation' => 'orders#confirmation'
+   match 'process_order' => 'orders#process_order'
    
 
    # CONTACT_TICKETS

@@ -40,10 +40,13 @@ Esg::Application.configure do
   # PayPal Integration
   config.after_initialize do
     ActiveMerchant::Billing::Base.mode = :test
-    ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
-      :login => "cameronleake7-facilitator_api1.gmail.com",
-      :password => "1370434556",
-      :signature => "AO6wMAPYpUHCVgYaDu8lF5Ufsm-qAStZfpWF.TGsVwEqsjyfd5ScPcLI"
-    )
+    paypal_options = {
+      :login => "development_api1.engineeringsurvivalguide.com",
+      :password => "1370580912",
+      :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AXxsOkkadp-YFtyA2-MGMW0M-2qv"
+    }
+    ::STANDARD_GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(paypal_options)
+    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
   end
+  
 end

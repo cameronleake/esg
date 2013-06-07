@@ -1,5 +1,5 @@
 ActiveAdmin.register Download do
-  menu :parent => "RESOURCES", :priority => 5
+  menu :parent => "RESOURCES", :priority => 4
   actions :index, :show, :destroy
   scope :all, :default => true  
   

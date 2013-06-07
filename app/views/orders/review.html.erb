@@ -1,0 +1,30 @@
+<div id="container">	
+	<div class="row">
+
+   	<div class="span9">
+			<div class="page-header">
+				<h2>3. Review Order Details</h2>
+			</div>           
+				
+			<p>Name: <%=h @order.first_name %> <%=h @order.last_name %></p>
+			<p>Email: <%= @order.email %></p>  
+			<p>Address: <%= @order.street1 %></p>
+			<p><%= @order.street2 %></p>
+			<p><%= @order.city %>, <%= @order.zip %></p>
+			<p><%= @order.state %>, <%= @order.country %></p>															
+			<br>                                                
+			<%= @order.attributes %>
+			<br>
+			<p><b>TODO: Display Shopping Cart Contents.</b></p>  
+                    
+		  	<div class="form-actions">
+				<a href="<%= shopping_cart_path(@cart) %>" class="btn btn-primary"><< Shopping Cart</a>      
+				<a href="<%= process_order_path %>" class="btn btn-danger">Place Order</a>  
+		  	</div>
+		</div>
+	
+		<div class="span3" align="center">
+
+		</div>		
+	</div>
+</div>

@@ -30,6 +30,7 @@ gem 'gibbon'                # For interacting with the MailChimp API
 gem 'mercury-rails'         # For editing HTML in the browser
 gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'    # For JS Datatables
 gem 'activemerchant'        # For Paypal Integeration
+gem 'country_select'        # For Country Selection DropDowns
 
 group :test, :development do
   gem "rspec-rails"

@@ -5,6 +5,7 @@ class ShoppingCart < ActiveRecord::Base
   attr_accessible :cart_token
   attr_accessible :status
   attr_accessible :order_number
+  attr_accessible :purchased_at
   belongs_to :user
   has_and_belongs_to_many :resources
   has_many :downloads, :dependent => :destroy

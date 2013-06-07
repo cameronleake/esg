@@ -1,5 +1,5 @@
 ActiveAdmin.register ShoppingCart do
-  menu :parent => "RESOURCES", :priority => 3
+  menu :parent => "ORDERS", :priority => 1
   scope :all, :default => true
   scope :open_orders do |cart|
     cart.where(:status => "OPEN")
@@ -11,7 +11,6 @@ ActiveAdmin.register ShoppingCart do
 
   # Configuration for Sidebar Filters
   filter :user
-  filter :payment_verified, :as => :select
   filter :email_sent, :as => :select
   filter :status, :as => :select, :include_blank => false, :collection => SHOPPING_CART_STATUSES
 
@@ -24,16 +23,12 @@ ActiveAdmin.register ShoppingCart do
    selectable_column
    column :order_number
    column :status
-   column :payment_verified, :sortable => :payment_verified do |cart|
-     div :class => "admin-center-column" do 
-       cart.payment_verified.yesno
-     end
-   end
    column :email_sent, :sortable => :email_sent do |cart|
      div :class => "admin-center-column" do 
        cart.email_sent.yesno
      end
    end
+   column :purchased_at
    column :created_at
    default_actions
   end
@@ -61,11 +56,11 @@ ActiveAdmin.register ShoppingCart do
         @total_price = @resource_prices.reduce(:+)
         "$" + number_with_precision(@total_price.to_f/100, :precision => 2)
       end
-      row :payment_verified do
-        cart.payment_verified.yesno
-      end
       row :email_sent do
         cart.email_sent.yesno
+      end
+      row :purchased_at do
+        cart.purchased_at
       end
       row :created_at
     end
@@ -79,7 +74,6 @@ ActiveAdmin.register ShoppingCart do
      f.input :order_number
      f.input :status, :as => :select, :include_blank => false, :collection => SHOPPING_CART_STATUSES
      f.input :user
-     f.input :payment_verified, :as => :select, :include_blank => false
      f.input :email_sent, :as => :select, :include_blank => false
    end                               
    f.actions                         

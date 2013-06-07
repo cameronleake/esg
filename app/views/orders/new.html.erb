@@ -3,21 +3,24 @@
 
    	<div class="span9">
 			<div class="page-header">
-				<h2>Checkout</h2>
+				<h2>2. Enter Payment Details</h2>
 			</div>
 			
-			<p>Once you confirm your order, you will be sent an email containing links to download each item in your cart.</p>
-			<p>The links will stay active for 24 hours.</p>
-			<br>
-			
 			<%= simple_form_for @order, :html => { :class => 'form-horizontal' } do |f| %>
-
-		  		<%= f.input :first_name, :input_html => { :value => current_user.first_name } %>
+			
+				<%= f.input :first_name, :input_html => { :value => current_user.first_name } %>
 		  		<%= f.input :last_name, :input_html => { :value => current_user.last_name } %>
 		  		<%= f.input :card_type, as: :select, :include_blank => false, :collection => CREDIT_CARD_TYPE_SELECTION %>
 				<%= f.input :card_number %>
 				<%= f.input :card_verification, :label => "Card Verification Value (CVV)" %>
 	  			<%= f.input :card_expires_on, :discard_day => true, :start_year => Date.today.year, :add_month_numbers => true %>		
+
+				<%= f.input :street1 %>
+				<%= f.input :street2 %>
+				<%= f.input :city %>
+				<%= f.input :state %>
+				<%= f.input :country %>
+				<%= f.input :zip %>															
 
 			  	<div class="form-actions">
 					<a href="<%= shopping_cart_path(@cart) %>" class="btn btn-primary"><< Shopping Cart</a>

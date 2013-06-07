@@ -350,6 +350,43 @@ ALTER SEQUENCE downloads_id_seq OWNED BY downloads.id;
 
 
 --
+-- Name: order_transactions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE order_transactions (
+    id integer NOT NULL,
+    order_id integer,
+    action character varying(255),
+    amount integer,
+    success boolean,
+    "authorization" character varying(255),
+    message character varying(255),
+    params text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: order_transactions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE order_transactions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: order_transactions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE order_transactions_id_seq OWNED BY order_transactions.id;
+
+
+--
 -- Name: orders; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -362,7 +399,16 @@ CREATE TABLE orders (
     card_type character varying(255),
     card_expires_on date,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    street1 character varying(255),
+    city character varying(255),
+    state character varying(255),
+    country character varying(255),
+    zip character varying(255),
+    express_token character varying(255),
+    express_payer_id character varying(255),
+    street2 character varying(255),
+    email character varying(255)
 );
 
 
@@ -507,13 +553,13 @@ CREATE TABLE schema_migrations (
 CREATE TABLE shopping_carts (
     id integer NOT NULL,
     user_id integer,
-    payment_verified boolean DEFAULT false,
     email_sent boolean DEFAULT false,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     cart_token character varying(255),
     status character varying(255),
-    order_number integer
+    order_number integer,
+    purchased_at timestamp without time zone
 );
 
 
@@ -709,6 +755,13 @@ ALTER TABLE ONLY downloads ALTER COLUMN id SET DEFAULT nextval('downloads_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY order_transactions ALTER COLUMN id SET DEFAULT nextval('order_transactions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
 
 
@@ -831,6 +884,14 @@ ALTER TABLE ONLY delayed_jobs
 
 ALTER TABLE ONLY downloads
     ADD CONSTRAINT downloads_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: order_transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY order_transactions
+    ADD CONSTRAINT order_transactions_pkey PRIMARY KEY (id);
 
 
 --
@@ -1113,3 +1174,13 @@ INSERT INTO schema_migrations (version) VALUES ('20130602091014');
 INSERT INTO schema_migrations (version) VALUES ('20130603132043');
 
 INSERT INTO schema_migrations (version) VALUES ('20130606115024');
+
+INSERT INTO schema_migrations (version) VALUES ('20130607040339');
+
+INSERT INTO schema_migrations (version) VALUES ('20130607041337');
+
+INSERT INTO schema_migrations (version) VALUES ('20130607052439');
+
+INSERT INTO schema_migrations (version) VALUES ('20130607065217');
+
+INSERT INTO schema_migrations (version) VALUES ('20130607081531');
