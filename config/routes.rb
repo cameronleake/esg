@@ -60,7 +60,8 @@ Esg::Application.routes.draw do
 
    # ORDERS
    resources :orders    # <TODO> Clean up Routes for Checkout Process
-   match 'express_order' => 'orders#express'
+   match 'payment_redirect' => 'orders#payment_redirect'
+   match 'express' => 'orders#express'                 
    match 'checkout' => 'orders#new'
    match 'review_order' => 'orders#review'
    match 'process_order' => 'orders#process_order'

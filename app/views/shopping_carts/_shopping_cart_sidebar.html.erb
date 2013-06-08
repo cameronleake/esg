@@ -3,10 +3,5 @@
 </div>
 <h4>Total: <%= "$" + number_with_precision(@total_cost, :precision => 2) %></h4>
 <br>
-<br>
 
-<a href="<%= checkout_path %>" class="btn btn-success">Checkout via Credit Card</a>
-
-<br>
-<br>
-<%= link_to image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_order_path %>
+<a href="<%= review_order_path %>" class="btn btn-success">Checkout >></a>
