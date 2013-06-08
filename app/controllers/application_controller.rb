@@ -38,12 +38,14 @@ class ApplicationController < ActionController::Base
   end
   
   def authorize_shopping_cart_exists
+    if current_shopping_cart
+      cookies.delete(:cart_token) if current_shopping_cart.status == "Closed"
+    end
     if current_shopping_cart.nil? && current_user
       @cart = ShoppingCart.new(:status => "Open")
       @cart.cart_token = generate_random_token
       @cart.user = current_user
       @cart.save
-      @cart.order_number = (@cart.id + 100000)
       @cart.save
       cookies[:cart_token] = @cart.cart_token
     end

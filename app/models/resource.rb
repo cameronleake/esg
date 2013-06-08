@@ -28,7 +28,7 @@ class Resource < ActiveRecord::Base
   end
     
   def number_of_reviews
-    self.reviews.count
+    self.reviews.where(:spam => false).count
   end
   
   def self.text_search(query)

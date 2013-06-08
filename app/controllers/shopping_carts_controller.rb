@@ -1,6 +1,6 @@
 class ShoppingCartsController < ApplicationController
-  before_filter :authorize_user_logged_in, only: [:show, :add_to_cart, :remove_from_cart, :checkout, :process_cart]
-  before_filter :authorize_shopping_cart_exists, only: [:show, :add_to_cart, :remove_from_cart, :checkout, :process_cart]
+  before_filter :authorize_user_logged_in, only: [:show, :add_to_cart, :remove_from_cart]
+  before_filter :authorize_shopping_cart_exists, only: [:show, :add_to_cart, :remove_from_cart]
   
 
   def show

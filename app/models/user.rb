@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
     self.shopping_carts.each do |cart|
       cart.downloads.each do |download|
         @downloads << download
-      end
+      end  
     end
     return @downloads
   end

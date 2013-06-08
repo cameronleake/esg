@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
-  attr_accessible :shopping_cart_id
+  attr_accessible :shopping_cart_id 
+  attr_accessible :email_sent
   attr_accessible :first_name
   attr_accessible :last_name      
   attr_accessible :email
@@ -16,11 +17,21 @@ class Order < ActiveRecord::Base
   attr_accessible :express_payer_id
   attr_accessible :card_number
   attr_accessible :card_verification 
+  attr_accessible :status
   attr_accessor :card_number, :card_verification    # This will store these variables in memory, but not the database.
   belongs_to :shopping_cart
-  has_many :transactions, :class_name => "OrderTransaction"
+  has_many :transactions, :class_name => "OrderTransaction", :dependent => :destroy   
+  has_many :downloads, :dependent => :destroy     
 
-  validate :validate_card, :on => :create  
+  # validate :validate_card, :on => :update   # <TODO>
+  after_create :initalize_order
+  
+  
+  def initalize_order
+    self.order_number = self.id.to_i + 100000
+    self.status = "New"
+    self.save!
+  end  
   
   
   def purchase(cart) 
@@ -49,11 +60,45 @@ class Order < ActiveRecord::Base
       self.zip = details.params["postal_code"]
     end
   end        
+                  
+  
+  def validate_card
+    if express_token.blank? && !credit_card.valid?
+      credit_card.errors.full_messages.each do |message|
+        errors[:base] << message
+      end
+    end
+  end
   
  
   def price_in_cents       
     shopping_cart.total_cart_cost
-  end
+  end                             
+     
+  
+  def send_download_links_email
+    OrderMailer.download_links_email(self).deliver
+  end     
+  
+  
+  def generate_download_links
+    @expiry_time = DateTime.now + DOWNLOAD_EXPIRY_HOURS.hours
+    @cart = ShoppingCart.find(self.shopping_cart_id)
+    @cart.resources.each do |resource|
+      @purchase_price = resource.price_in_cents
+      self.downloads << Download.new( :order_id => self.id, 
+                                      :resource_id => resource.id, 
+                                      :download_token => generate_random_token, 
+                                      :expiry_time => @expiry_time,
+                                      :purchase_price_in_cents => @purchase_price)
+    end
+    self.save!
+  end    
+            
+  
+  def generate_random_token
+    SecureRandom.urlsafe_base64
+  end  
 
 
   private     
@@ -76,15 +121,6 @@ class Order < ActiveRecord::Base
     { :ip => ip_address,
       :token => express_token,
       :payer_id => express_payer_id }
-  end
-  
-  
-  def validate_card
-    if express_token.blank? && !credit_card.valid?
-      credit_card.errors.full_messages.each do |message|
-        errors[:base] << message
-      end
-    end
   end
   
   

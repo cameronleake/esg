@@ -12,13 +12,16 @@ class OrdersController < ApplicationController
       redirect_to new_order_path
     elsif @payment_method == "express"
       redirect_to express_path
+    else
+      flash[:error] = "Please select a payment type."
+      render :action => "review"
     end      
-    # xxx   
   end
 
 
   def express
-    response = EXPRESS_GATEWAY.setup_purchase(current_shopping_cart.build_order.price_in_cents,
+    @cart_total_in_cents = current_shopping_cart.total_cart_cost 
+    response = EXPRESS_GATEWAY.setup_purchase(@cart_total_in_cents,
       :ip                => request.remote_ip,
       :return_url        => new_order_url,
       :cancel_return_url => shopping_cart_url
@@ -28,47 +31,54 @@ class OrdersController < ApplicationController
          
 
   def new
-    @order = Order.new(:express_token => params[:token])  
-    @cart = current_shopping_cart
+    @cart = current_shopping_cart       
     @cart_items = @cart.resources
     @total_cost = @cart.total_cart_cost/100         
+    if params[:token]     # PayPal Express Payment
+      @order = Order.new(:express_token => params[:token])
+      @order.save!    
+    elsif @cart.order     # Existing Order for the Cart
+      @order = @cart.order
+    else                  # Create New Order
+      @order = Order.new    
+    end
+    @cart.order = @order
+    @cart.save!
   end
 
                     
-  def create
+  def update
+    # Get the current Cart and Order 
     @cart = current_shopping_cart
-    @order = @cart.build_order(params[:order]) 
-    if @order.save
-      if @order.purchase(@cart)
-        redirect_to order_completed_path, :notice => "Order processed successfully!"
-      else
-        flash[:error] = "#{@order.transactions.last.message}"
-        render :action => "failure"
+    @order = @cart.order         
+    @order.ip_address = request.remote_ip        
+    
+    # If this is a Standard Order, update it
+    if params[:order]         
+      @order.update_attributes(params[:order])
+      @order.save!
+    end    
+    
+    # Perform purchase on the Order
+    if @order.purchase(@cart) 
+      @order.generate_download_links
+      if @order.delay.send_download_links_email
+        @order.email_sent = true
       end
-    else
-      flash[:error] = @order.errors.full_messages.join(' | ')
-      render :action => 'new'      
-    end                        
-  end                    
-
-  
-                                                                     
-  def process_order                               
-    @order = Order.find(cookies[:order_id])    
-    @cart = current_shopping_cart   
-    if @order.purchase(@cart)
-      @cart.generate_download_links
-      if @cart.delay.send_download_links_email
-        @cart.email_sent = true
-      end
+      @order.status = "Payment Confirmed"
+      @cart.status = "Closed"
+      @order.save! 
       @cart.save!
-      cookies.delete(:order_id)
-      cookies.delete(:cart_token)       
-      redirect_to order_completed_path, :notice => "Order processed successfully!"  
-    else
-      flash[:error] = "#{@order.transactions.last.message} #{@order.card_number} #{@order.card_verification}"
+      cookies.delete(:cart_token)  
+      redirect_to order_completed_path, :notice => "Order processed successfully!"
+    else             
+      @order.status = "Error"
+      @cart.status = "Error"
+      @order.save!        
+      @cart.save!
+      flash[:error] = "#{@order.transactions.last.message}"
       render :action => "failure"
-    end
-  end   
+    end             
+  end                    
   
 end

@@ -1,17 +1,19 @@
 ActiveAdmin.register ShoppingCart do
   menu :parent => "ORDERS", :priority => 1
   scope :all, :default => true
-  scope :open_orders do |cart|
-    cart.where(:status => "OPEN")
+  scope "Open" do |cart|
+    cart.where(:status => "Open")
   end
-  scope :closed_orders do |cart|
-    cart.where(:status => "CLOSE")
+  scope "Closed" do |cart|
+    cart.where(:status => "Closed")
+  end
+  scope "Abandoned" do |cart|
+    cart.where(:status => "Abandoned")
   end
   
 
   # Configuration for Sidebar Filters
   filter :user
-  filter :email_sent, :as => :select
   filter :status, :as => :select, :include_blank => false, :collection => SHOPPING_CART_STATUSES
 
 
@@ -21,15 +23,27 @@ ActiveAdmin.register ShoppingCart do
   
   index do
    selectable_column
-   column :order_number
-   column :status
-   column :email_sent, :sortable => :email_sent do |cart|
-     div :class => "admin-center-column" do 
-       cart.email_sent.yesno
+   column :user    
+   column "Cart Number" do |cart|
+     div :class => "admin-center-column" do  
+       "Cart ##{cart.id}"
      end
    end
-   column :purchased_at
-   column :created_at
+   column "Cart Status" do |cart|
+     div :class => "admin-center-column" do     
+       cart.status
+     end
+   end
+   # column "Order Status" do |cart|                # <TODO>
+   #   div :class => "admin-center-column" do       
+   #     cart.order.status
+   #   end
+   # end 
+   # column "Order Number" do |cart|
+   #   div :class => "admin-center-column" do  
+   #     link_to "##{cart.order.order_number}", admin_order_path(cart.order.id)
+   #   end
+   # end     
    default_actions
   end
   
@@ -37,17 +51,11 @@ ActiveAdmin.register ShoppingCart do
   # Configuration for Shopping Carts Show Page
   show do |cart|
     attributes_table do
-      row :order_number
-      row :status
       row :user
-      row "Cart Contents" do
-        table_for(cart.resources, :sortable => true) do
-          column :name
-          column "Price", :sortable => :price_in_cents do |cart|
-            "$" + number_with_precision(cart.price_in_cents.to_f/100, :precision => 2)
-          end
-        end
+      row "Cart Id" do |cart|
+        "Cart ##{cart.id}"
       end
+      row :status  
       row "Total Price" do
         @resource_prices = []
         cart.resources.each do |resource|
@@ -56,13 +64,21 @@ ActiveAdmin.register ShoppingCart do
         @total_price = @resource_prices.reduce(:+)
         "$" + number_with_precision(@total_price.to_f/100, :precision => 2)
       end
-      row :email_sent do
-        cart.email_sent.yesno
+      row :created_at  
+      row :purchased_at  
+      row "Cart Contents" do
+        table_for(cart.resources) do
+          column :name do |resource|
+            link_to resource.name, admin_resource_path(resource)
+          end
+          column "Price", :sortable => :price_in_cents do |resource|
+            "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2)
+          end  
+        end
       end
-      row :purchased_at do
-        cart.purchased_at
+      row :name do |cart|
+        link_to cart.order.order_number, admin_order_path(cart.order.id)
       end
-      row :created_at
     end
     active_admin_comments
   end
@@ -71,10 +87,8 @@ ActiveAdmin.register ShoppingCart do
   # Configuration for Shopping Carts Edit Page
   form do |f|                         
    f.inputs "New Shopping Cart" do       
-     f.input :order_number
      f.input :status, :as => :select, :include_blank => false, :collection => SHOPPING_CART_STATUSES
      f.input :user
-     f.input :email_sent, :as => :select, :include_blank => false
    end                               
    f.actions                         
   end

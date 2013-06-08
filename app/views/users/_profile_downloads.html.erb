@@ -15,7 +15,7 @@
 		<tbody>
 			<% @downloads.each do |download| %>
 			<tr>
-				<td><%= download.shopping_cart.order_number %></td>
+				<td><%= download.order.order_number %></td>
 				<td><%= download.created_at %></td>
 				<td><%= download.resource.name %></td>
 				<td>

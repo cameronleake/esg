@@ -321,7 +321,7 @@ CREATE TABLE downloads (
     link_expired boolean DEFAULT false,
     expiry_time timestamp without time zone,
     resource_id integer,
-    shopping_cart_id integer,
+    order_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     download_token character varying(255),
@@ -409,7 +409,9 @@ CREATE TABLE orders (
     express_payer_id character varying(255),
     street2 character varying(255),
     email character varying(255),
-    status character varying(255)
+    email_sent boolean DEFAULT false,
+    status character varying(255),
+    order_number integer
 );
 
 
@@ -554,12 +556,10 @@ CREATE TABLE schema_migrations (
 CREATE TABLE shopping_carts (
     id integer NOT NULL,
     user_id integer,
-    email_sent boolean DEFAULT false,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     cart_token character varying(255),
     status character varying(255),
-    order_number integer,
     purchased_at timestamp without time zone
 );
 
@@ -1187,3 +1187,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130607065217');
 INSERT INTO schema_migrations (version) VALUES ('20130607081531');
 
 INSERT INTO schema_migrations (version) VALUES ('20130607124533');
+
+INSERT INTO schema_migrations (version) VALUES ('20130608084841');
+
+INSERT INTO schema_migrations (version) VALUES ('20130608092041');
