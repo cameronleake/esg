@@ -561,7 +561,8 @@ CREATE TABLE shopping_carts (
     updated_at timestamp without time zone NOT NULL,
     cart_token character varying(255),
     status character varying(255),
-    purchased_at timestamp without time zone
+    purchased_at timestamp without time zone,
+    order_id integer
 );
 
 
@@ -1194,3 +1195,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130608084841');
 INSERT INTO schema_migrations (version) VALUES ('20130608092041');
 
 INSERT INTO schema_migrations (version) VALUES ('20130609052025');
+
+INSERT INTO schema_migrations (version) VALUES ('20130609112009');

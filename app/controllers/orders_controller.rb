@@ -33,87 +33,86 @@ class OrdersController < ApplicationController
          
 
   def new
-    @cart = current_shopping_cart       
+    @cart = current_shopping_cart
     @cart_items = @cart.resources
     @total_cost = @cart.total_cart_cost/100     
-    if params[:token]     # PayPal Express Payment
-      @order = Order.new(:express_token => params[:token])
-      @order.save!    
-    elsif @cart.order     # Existing Order for the Cart
-      @order = @cart.order
-    else                  # Create New Order
-      @order = Order.new    
-    end
-    @cart.order = @order
-    @cart.save!
+
+    ###### <TODO> FIX THIS!  Needs to take the Order object for the current Shopping Cart and update with the params, if applicable.
+
+    # @order = Order.find(@cart.order_id)
+    # if params[:token]         
+    #   @order.destroy
+    #   @new_order = Order.new(:express_token => params[:token], :shopping_cart_id => @cart.id)
+    #   @cart.order_id = @new_order.id
+    #   @new_order.save(:validate => false)
+    #   @cart.save
+    #   @order = @new_order
+    # end 
   end
 
                     
   def update
-    # Get the current Cart and Order 
     @cart = current_shopping_cart
     @order = @cart.order         
     @order.ip_address = request.remote_ip        
-    
-    # If this is a Standard Order
     if params[:order] 
       @order.update_attributes(params[:order])
     end    
-    
-    # Perform purchase on the Order
-    if @order.save
-      if @order.purchase(@cart) 
-        @order.generate_download_links
-        if @order.delay.send_download_links_email
-          @order.email_sent = true
-        end
-        @order.status = "Payment Confirmed"
-        if @order.express_token
-          @order.payment_method = "PayPal Express"
-        else
-          @order.payment_method = "Standard"
-        end
-        @cart.status = "Closed" 
-        @order.save! 
-        @cart.save!
-        cookies.delete(:cart_token)  
-        redirect_to order_completed_path, :notice => "Order processed successfully!"
-      else             
-        @order.status = "Error"
-        @cart.status = "Error"
-        @order.save!        
-        @cart.save!
-        flash[:error] = "#{@order.transactions.last.message}"
-        render :action => "failure"
-      end             
-    else 
-      flash[:error] = "Please fill in all required fields."
-      render :action => 'new'
+    if @order.express_token
+      @order.payment_method = "PayPal Express"
+      unless @order.save(:validate => false)
+        flash[:error] = "Error with PayPal Express Gateway."
+        render :action => 'new'
+      end
+    else
+      @order.payment_method = "Standard"
+      unless @order.save
+        flash[:error] = "Please fill in all required fields."
+        render :action => 'new'
+      end
     end
+    
+    if @order.purchase(@cart) 
+      @order.generate_download_links
+      if @order.delay.send_download_links_email
+        @order.email_sent = true
+      end
+      @order.status = "Payment Confirmed"
+      @cart.status = "Closed" 
+      @order.save
+      @cart.save
+      cookies.delete(:cart_token)  
+      redirect_to order_completed_path, :notice => "Order processed successfully!"
+    else             
+      @order.status = "Error"      # <TODO> This needs to handle better for user.
+      @cart.status = "Error"
+      @order.save       
+      @cart.save
+      flash[:error] = "#{@order.transactions.last.message}"
+      render :action => "failure"
+    end             
   end  
   
   
   def free_order 
     @cart = current_shopping_cart
-    if @cart.order
-      @order = @cart.order
-    else
-      @order = Order.new
-    end
-    @order.email = params[:email]    
-    @order.ip_address = request.remote_ip    
-    
+    @order = @cart.order
+    @order.email = params[:email]
+    @order.ip_address = request.remote_ip
+    @order.payment_method = "Free"
+    @order.status = "Closed"
+        
     @order.generate_download_links
     if @order.delay.send_download_links_email
       @order.email_sent = true
-    end                    
-    @order.payment_method = "Free - No Charge"
-    @cart.status = "Closed"
-    @order.save! 
-    @cart.order = @order     
-    @cart.save!
+    end                            
+    
+    @cart.status = "Closed"  
+    @cart.order = @order
+    @order.save(:validate => false) 
+    @cart.save
     cookies.delete(:cart_token)  
-    redirect_to order_completed_path, :notice => "Order processed successfully!"
+    redirect_to order_completed_path, :notice => "Order processed successfully!"    
   end              
   
 end

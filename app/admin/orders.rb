@@ -64,29 +64,33 @@ ActiveAdmin.register Order do
       row :email_sent do |order|
         order.email_sent.yesno
       end    
-      row "Transaction History" do
-        table_for(order.transactions) do
-          column :created_at
-          column :action
-          column :success, :sortable => :success do |transaction|
-            transaction.success.yesno
-          end
-          column :message           
-          column "View" do |transaction|
-            link_to "View", admin_order_transaction_path(transaction.id)
+      unless order.payment_method == "Free"
+        row "Transaction History" do
+          table_for(order.transactions) do
+            column :created_at
+            column :action
+            column :success, :sortable => :success do |transaction|
+              transaction.success.yesno
+            end
+            column :message           
+            column "View" do |transaction|
+              link_to "View", admin_order_transaction_path(transaction.id)
+            end
           end
         end
+        row "Name" do |order|
+         "#{order.first_name} #{order.last_name}" 
+        end
+        row "Address" do |order|
+          "#{order.street1} #{order.street2}, #{order.city}, #{order.state}, #{order.country} #{order.zip}"
+        end
+        row :email  
+        row :card_type
+        row :card_expires_on 
+        row :express_token
+        row :express_payer_id
+        row :ip_address
       end
-      row "Name" do |order|
-       "#{order.first_name} #{order.last_name}" 
-      end
-      row "Address" do |order|
-        "#{order.street1} #{order.street2}, #{order.city}, #{order.state}, #{order.country} #{order.zip}"
-      end
-      row :email  
-      row :card_type
-      row :card_expires_on
-      row :ip_address
       row :created_at  
     end
     active_admin_comments

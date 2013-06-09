@@ -18,7 +18,9 @@ class Order < ActiveRecord::Base
   attr_accessible :card_number
   attr_accessible :card_verification 
   attr_accessible :status
-  attr_accessor :card_number, :card_verification
+  attr_accessible :payment_method
+  attr_accessor :card_number
+  attr_accessor :card_verification 
   validates_presence_of :first_name
   validates_presence_of :last_name
   validates_presence_of :email            
@@ -42,7 +44,7 @@ class Order < ActiveRecord::Base
   def initalize_order
     self.order_number = self.id.to_i + 100000
     self.status = "New"
-    self.save!
+    self.save(:validate => false)
   end  
   
   
@@ -104,7 +106,7 @@ class Order < ActiveRecord::Base
                                       :expiry_time => @expiry_time,
                                       :purchase_price_in_cents => @purchase_price)
     end
-    self.save!
+    self.save(:validate => false)
   end    
             
   

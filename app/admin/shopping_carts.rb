@@ -33,6 +33,11 @@ ActiveAdmin.register ShoppingCart do
      div :class => "admin-center-column" do     
        cart.status
      end
+   end 
+   column "Order Number" do |cart|
+     div :class => "admin-center-column" do 
+       link_to "##{cart.order.order_number}", admin_order_path(cart.order_id)  
+     end
    end
    # column "Order Status" do |cart|                # <TODO>
    #   div :class => "admin-center-column" do       
@@ -76,8 +81,8 @@ ActiveAdmin.register ShoppingCart do
           end  
         end
       end
-      row :name do |cart|
-        link_to cart.order.order_number, admin_order_path(cart.order.id)
+      row "Order Number" do |cart|
+        link_to "##{cart.order.order_number}", admin_order_path(cart.order.id)
       end
     end
     active_admin_comments
