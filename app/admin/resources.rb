@@ -22,7 +22,7 @@ ActiveAdmin.register Resource do
 
 
   # Configuration for Resources Index Page
-  config.sort_order = "category ASC"
+  config.sort_order = "id ASC"
   config.per_page = 15
   
   index do

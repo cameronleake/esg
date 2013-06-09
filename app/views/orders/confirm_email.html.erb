@@ -1,0 +1,27 @@
+<div id="container">	
+	<div class="row">
+
+   	<div class="span9">
+			<div class="page-header">
+				<h2>2. Confirm Email</h2>
+			</div>
+		          
+			<p>Please confirm your preferred email address for delivery of your order.</p>    
+			<br>
+		
+		 	<%= form_tag free_order_path, { :method => :post, :class => "simple_form form-horizontal" } do %>
+
+				<div class="control-group email required password_resets_email">
+					<label class="email required control-label" for="email"><abbr title="required">*</abbr> Email</label>
+					<div class="controls">
+						<%= text_field_tag :email, params[:email], :type => "email", :value => current_user.email %>
+					</div>
+				</div>
+      
+		</div>
+		<div class="span3" align="center">                 
+		 	<%= render "confirm_email_sidebar" %>   				
+		</div>	   
+		<% end %> 
+  	</div>
+</div>

@@ -30,13 +30,9 @@ ActiveAdmin.register Order do
         "##{order.order_number}" 
       end
     end
-    column "Payment Method" do |order|      
+    column :payment_method do |order|      
       div :class => "admin-center-column" do  
-        if order.express_token?
-          "PayPal Express"
-        else
-          "Standard"
-        end
+        order.payment_method
       end
     end
     column :status, :sortable => :status do |order|
@@ -63,13 +59,7 @@ ActiveAdmin.register Order do
       row :order_number do |order|
         "##{order.order_number}"
       end  
-      row "Payment Method" do |order|      
-        if order.express_token?
-          "PayPal Express"
-        else
-          "Standard"
-        end 
-      end
+      row :payment_method
       row :status    
       row :email_sent do |order|
         order.email_sent.yesno

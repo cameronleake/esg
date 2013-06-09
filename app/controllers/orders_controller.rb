@@ -2,7 +2,9 @@ class OrdersController < ApplicationController
 
 
   def review
-    @total_cost = current_shopping_cart.total_cart_cost     
+    @cart = current_shopping_cart
+    @cart_items = @cart.resources
+    @total_cost = @cart.total_cart_cost/100
   end    
         
     
@@ -33,7 +35,7 @@ class OrdersController < ApplicationController
   def new
     @cart = current_shopping_cart       
     @cart_items = @cart.resources
-    @total_cost = @cart.total_cart_cost/100         
+    @total_cost = @cart.total_cart_cost/100     
     if params[:token]     # PayPal Express Payment
       @order = Order.new(:express_token => params[:token])
       @order.save!    
@@ -53,32 +55,65 @@ class OrdersController < ApplicationController
     @order = @cart.order         
     @order.ip_address = request.remote_ip        
     
-    # If this is a Standard Order, update it
-    if params[:order]         
+    # If this is a Standard Order
+    if params[:order] 
       @order.update_attributes(params[:order])
-      @order.save!
     end    
     
     # Perform purchase on the Order
-    if @order.purchase(@cart) 
-      @order.generate_download_links
-      if @order.delay.send_download_links_email
-        @order.email_sent = true
-      end
-      @order.status = "Payment Confirmed"
-      @cart.status = "Closed"
-      @order.save! 
-      @cart.save!
-      cookies.delete(:cart_token)  
-      redirect_to order_completed_path, :notice => "Order processed successfully!"
-    else             
-      @order.status = "Error"
-      @cart.status = "Error"
-      @order.save!        
-      @cart.save!
-      flash[:error] = "#{@order.transactions.last.message}"
-      render :action => "failure"
-    end             
-  end                    
+    if @order.save
+      if @order.purchase(@cart) 
+        @order.generate_download_links
+        if @order.delay.send_download_links_email
+          @order.email_sent = true
+        end
+        @order.status = "Payment Confirmed"
+        if @order.express_token
+          @order.payment_method = "PayPal Express"
+        else
+          @order.payment_method = "Standard"
+        end
+        @cart.status = "Closed" 
+        @order.save! 
+        @cart.save!
+        cookies.delete(:cart_token)  
+        redirect_to order_completed_path, :notice => "Order processed successfully!"
+      else             
+        @order.status = "Error"
+        @cart.status = "Error"
+        @order.save!        
+        @cart.save!
+        flash[:error] = "#{@order.transactions.last.message}"
+        render :action => "failure"
+      end             
+    else 
+      flash[:error] = "Please fill in all required fields."
+      render :action => 'new'
+    end
+  end  
+  
+  
+  def free_order 
+    @cart = current_shopping_cart
+    if @cart.order
+      @order = @cart.order
+    else
+      @order = Order.new
+    end
+    @order.email = params[:email]    
+    @order.ip_address = request.remote_ip    
+    
+    @order.generate_download_links
+    if @order.delay.send_download_links_email
+      @order.email_sent = true
+    end                    
+    @order.payment_method = "Free - No Charge"
+    @cart.status = "Closed"
+    @order.save! 
+    @cart.order = @order     
+    @cart.save!
+    cookies.delete(:cart_token)  
+    redirect_to order_completed_path, :notice => "Order processed successfully!"
+  end              
   
 end

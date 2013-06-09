@@ -4,7 +4,7 @@ class OrderMailer < ActionMailer::Base
   def download_links_email(order)
     @order = order
     @cart = order.shopping_cart
-    mail :to => @cart.user.email, :subject => "Order Number: #{@order.order_number}"
+    mail :to => @order.email, :subject => "Order Number: #{@order.order_number}"
   end
 
 end  

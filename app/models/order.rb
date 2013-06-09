@@ -18,7 +18,19 @@ class Order < ActiveRecord::Base
   attr_accessible :card_number
   attr_accessible :card_verification 
   attr_accessible :status
-  attr_accessor :card_number, :card_verification    # This will store these variables in memory, but not the database.
+  attr_accessor :card_number, :card_verification
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+  validates_presence_of :email            
+  validates_presence_of :card_type
+  validates_presence_of :card_number
+  validates_presence_of :card_verification
+  validates_presence_of :card_expires_on
+  validates_presence_of :street1
+  validates_presence_of :city
+  validates_presence_of :state
+  validates_presence_of :country
+  validates_presence_of :zip  
   belongs_to :shopping_cart
   has_many :transactions, :class_name => "OrderTransaction", :dependent => :destroy   
   has_many :downloads, :dependent => :destroy     

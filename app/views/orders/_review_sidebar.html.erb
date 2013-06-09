@@ -1,7 +1,8 @@
 <div class="page-header">
   	<h3>Payment Options</h3>
 </div>
-<h4>Please select payment type.</h4>
+
+<h4>Please select payment type.</h4>  
 
 <%= form_tag payment_redirect_path, { :method => :post, :class => "simple_form form-horizontal" } do %>   
 
@@ -15,14 +16,10 @@
 			<td align="center"><img src="assets/PayPal-Express-Checkout-Logo.jpg" alt="PayPal Express Checkout Logo"></td>
 		</tr>
 	</table>
-                                   
-	<br>
-	<h4>Total: <%= "$" + number_with_precision(@total_cost/100, :precision => 2) %></h4>           
-
-	<br>
+                                  
    <br>
 	<%= submit_tag :submit, :value => "Proceed to Payment >>", :class => 'btn btn-success' %>  
 	<br>
 	<br>
-	
-<% end %>
+
+<% end %>    

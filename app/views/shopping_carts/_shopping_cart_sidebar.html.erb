@@ -1,7 +1,23 @@
-<div class="page-header">
-  	<h3>Cart Summary</h3>
-</div>
-<h4>Total: <%= "$" + number_with_precision(@total_cost, :precision => 2) %></h4>
-<br>
+<% if @total_cost > 0 %>   
 
-<a href="<%= review_order_path %>" class="btn btn-success">Checkout >></a>
+	<div class="page-header">
+	  	<h3>Cart Summary</h3>
+	</div>
+	<h4>Total: <%= "$" + number_with_precision(@total_cost, :precision => 2) %></h4>
+	<br>
+
+	<a href="<%= review_order_path %>" class="btn btn-success">Checkout >></a>
+
+<% else %>   
+
+	<div class="page-header">
+	  	<h3>Free Order</h3>
+	</div>
+
+	<p>All items in your cart are free!  There is no charge for this order, checkout to receive your items.</p>
+   <br>
+   <a href="<%= confirm_email_path %>" class="btn btn-success">Checkout >></a>  
+	<br>
+	<br>
+	
+<% end %>

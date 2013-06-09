@@ -19,7 +19,7 @@ ActiveAdmin.register Download do
    selectable_column
    column "Order No." do |download|
      div :class => "admin-center-column" do 
-       link_to "##{download.order.order_number}", admin_shopping_cart_path(download.shopping_cart_id)
+       link_to "##{download.order.order_number}", admin_order_path(download.order.id)
      end
    end
    column :resource
@@ -41,7 +41,9 @@ ActiveAdmin.register Download do
   # Configuration for Downloads Show Page
   show do |download|
     attributes_table do
-      row :shopping_cart
+      row :order do |download|
+        link_to "##{download.order.order_number}", admin_order_path(download.order.id)
+      end
       row :resource
       row :times_accessed   
       row "Purchase Price" do

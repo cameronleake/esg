@@ -411,7 +411,8 @@ CREATE TABLE orders (
     email character varying(255),
     email_sent boolean DEFAULT false,
     status character varying(255),
-    order_number integer
+    order_number integer,
+    payment_method character varying(255)
 );
 
 
@@ -1191,3 +1192,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130607124533');
 INSERT INTO schema_migrations (version) VALUES ('20130608084841');
 
 INSERT INTO schema_migrations (version) VALUES ('20130608092041');
+
+INSERT INTO schema_migrations (version) VALUES ('20130609052025');

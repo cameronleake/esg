@@ -17,6 +17,19 @@ class ResourceImageUploader < CarrierWave::Uploader::Base
       end
     end
   end
+            
+      
+  # Generate Icon Resource Image for Shopping Cart
+  version :icon do
+    process :create_resource_image_icon
+  end
+  
+  def create_resource_image_icon
+    manipulate! do |img|
+      img = img.resize_to_fill(100, 60)
+      img = img.crop(Magick::CenterGravity, 100, 60)      
+    end
+  end
 
 
   # Generate Thumbnail Resource Image for Gallery
