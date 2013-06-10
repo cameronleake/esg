@@ -34,20 +34,12 @@ class OrdersController < ApplicationController
 
   def new
     @cart = current_shopping_cart
-    @cart_items = @cart.resources
     @total_cost = @cart.total_cart_cost/100     
-
-    ###### <TODO> FIX THIS!  Needs to take the Order object for the current Shopping Cart and update with the params, if applicable.
-
-    # @order = Order.find(@cart.order_id)
-    # if params[:token]         
-    #   @order.destroy
-    #   @new_order = Order.new(:express_token => params[:token], :shopping_cart_id => @cart.id)
-    #   @cart.order_id = @new_order.id
-    #   @new_order.save(:validate => false)
-    #   @cart.save
-    #   @order = @new_order
-    # end 
+    @order = @cart.order   
+    if params[:token]
+      @order.update_attributes(:express_token => params[:token])
+      @order.save!(:validate => false)
+    end
   end
 
                     
@@ -60,13 +52,13 @@ class OrdersController < ApplicationController
     end    
     if @order.express_token
       @order.payment_method = "PayPal Express"
-      unless @order.save(:validate => false)
+      unless @order.save!(:validate => false)
         flash[:error] = "Error with PayPal Express Gateway."
         render :action => 'new'
       end
     else
       @order.payment_method = "Standard"
-      unless @order.save
+      unless @order.save!
         flash[:error] = "Please fill in all required fields."
         render :action => 'new'
       end
@@ -79,15 +71,15 @@ class OrdersController < ApplicationController
       end
       @order.status = "Payment Confirmed"
       @cart.status = "Closed" 
-      @order.save
-      @cart.save
+      @order.save!(:validate => false)
+      @cart.save!
       cookies.delete(:cart_token)  
       redirect_to order_completed_path, :notice => "Order processed successfully!"
     else             
       @order.status = "Error"      # <TODO> This needs to handle better for user.
       @cart.status = "Error"
-      @order.save       
-      @cart.save
+      @order.save!(:validate => false)       
+      @cart.save!
       flash[:error] = "#{@order.transactions.last.message}"
       render :action => "failure"
     end             
@@ -109,8 +101,8 @@ class OrdersController < ApplicationController
     
     @cart.status = "Closed"  
     @cart.order = @order
-    @order.save(:validate => false) 
-    @cart.save
+    @order.save!(:validate => false) 
+    @cart.save!
     cookies.delete(:cart_token)  
     redirect_to order_completed_path, :notice => "Order processed successfully!"    
   end              

@@ -16,7 +16,7 @@ RESOURCE_RATINGS = [1, 2, 3, 4, 5]
 DOWNLOAD_EXPIRY_HOURS = 24
 
 # Tickets
-CONTACT_TICKET_STATUSES = ["OPEN", "CLOSED"]
+CONTACT_TICKET_STATUSES = ["Open", "Closed", "Abandoned"]
 
 # Users
 DEFAULT_AVATAR_PATH = "/assets/Default_Profile_Icon.jpg"
