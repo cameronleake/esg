@@ -15,40 +15,29 @@
  *= require users
  *= require resources
 */
-         
 
-/*.header-container {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	height: 150px;
-	min-width: 100%;                                             
-	text-align: center;
-	max-width: 300px;
-	font-size: 5em;  
-
-}  */
-                  
 
 /* Navbar Header Section */
 
 .header {
 	position: relative;
-  padding: 40px 0;
+  padding: 30px 0;
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
-  background: #111111; /* Old browsers */
-  background: -moz-linear-gradient(45deg,  #111111 0%, #6D1706 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#111111), color-stop(100%,#6D1706)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(45deg,  #111111 0%,#6D1706 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(45deg,  #111111 0%,#6D1706 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(45deg,  #111111 0%,#6D1706 100%); /* IE10+ */
-  background: linear-gradient(45deg,  #111111 0%,#6D1706 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#111111', endColorstr='#6D1706',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: #000000; /* Old browsers */
+  background: -moz-linear-gradient(45deg,  #000000 0%, #BFBFBF 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#000000), color-stop(100%,#BFBFBF)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg,  #000000 0%,#BFBFBF 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg,  #000000 0%,#BFBFBF 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg,  #000000 0%,#BFBFBF 100%); /* IE10+ */
+  background: linear-gradient(45deg,  #000000 0%,#BFBFBF 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#BFBFBF',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
 }
 
 .header h1 {
-	font-size: 80px;
+	font-size: 70px;
   font-weight: bold;
   color: #fff; 
   letter-spacing: -1px;
@@ -92,43 +81,48 @@
 }           
 
 
-/* Navbar Footer */
+/* Navbar Footer */   
 
 html {
   position: relative;
   min-height: 100%;
-}                       
+}                     
 
 .footer {
-	padding-top: 70px; 
-	height: 30px;   
+	padding-top: 100px; 
+	text-align: center; 
 }   
 
-.footer h2 {
-  color: #fff; 
-	font-size: 16px;
-  font-weight: 500;
+.footer h2 { 
+  font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
+  font-weight: bold;	
+	font-size: 18px;
   line-height: 1.25;
 	padding: 10px 10px 0 0;	
+  text-transform: uppercase; 	
 }  
 
-.footer h3 {
-  color: #fff; 
-	font-size: 16px;
-  font-weight: 500;
-  line-height: 1.25;
-	padding: 10px 10px 0 0;	
-}
-
 .footer p { 
+  font-family: "News Cycle", "Arial Narrow Bold", sans-serif;    
   color: #fff; 
 	font-size: 14px;
-  font-weight: 300;
+  font-weight: bold;
   line-height: 1.25;
-	padding: 10px 10px 0 0;
+	padding: 10px 10px 5px 0;
 }     
 
 .footer .navbar{
   position: absolute; 
-	padding-top: 60px;
+}        
+                                        
+.footer h2 a:link,
+.footer h2 a:visited,
+.footer h2 a:active { 
+	color: #CBCBCB;
+	text-decoration: none; 
+}
+
+.footer h2 a:hover { 
+	color: #FFFFFF;      
+	text-decoration: none;
 }

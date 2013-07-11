@@ -1,30 +1,12 @@
-<div class="container">
-	<div class="navbar navbar-inverse navbar-fixed-bottom" align="center">   
-		<div class="navbar-inner">
-			<div class="row">
-				<div class="span4">
-            	<h2>Blog</h2>
-
-
-
-				</div>
-				<div class="span4">
-            	<h2><%= link_to "Resources", categories_path %></h2>
-
-					<% tag_cloud Resource.tag_counts.sort { |x, y| x.name <=> y.name }, %w{s m l} do |tag| %>
-					 	<h3><%= link_to tag.name, category_tag_path(tag.name) %></h3>
-					<% end %>
-
-				</div>
-				<div class="span4">
-            	<h2>EBooks</h2>
-				</div>
-			</div>
-                                
-			<br>
-			<div class="row">
-				<div class="span12">
-					<p>Build 0.4.0</p>
+<div class="footer">            
+	<div class="navbar navbar-inverse navbar-fixed-bottom">   
+		<div class="navbar-inner">     
+			<div class="container">   
+				<div class="row">
+					<div class="span12">
+						<h2><%= link_to "Sign Up", signup_path %> &nbsp &nbsp &nbsp <%= link_to "Contact Us", contact_path %></h2>
+						<p>Copyright Engineering Survival Guide - v0.4.1</p>
+					</div>
 				</div>
 			</div>
 		</div>

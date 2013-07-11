@@ -225,7 +225,7 @@ textarea {
 
 body {
   margin: 0;
-  font-family: Georgia, "Times New Roman", Times, serif;
+	font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;                                            /* CHANGED FOR ESG */
   font-size: 14px;
   line-height: 20px;
   color: #777777;
@@ -1079,7 +1079,7 @@ input,
 button,
 select,
 textarea {
-  font-family: Georgia, "Times New Roman", Times, serif;
+	font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;                                         /* CHANGED FOR ESG */
 }
 
 label {
@@ -6251,7 +6251,7 @@ hr {
   font-weight: bold;
 }
 
-.navbar .navbar-inner {
+/*.navbar .navbar-inner {      # <EDITED FOR ESG>
   border-bottom: 2px solid #eeeeee;
   -webkit-border-radius: 0;
      -moz-border-radius: 0;
@@ -6260,7 +6260,7 @@ hr {
      -moz-box-shadow: none;
           box-shadow: none;
 }
-
+*/
 .navbar .brand {
   padding: 19px 20px 21px;
   font-size: 24px;
