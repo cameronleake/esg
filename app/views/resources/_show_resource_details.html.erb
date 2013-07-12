@@ -8,7 +8,6 @@
 		<dd><%= image_tag @resource.image_url(:medium).to_s %></dd>
 	</a>
 	<p><b>Description:</b> <%= @resource.description %></p>
-	<p><b>Provider:</b></p>
 	<p><b>Price:</b>
 		<% if @resource.price_in_cents > 0 %>
 			<%= "$" + number_with_precision(@resource.price_in_cents.to_f/100, :precision => 2) %>

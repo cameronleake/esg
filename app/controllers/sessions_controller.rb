@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       remember_me(@user)
       is_email_verified(@user)
+      cookies.delete(:cart_token)
     elsif @user && !@user.authenticate(params[:password])
       flash.now.alert = "Incorrect password."
       render "new"
