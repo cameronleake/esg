@@ -1,6 +1,6 @@
 ActiveAdmin.register OrderTransaction do
   menu :parent => "ORDERS", :priority => 3   
-  # actions :index, :show             # <TODO>
+  actions :index, :show
   # config.batch_actions = false      # <TODO>
   scope :all, :default => true
   scope :successful do |transaction|

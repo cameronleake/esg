@@ -4,7 +4,7 @@ class CreateResources < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :type
-      t.integer :price
+      # t.integer :price 
       t.string :image
       t.string :file
       t.string :category

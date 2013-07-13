@@ -1,6 +1,6 @@
 ActiveAdmin.register Order do
   menu :parent => "ORDERS", :priority => 2
-  # actions :index, :show           # <TODO>
+  actions :index, :show
   # scope :all, :default => true    # <TODO>
           
   

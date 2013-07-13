@@ -1,5 +1,6 @@
 ActiveAdmin.register ShoppingCart do
   menu :parent => "ORDERS", :priority => 1
+  actions :index, :show
   scope :all, :default => true
   scope "Open" do |cart|
     cart.where(:status => "Open")
