@@ -59,16 +59,16 @@ ActiveAdmin.register Resource do
       row "Price" do
          "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2)
       end
-      row :number_of_downloads do
+      row :number_of_downloads do |resource|
         resource.number_of_downloads
       end
-      row :featured_resource do
+      row :featured_resource do |resource|
         resource.featured_resource.yesno
       end
-      row :file do
+      row :file do |resource|
         link_to "View File", resource.file_url if resource.file?
       end
-      row "Preview Image" do
+      row "Preview Image" do |resource|
         image_tag(resource.image.url(:preview)) if resource.image?
       end
       row :created_at
@@ -76,10 +76,10 @@ ActiveAdmin.register Resource do
     active_admin_comments
   end
   
-  
+   
   # Configuration for Resources Edit Page
   form do |f|                         
-   f.inputs "New User" do       
+   f.inputs "New Resource" do       
      f.input :user
      f.input :category, :as => :select, :include_blank => false
      f.input :name
@@ -88,11 +88,11 @@ ActiveAdmin.register Resource do
      f.input :price_in_cents
      f.input :tag_list  #  <TODO>: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
      f.input :file, :as => :file, :input_html => { :accept => "application/pdf" }, hint: resource.file_url
-     f.input :image, :as => :file, :input_html => { :accept => "image/*" }, hint: image_tag(resource.image.url(:thumb))
+     f.input :image, :as => :file, :input_html => { :accept => "image/*" }, hint: resource.image_url
      f.input :featured_resource, :as => :select, :include_blank => false
    end                               
    f.actions                         
-  end
+  end   
   
   
   # Configuration for Resources Batch Actions
@@ -105,13 +105,13 @@ ActiveAdmin.register Resource do
       redirect_to admin_resources_path
     end
     
-    batch_action "Un-Feature", :priority => 1 do |selection|
+    batch_action "Un-Feature", :priority => 2 do |selection|
       Resource.find(selection).each do |resource|
         resource.featured_resource = false
         resource.save
       end
       redirect_to admin_resources_path
     end
-  end
+  end  
   
-end
+end  
