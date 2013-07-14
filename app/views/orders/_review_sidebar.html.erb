@@ -7,7 +7,7 @@
 <%= form_tag payment_redirect_path, { :method => :post, :class => "simple_form form-horizontal" } do %>   
 
 	<table border="0" cellpadding="10" cellspacing="0" align="center">
-		<tr>      
+		<tr>   
 			<td><%= radio_button_tag :payment_method, "credit_card", true %></td>
 			<td align="center"><img src="assets/Credit-Card-Checkout-Logo.jpg" alt="Credit Card Checkout Logo"></td>
 		</tr>
@@ -15,7 +15,7 @@
 			<td><%= radio_button_tag :payment_method, "express" %></td>
 			<td align="center"><img src="assets/PayPal-Express-Checkout-Logo.jpg" alt="PayPal Express Checkout Logo"></td>
 		</tr>
-	</table>
+	</table>    
                                   
    <br>
 	<%= submit_tag :submit, :value => "Proceed to Payment >>", :class => 'btn btn-success' %>  

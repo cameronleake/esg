@@ -1,5 +1,6 @@
 ActiveAdmin.register OrderTransaction do
-  menu :parent => "ORDERS", :priority => 3   
+  menu :parent => "ORDERS", :priority => 3     
+  config.filters = false       
   actions :index, :show
   # config.batch_actions = false      # <TODO>
   scope :all, :default => true
@@ -9,14 +10,6 @@ ActiveAdmin.register OrderTransaction do
   scope :failed do |transaction|
     transaction.where(:success => false)
   end
-  
-
-  # Configuration for Sidebar Filters
-  filter :order
-  filter :success, as: :select
-  filter :action
-  filter :amount
-  filter :created_at
 
 
   # Configuration for Transactions Index Page
@@ -28,15 +21,6 @@ ActiveAdmin.register OrderTransaction do
     column "Order", :sortable => :order_id do |transaction|
       link_to "##{transaction.order.order_number}", admin_order_path(transaction.order_id)
     end
-    column "Payment Method" do |transaction|      
-      div :class => "admin-center-column" do  
-        if transaction.order.express_token == nil
-          "PayPal Express"
-        else
-          "Standard"
-        end    
-      end
-    end
     column :action, :sortable => :action do |transaction|
       div :class => "admin-center-column" do 
         transaction.action
@@ -47,7 +31,9 @@ ActiveAdmin.register OrderTransaction do
         transaction.success.yesno
       end
     end  
-    column :message
+    column "Error Code" do |transaction|
+      transaction.error_codes if transaction.error_codes != 0
+    end
     default_actions
   end    
             
@@ -68,6 +54,7 @@ ActiveAdmin.register OrderTransaction do
         transaction.success.yesno        
       end
       row :message
+      row :error_codes
       row :params
       row :created_at
     end

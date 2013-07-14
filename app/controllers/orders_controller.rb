@@ -32,18 +32,26 @@ class OrdersController < ApplicationController
   end
          
 
-  def new
+  def new    
+    @user = current_user
     @cart = current_shopping_cart
     @total_cost = @cart.total_cart_cost/100     
     @order = @cart.order   
     if params[:token]
       @order.update_attributes(:express_token => params[:token])
       @order.save!(:validate => false)
-    end
+    end                 
+    @order.street1 = @user.street1           # <TODO> Refactor and move into model.
+    @order.street2 = @user.street2
+    @order.city = @user.city
+    @order.state = @user.state
+    @order.country = @user.country
+    @order.zip = @user.zip
   end
 
                     
   def update
+    @user = current_user
     @cart = current_shopping_cart
     @order = @cart.order         
     @order.ip_address = request.remote_ip        
@@ -58,32 +66,53 @@ class OrdersController < ApplicationController
       end
     else
       @order.payment_method = "Standard"
-      unless @order.save!
+      if @order.valid?
+        @order.save!
+        @user.save_address(@order)
+        
+        if @order.purchase(@cart) 
+          @order.generate_download_links
+          if @order.delay.send_download_links_email
+            @order.email_sent = true
+          end
+          @order.status = "Payment Confirmed"
+          @cart.status = "Closed" 
+          @order.save!(:validate => false)
+          @cart.save!
+          cookies.delete(:cart_token)  
+          redirect_to order_completed_path, :notice => "Order processed successfully!"
+        else             
+          @order.status = "Error"
+          @cart.status = "Error"
+          @order.save!(:validate => false) 
+          @cart.save! 
+          
+          case @order.transactions.last.error_codes
+          when 10527
+            flash[:error] = "Please enter a valid credit card number & type"
+            render :action => 'new'    
+          when 10508
+            flash[:error] = "Please enter a valid credit card expiration date"
+            render :action => 'new'            
+          else
+            flash[:error] = "#{@order.transactions.last.message}"
+            render :action => "failure"            
+          end            
+
+        end
+      else
         flash[:error] = "Please fill in all required fields."
         render :action => 'new'
       end
-    end
-    
-    if @order.purchase(@cart) 
-      @order.generate_download_links
-      if @order.delay.send_download_links_email
-        @order.email_sent = true
-      end
-      @order.status = "Payment Confirmed"
-      @cart.status = "Closed" 
-      @order.save!(:validate => false)
-      @cart.save!
-      cookies.delete(:cart_token)  
-      redirect_to order_completed_path, :notice => "Order processed successfully!"
-    else             
-      @order.status = "Error"      # <TODO> This needs to handle better for user.
-      @cart.status = "Error"
-      @order.save!(:validate => false)       
-      @cart.save!
-      flash[:error] = "#{@order.transactions.last.message}"
-      render :action => "failure"
-    end             
-  end  
+    end     
+  end    
+  
+  
+  def failure
+    @cart = current_shopping_cart
+    @order = @cart.order
+    @last_transaction = @order.transactions.last
+  end
   
   
   def free_order 

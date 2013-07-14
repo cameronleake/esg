@@ -1,5 +1,5 @@
 class OrderTransaction < ActiveRecord::Base
-  attr_accessible :action, :amount, :authorization, :message, :order_id, :params, :success, :response
+  attr_accessible :action, :amount, :authorization, :message, :order_id, :params, :success, :response, :error_codes
   belongs_to :order
   serialize :params
   
@@ -7,12 +7,13 @@ class OrderTransaction < ActiveRecord::Base
   def response=(response)
     self.success       = response.success?
     self.authorization = response.authorization
-    self.message       = response.message
-    self.params        = response.params
+    self.message       = response.message   
+    self.error_codes   = response.params['error_codes'].to_i
+    self.params        = response.params  
   rescue ActiveMerchant::ActiveMerchantError => e
     self.success       = false
     self.authorization = nil
-    self.message       = e.message
+    self.message       = e.message   
     self.params        = {}
   end
   

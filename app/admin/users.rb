@@ -57,6 +57,12 @@ ActiveAdmin.register User do
       row :image do
         image_tag(user.avatar.url(:profile))
       end
+      row :street1
+      row :street2
+      row :city
+      row :state
+      row :country
+      row :zip
     end
     active_admin_comments
   end
@@ -73,7 +79,13 @@ ActiveAdmin.register User do
      f.input :email_verified, :as => :select, :include_blank => false
      f.input :blog_subscription, :as => :select, :include_blank => false
      f.input :resources_subscription, :as => :select, :include_blank => false
-     f.input :avatar, :as => :file
+     f.input :avatar, :as => :file  
+     f.input :street1
+     f.input :street2
+     f.input :city
+     f.input :state
+     f.input :country
+     f.input :zip
    end                               
    f.actions                         
   end

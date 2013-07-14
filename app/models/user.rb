@@ -69,6 +69,17 @@ class User < ActiveRecord::Base
   def un_verify_email
     self.email_verified = false
     self.save!
+  end 
+  
+  def save_address(order) 
+    @order = order
+    self.street1 = @order.street1
+    self.street2 = @order.street2
+    self.city = @order.city
+    self.state = @order.state
+    self.country = @order.country
+    self.zip = @order.zip
+    self.save!
   end
   
 end

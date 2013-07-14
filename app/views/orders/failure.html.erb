@@ -7,10 +7,16 @@
 			</div>
                    
 			<p>An error has occurred with your payment details.</p>
-			<p>Please contact us to process your order.</p>
+			<p>Please return to re-enter your payment details, or contact us to process your order.</p>     
+			  
+		  	<div class="form-actions"> 			
+				<a href="<%= new_order_path %>" class="btn btn-warning"><< Return</a> 
+			</div>
+			
+		</div>     
+		
+   	<div class="span3" align="center">		
+			<%= render "failure_sidebar" %>
 		</div>
-		<div class="span3" align="center">
-
-		</div>		
 	</div>
 </div>

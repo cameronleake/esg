@@ -66,12 +66,13 @@ ActiveAdmin.register Order do
       end    
       unless order.payment_method == "Free"
         row "Transaction History" do
-          table_for(order.transactions) do
+          table_for(order.transactions.reverse) do
             column :created_at
             column :action
             column :success, :sortable => :success do |transaction|
               transaction.success.yesno
-            end
+            end            
+            column :error_codes
             column :message           
             column "View" do |transaction|
               link_to "View", admin_order_transaction_path(transaction.id)

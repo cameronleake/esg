@@ -1,5 +1,6 @@
 ActiveAdmin.register Article do
-  menu :parent => "ESG BLOG", :priority => 1
+  menu :parent => "ESG BLOG", :priority => 1   
+  config.filters = false  
   scope :all, :default => true
   scope :featured_articles do |articles|
     articles.where(:featured_article => true)
@@ -13,18 +14,6 @@ ActiveAdmin.register Article do
   scope :not_yet_distributed do |articles|
     articles.where(:distributed_at => nil)
   end
-  
-  
-  # Configuration for Sidebar Filters
-  filter :title
-  filter :blurb
-  filter :body
-  filter :featured_article, :as => :select, :collection => ["Featured", "No"]
-  filter :published, :as => :select, :collection => ["Published", "Draft"]
-  filter :tag_list
-  filter :distributed_at  
-  filter :created_at   
-  filter :updated_at
   
   
   # Configuration for Articles Index Page
@@ -83,11 +72,12 @@ ActiveAdmin.register Article do
   form do |f|                         
     f.inputs "New Article" do       
       f.input :title
-      f.input :blurb, as: :text, :input_html => { :rows => 6, :maxlength => 255 }
+      f.input :blurb, as: :text, :input_html => { :rows => 6, :maxlength => 255 }   
+      f.input :body, as: :text, :input_html => { :rows => 12 }   
       f.input :featured_image, :as => :file, :input_html => { :accept => "image/*" }
       f.input :tag_list  #  <TODO>: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
-      f.input :featured_article, :as => :select, :include_blank => false, :collection => ["Featured", "No"]
-      f.input :published, :as => :select, :include_blank => false, :collection => ["Published", "Draft"]
+      f.input :featured_article, :as => :select, :include_blank => false, :collection => [["Featured", true], ["No", false]]
+      f.input :published, :as => :select, :include_blank => false, :collection => [["Published", true], ["Draft", false]]
     end                               
     f.actions                         
   end

@@ -363,7 +363,8 @@ CREATE TABLE order_transactions (
     message character varying(255),
     params text,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    error_codes integer
 );
 
 
@@ -404,15 +405,15 @@ CREATE TABLE orders (
     city character varying(255),
     state character varying(255),
     country character varying(255),
-    zip character varying(255),
     express_token character varying(255),
     express_payer_id character varying(255),
     street2 character varying(255),
     email character varying(255),
-    email_sent boolean DEFAULT false,
     status character varying(255),
+    email_sent boolean DEFAULT false,
     order_number integer,
-    payment_method character varying(255)
+    payment_method character varying(255),
+    zip integer
 );
 
 
@@ -444,7 +445,6 @@ CREATE TABLE resources (
     name character varying(255),
     description character varying(255),
     price_type character varying(255),
-    price_in_cents integer DEFAULT 0,
     image character varying(255),
     file character varying(255),
     user_id integer,
@@ -452,7 +452,8 @@ CREATE TABLE resources (
     updated_at timestamp without time zone NOT NULL,
     category_id integer,
     featured_resource boolean DEFAULT false,
-    currency character varying(255) DEFAULT 'AUD'::character varying
+    price_in_cents integer DEFAULT 0,
+    currency character varying(255) DEFAULT 'USD'::character varying
 );
 
 
@@ -668,7 +669,13 @@ CREATE TABLE users (
     last_name character varying(255),
     blog_subscription boolean DEFAULT false,
     resources_subscription boolean DEFAULT false,
-    avatar character varying(255) DEFAULT ''::character varying
+    avatar character varying(255) DEFAULT ''::character varying,
+    street1 character varying(255),
+    street2 character varying(255),
+    city character varying(255),
+    state character varying(255),
+    country character varying(255),
+    zip integer
 );
 
 
@@ -1082,8 +1089,6 @@ INSERT INTO schema_migrations (version) VALUES ('20130511065218');
 
 INSERT INTO schema_migrations (version) VALUES ('20130511133753');
 
-INSERT INTO schema_migrations (version) VALUES ('20130512105906');
-
 INSERT INTO schema_migrations (version) VALUES ('20130512115715');
 
 INSERT INTO schema_migrations (version) VALUES ('20130512144220');
@@ -1109,8 +1114,6 @@ INSERT INTO schema_migrations (version) VALUES ('20130515053100');
 INSERT INTO schema_migrations (version) VALUES ('20130515063833');
 
 INSERT INTO schema_migrations (version) VALUES ('20130515083251');
-
-INSERT INTO schema_migrations (version) VALUES ('20130517134731');
 
 INSERT INTO schema_migrations (version) VALUES ('20130518143142');
 
@@ -1197,3 +1200,13 @@ INSERT INTO schema_migrations (version) VALUES ('20130608092041');
 INSERT INTO schema_migrations (version) VALUES ('20130609052025');
 
 INSERT INTO schema_migrations (version) VALUES ('20130609112009');
+
+INSERT INTO schema_migrations (version) VALUES ('20130714022602');
+
+INSERT INTO schema_migrations (version) VALUES ('20130714080915');
+
+INSERT INTO schema_migrations (version) VALUES ('20130714081107');
+
+INSERT INTO schema_migrations (version) VALUES ('20130714102159');
+
+INSERT INTO schema_migrations (version) VALUES ('20130714120119');
