@@ -2,7 +2,6 @@ class CategoriesController < ApplicationController
 
 
   def index
-    @header_type = "Resource Centre"
     @categories = categories_with_resources
     if params[:tag]
       @tag_name = params[:tag]
@@ -11,8 +10,7 @@ class CategoriesController < ApplicationController
   end
                                        
 
-  def show 
-    @header_type = "Resource Centre"       
+  def show    
     @category = Category.find(params[:id])
     @resources = Resource.order("name ASC").where(:category_id => params[:id]).page(params[:page]).per(5)
     if params[:tag]

@@ -1,7 +1,6 @@
 class ContactsController < ApplicationController
   
   def new   
-    @header_type = "Contact Us"
     @contact = Contact.new
     @contact.status = "OPEN"
   end

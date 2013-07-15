@@ -2,7 +2,6 @@ class ArticlesController < ApplicationController
   before_filter :authorize_user_logged_in, only: [:edit, :update]
   
   def index     
-    @header_type = "Blog"
     if params[:tag]
       @articles = Article.where(:published => true).tagged_with(params[:tag]).order("created_at DESC").page(params[:page]).per(5)
     elsif params[:query].present?
