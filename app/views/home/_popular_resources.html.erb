@@ -1,0 +1,4 @@
+<h4>Popular Resources</h4>       
+<% @popular_resources.each do |resource| %>
+	<p><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %> - Downloads: <%= resource.number_of_downloads %></p>
+<% end %>

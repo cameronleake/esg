@@ -3,7 +3,6 @@ Esg::Application.routes.draw do
    root :to => "home#index"
 
    # HOME
-   match 'ebook' => 'home#ebook'
    match 'faq' => 'home#faq'
    match '404' => 'home#404'
    match '422' => 'home#422'

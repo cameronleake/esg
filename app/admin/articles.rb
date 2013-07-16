@@ -22,7 +22,8 @@ ActiveAdmin.register Article do
 
   index do
     selectable_column
-    column :title
+    column :title  
+    column :author
     column :published, :sortable => :published do |article|
        div :class => "admin-center-column" do 
           article.published.published_status
@@ -42,7 +43,8 @@ ActiveAdmin.register Article do
   # Configuration for Articles Show Page
   show do |article|
     attributes_table do
-      row :title
+      row :title  
+      row :author
       row :blurb
       row " " do |article|
         link_to "LAUNCH HTML EDITOR", "/editor#{article_path(article)}", id: "edit_link"
@@ -71,7 +73,8 @@ ActiveAdmin.register Article do
   # Configuration for Articles Edit Page
   form do |f|                         
     f.inputs "New Article" do       
-      f.input :title
+      f.input :title     
+      f.input :author
       f.input :blurb, as: :text, :input_html => { :rows => 6, :maxlength => 255 }   
       f.input :body, as: :text, :input_html => { :rows => 12 }   
       f.input :featured_image, :as => :file, :input_html => { :accept => "image/*" }

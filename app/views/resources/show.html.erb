@@ -6,13 +6,13 @@
 				
 			<% if @tag_name != nil %>
 				<div class="form-actions">
-					<a href="<%= category_tag_path(@tag_name) %>" class="btn btn-primary"><< Categories</a>
+					<a href="<%= category_tag_path(@tag_name) %>" class="btn btn-primary"><< Resources</a>
 					<a href="<%= show_category_tag_path(@resource.category_id) %>" class="btn btn-primary"><< <%= @resource.category.name.pluralize %></a>	
 					<a href="<%= categories_path %>" class="btn btn-info">Remove Filter</a>
 				</div>
 			<% else %>
 				<div class="form-actions">
-					<a href="<%= categories_path %>" class="btn btn-primary"><< Categories</a>
+					<a href="<%= categories_path %>" class="btn btn-primary"><< Resources</a>
 					<a href="<%= category_path(@resource.category_id) %>" class="btn btn-primary"><< <%= @resource.category.name.pluralize %></a>
 				</div>
 			<% end %>

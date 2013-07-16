@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
   def password_required
     @password_required || false
   end
+     
     
   def send_password_reset
     generate_token(:password_reset_token)
@@ -37,24 +38,29 @@ class User < ActiveRecord::Base
     self.save!
     UserMailer.password_reset(self).deliver
   end
-
+  
+  
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while User.exists?(column => self[column])
   end
+      
   
   def send_welcome_email
     UserMailer.welcome_message(self).deliver
   end
+        
   
   def send_verification_email
     UserMailer.email_verification_message(self).deliver
   end
+      
   
   def get_user_email
     email
   end
+        
   
   def get_downloads_list
     @downloads = []
@@ -62,14 +68,16 @@ class User < ActiveRecord::Base
       cart.downloads.each do |download|
         @downloads << download
       end  
-    end
+    end     
     return @downloads
   end
+       
   
   def un_verify_email
     self.email_verified = false
     self.save!
-  end 
+  end    
+  
   
   def save_address(order) 
     @order = order

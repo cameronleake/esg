@@ -1,7 +1,8 @@
 <% if @tag_name %>
 	<br>
 	<h5>FILTER: <span class="label label-info"><%= @tag_name %><span></h5>
-<% end %>
+	<a href="<%= categories_path %>" class="btn-small btn-info">Remove Filter</a>
+<% end %>  
 
 <div class="page-header">
   	<h3>Filter by Tags</h3>

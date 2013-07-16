@@ -9,7 +9,7 @@
 				<td>
 					<div class="media">
 						<h3><%= link_to article.title, article_path(article) %></h3>								
-						<a class="pull-left">
+						<a href=<%= "#{article_path(article)}" %> class="pull-left">
 							<dd><%= image_tag article.featured_image_url(:thumb).to_s %></dd>
 						</a>
 						<h5>
@@ -18,7 +18,8 @@
 							<% if article.comments_count(article) > 0 %>
 							 	 --  <%= pluralize(article.comments_count(article), 'Comment') %>
 							<% end %>
-						</h5>
+						</h5>                              
+						<h5>By: <%= article.author %></h5> 
 						<%= article.blurb %>
 					</div>
 				</td>

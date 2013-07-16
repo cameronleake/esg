@@ -4,7 +4,7 @@
 </div>
 
 <div class="media">				
-	<a class="pull-left">
+	<a href="#resource-preview" role="button" data-toggle="modal" class="pull-left">
 		<dd><%= image_tag @resource.image_url(:medium).to_s %></dd>
 	</a>
 	<p><b>Description:</b> <%= @resource.description %></p>
@@ -38,10 +38,14 @@
 	<div class="modal-body resource-preview-modal-body">
    	<p><%= image_tag(@resource.image.url(:preview)) %></p>
 	</div>
- 	
-	<div class="modal-footer">
-    	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-  	</div>
 </div>
-<br>
-<br>
+<br>    
+
+
+<script type="text/javascript">
+	$('#resource-preview').on('show', function () {
+		$(this).find('.modal-body').css({width:'auto',
+	                               height:'auto', 
+	                              'max-height':'100%'});
+	});
+</script>

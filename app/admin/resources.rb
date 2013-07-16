@@ -37,6 +37,11 @@ ActiveAdmin.register Resource do
          "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2)
        end
      end
+   end  
+   column :number_of_downloads do |resource|
+     div :class => "admin-center-column" do 
+       resource.number_of_downloads
+     end     
    end
    column :featured_resource, :sortable => :featured_resource do |resource|
      div :class => "admin-center-column" do 
@@ -59,9 +64,7 @@ ActiveAdmin.register Resource do
       row "Price" do
          "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2)
       end
-      row :number_of_downloads do |resource|
-        resource.number_of_downloads
-      end
+      row :number_of_downloads
       row :featured_resource do |resource|
         resource.featured_resource.yesno
       end

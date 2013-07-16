@@ -149,7 +149,8 @@ CREATE TABLE articles (
     blurb character varying(255),
     featured_article boolean DEFAULT false,
     published boolean DEFAULT false,
-    distributed_at timestamp without time zone
+    distributed_at timestamp without time zone,
+    author character varying(255)
 );
 
 
@@ -453,7 +454,8 @@ CREATE TABLE resources (
     category_id integer,
     featured_resource boolean DEFAULT false,
     price_in_cents integer DEFAULT 0,
-    currency character varying(255) DEFAULT 'USD'::character varying
+    currency character varying(255) DEFAULT 'USD'::character varying,
+    number_of_downloads integer DEFAULT 0
 );
 
 
@@ -1210,3 +1212,7 @@ INSERT INTO schema_migrations (version) VALUES ('20130714081107');
 INSERT INTO schema_migrations (version) VALUES ('20130714102159');
 
 INSERT INTO schema_migrations (version) VALUES ('20130714120119');
+
+INSERT INTO schema_migrations (version) VALUES ('20130716044103');
+
+INSERT INTO schema_migrations (version) VALUES ('20130716052817');

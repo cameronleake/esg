@@ -6,6 +6,14 @@ class Download < ActiveRecord::Base
   attr_accessible :download_token
   attr_accessible :purchase_price_in_cents
   belongs_to :resource
-  belongs_to :order
+  belongs_to :order                                  
+  after_create :increase_resource_download_count
+                                        
+  
+  def increase_resource_download_count
+    @resource = self.resource
+    @resource.number_of_downloads += 1
+    @resource.save!
+  end
 
 end

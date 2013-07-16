@@ -13,6 +13,7 @@ class Resource < ActiveRecord::Base
   attr_accessible :user_id
   attr_accessible :category_id
   attr_accessible :featured_resource
+  attr_accessible :number_of_downloads
   belongs_to :user
   belongs_to :category
   has_many :downloads, :dependent => :destroy
@@ -22,10 +23,6 @@ class Resource < ActiveRecord::Base
   pg_search_scope :search, against: [:name, :description],
     using: { tsearch: {dictionary: "english", :prefix => true} }
     
-    
-  def number_of_downloads
-    self.downloads.count
-  end
     
   def number_of_reviews
     self.reviews.where(:spam => false).count

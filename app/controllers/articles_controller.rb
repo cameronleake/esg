@@ -3,11 +3,11 @@ class ArticlesController < ApplicationController
   
   def index     
     if params[:tag]
-      @articles = Article.where(:published => true).tagged_with(params[:tag]).order("created_at DESC").page(params[:page]).per(5)
+      @articles = Article.where(:published => true).tagged_with(params[:tag]).order("created_at DESC").page(params[:page]).per(10)
     elsif params[:query].present?
-      @articles = Article.where(:published => true).text_search(params[:query]).page(params[:page]).per(5)
+      @articles = Article.where(:published => true).text_search(params[:query]).page(params[:page]).per(10)
     else
-      @articles = Article.where(:published => true).order("created_at DESC").page(params[:page]).per(5)
+      @articles = Article.where(:published => true).order("created_at DESC").page(params[:page]).per(10)
     end
   end
 

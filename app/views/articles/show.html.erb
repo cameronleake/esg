@@ -14,7 +14,7 @@
 
 	<div class="page-header">
   		<h2><%= @article.title %></h2>
-		<p><%= @article.created_at %> | <%= display_article_tag_links(@article) %></p>
+		<p><%= @article.created_at %> | <%= display_article_tag_links(@article) %> <%= " | #{@article.author}" if @article.author %> </p>
 		<p><%= image_tag @article.featured_image_url(:header).to_s %></p>
 	</div>
 	

@@ -1,0 +1,4 @@
+<h4>Categories</h4>           
+<% tag_cloud Resource.tag_counts.sort { |x, y| x.name <=> y.name }, %w{s m l} do |tag| %>
+ 	<p><%= link_to tag.name, category_tag_path(tag.name) %></p>
+<% end %>

@@ -1,23 +1,40 @@
-<br>
 <div id="container">	
 	<div class="row">
 
-   	<div class="span9">
-			
-			<% if @tag_name != nil %>
-					<% @filtered_categories.each do |category| %>
-					<%= render :partial => "display_category", :locals => { :category => category } %>
-				<% end %>
-				<div class="span9">
-					<div class="form-actions">
-						<a href="<%= categories_path %>" class="btn btn-info">Remove Filter</a>		
-					</div>
+		<div class="span9">   	 
+			<div class="span9">
+				<br>
+				<div class="well well-small">
+					<%= render "resource_categories" %> 
 				</div>
-			<% else %>	
-				<% @categories.each_with_index do |category, i| %>
-					<%= render :partial => "display_category", :locals => { :category => category } %>
+			</div>
+		
+			<div class="span9">		
+				<% if @tag_name != nil %>                                  
+
+					<table class="table table-striped">
+						<tbody>
+							<% @filtered_resources.each do |resource| %>
+								<%= render :partial => "display_resource", :locals => { :resource => resource } %>
+							<% end %>
+						</tbody>
+					</table>                                             
+					<h6><%= paginate @filtered_resources, :window => 2 %></h6>				
+				
+				<% else %>
+
+					<table class="table table-striped">
+						<tbody>
+							<% @resources.each do |resource| %>
+								<%= render :partial => "display_resource", :locals => { :resource => resource } %>
+							<% end %>
+						</tbody>
+					</table>                                             
+					<h6><%= paginate @resources, :window => 2 %></h6>      
+
 				<% end %>
-			<% end %>			
+				<br>
+			</div>   
 		</div>
 		
 		<div class="span3" align="center">

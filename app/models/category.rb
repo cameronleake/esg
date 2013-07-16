@@ -6,14 +6,16 @@ class Category < ActiveRecord::Base
   def resources_count
     self.resources.count
   end
+                         
   
   def number_of_downloads
     @download_count = 0
     self.resources.each do |resource|
-      @download_count += resource.downloads.count
+      @download_count += resource.number_of_downloads
     end
     return @download_count
-  end
+  end   
+  
   
   def resources_with_tag(tag)
     @resources = []
@@ -21,6 +23,11 @@ class Category < ActiveRecord::Base
       @resources << resource if resource.tag_list.include?(tag)
     end
     return @resources
+  end
+       
+  
+  def resources_with_tag_count(tag)
+    return resources_with_tag(tag).count
   end
   
 end

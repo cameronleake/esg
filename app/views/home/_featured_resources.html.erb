@@ -9,7 +9,7 @@
 				<td>
 					<div class="media">
 						<h3><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h3>								
-						<a class="pull-left">
+						<a href=<%= "#{category_resource_path(resource.category_id, resource.id)}" %> class="pull-left">
 							<dd><%= image_tag resource.image_url(:thumb).to_s %></dd>
 						</a>
 						<h5>Type: <%= resource.category.name %> -- <%= display_category_tag_links(resource) %></h5>

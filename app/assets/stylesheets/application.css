@@ -17,6 +17,13 @@
 */
 
 
+/* Fix for Whitespace Sidebar on RHS */
+
+.container {
+	overflow-x: hidden;
+}
+
+
 /* Navbar Header Section */
 
 .header {
@@ -24,50 +31,12 @@
   padding: 0;
   background: #000000; /* Old browsers */
 }
+       
+/* Top Navbar Navigation */ 
 
-/*.header h1 {
-	font-size: 70px;
-  font-weight: bold;
-  color: #fff; 
-  letter-spacing: -1px;
-  line-height: 1;
-}  */  
-
-/*.header p {              <TODO> Remove if not required.
-	font-size: 24px;
-  font-weight: 300;
-  line-height: 1.25;
-  margin-bottom: 30px;
-}    */
-
-
-/* Navbar Header Pattern Overlay */         
-
-.header .container {
-	position: relative;
-  z-index: 2;
-}     
-
-.header:after {
-	  content: '';
-	  display: block;
-	  position: absolute;
-	  top: 0;
-	  right: 0;
-	  bottom: 0;
-	  left: 0;
-		background: url(../assets/bs-docs-masthead-pattern.png) repeat center center;
-	  opacity: .4;
-	}
-	@media
-	only screen and (-webkit-min-device-pixel-ratio: 2),
-	only screen and (   min--moz-device-pixel-ratio: 2),
-	only screen and (     -o-min-device-pixel-ratio: 2/1) {
-
-	  .header:after {
-	    background-size: 150px 150px;
-	  }
-}           
+/*.navbar-static-top .navbar-inner {
+	height: 10px;
+}   */                        
 
 
 /* Navbar Footer */   
