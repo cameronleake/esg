@@ -27,9 +27,21 @@ class Resource < ActiveRecord::Base
   def number_of_reviews
     self.reviews.where(:spam => false).count
   end
+
   
   def self.text_search(query)
     search(query)
+  end
+
+
+  def average_rating
+    @number_of_reviews = self.reviews.count
+    @total_review_value = 0
+    self.reviews.each do |review|
+      @total_review_value += review.rating
+    end   
+    @average_rating = ( @total_review_value.to_f / @number_of_reviews.to_f ).round
+    return @average_rating
   end
 
 end

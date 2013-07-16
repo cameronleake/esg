@@ -90,4 +90,14 @@ class User < ActiveRecord::Base
     self.save!
   end
   
+
+  def already_submitted_review(resource)   
+    self.reviews.each do |review|
+      if review.resource_id == resource.id
+        return true
+      end
+    end  
+    return false
+  end
+
 end

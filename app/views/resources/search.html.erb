@@ -8,27 +8,9 @@
 			
 			<table class="table table-striped">
 				<% @resources.each do |resource| %>
-					<thead>
-						<tr>
-							<td class="blog-article-list">
-								<div class="media">
-									<h3><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h3>	
-									<a class="pull-left">
-										<dd><%= image_tag resource.image_url(:thumb).to_s %></dd>
-									</a>
-									<h5>Type: <%= resource.category.name %> -- <%= display_category_tag_links(resource) %></h5>
-									<h5>Price:  
-										<% if resource.price_type == "Paid" %>
-											<%= "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2) %>
-										<% else %>
-											FREE
-										<% end %>
-									</h5>
-									<%= resource.description %>
-								</div>					
-							</td>
-						</tr>
-					</thead>
+					<tbody>
+						<%= render :partial => "categories/display_resource", :locals => { :resource => resource } %>
+					</tbody>
 				<% end %>
 			</table>
 			

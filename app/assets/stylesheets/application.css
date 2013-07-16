@@ -17,13 +17,6 @@
 */
 
 
-/* Fix for Whitespace Sidebar on RHS */
-
-.container {
-	overflow-x: hidden;
-}
-
-
 /* Navbar Header Section */
 
 .header {

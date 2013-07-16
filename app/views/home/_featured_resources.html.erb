@@ -13,13 +13,19 @@
 							<dd><%= image_tag resource.image_url(:thumb).to_s %></dd>
 						</a>
 						<h5>Type: <%= resource.category.name %> -- <%= display_category_tag_links(resource) %></h5>
-						<h5>Price:  
-							<% if resource.price_type == "Paid" %>
-								<%= "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2) %>
-							<% else %>
-								FREE
+						<% if resource.reviews.count > 0 %>			
+
+							<% resource.average_rating.times do %>
+								<i class="icon-star rating-colour-medium"></i>
 							<% end %>
-						</h5>
+
+							<% (5 - resource.average_rating).times do %>
+								<i class="icon-star-empty rating-no-colour-medium"></i>
+							<% end %>
+
+						<% else %>			
+							Not yet rated
+						<% end %>
 						<%= resource.description %>
 					</div>
 				</td>

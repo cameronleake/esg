@@ -1,3 +1,7 @@
+<div class="page-header">
+	<h3>Reviews</h3>
+</div>
+
 <table class="table table-striped">
 	<% @resource.reviews.where(:spam => false).order("created_at ASC").each do |review| %>
 		<thead>
@@ -16,12 +20,14 @@
 							</div>
 						</div>
 						<div class="span2">
-							<h4>Rated: <%= review.rating %>/5</h4>
-						</div>
-						<div class="span4">
-							<div class="progress progress-striped progress-warning">
-								<div class="bar" style="width: <%= ((review.rating.to_f/5)*100) %>%"></div>
-							</div>
+							<% review.rating.times do %>
+								<i class="icon-star rating-colour-large"></i>
+							<% end %>
+
+							<% (5 - review.rating).times do %>
+								<i class="icon-star-empty rating-no-colour-large"></i>
+							<% end %>
+							<h5>Rated: <%= review.rating %>/5</h5>
 						</div>
 					</div>
 				</td>

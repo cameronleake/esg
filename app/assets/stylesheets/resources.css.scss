@@ -7,12 +7,10 @@
 
 .resource-preview-modal {
 	max-width: 90%;
-	height: 800px;
 	max-height: 90%;
 }
 
 .resource-preview-modal-body {
-	height: 750px;
 	max-height: 75%;
 }
 
@@ -26,4 +24,31 @@
 }
 .ui-resizable-e {
   right: 0;
+}
+                     
+
+/* Rating Star Icons */
+
+.rating-colour-medium {
+	color: #FFCD1B;   
+	text-shadow: 1px 1px 1px #41454D;
+  font-size: 1.2em;
+}                   
+
+.rating-no-colour-medium {
+	color: #9299A7; 
+	text-shadow: 1px 1px 1px #CDCDCD; 	
+  font-size: 1.2em;
+}
+
+.rating-colour-large {
+	color: #FFCD1B;   
+	text-shadow: 1px 1px 1px #41454D;
+  font-size: 1.5em;
+}
+
+.rating-no-colour-large {
+	color: #9299A7; 	
+	text-shadow: 1px 1px 1px #CDCDCD; 
+  font-size: 1.5em;
 }

@@ -25,6 +25,23 @@
 				<% if resource.number_of_reviews > 0 %>
 				 	-- <%= pluralize(resource.number_of_reviews, "Review") %><% end %>										
 			</h5>
+			<h5>Rating: 
+			
+				<% if resource.reviews.count > 0 %>			
+
+					<% resource.average_rating.times do %>
+						<i class="icon-star rating-colour-medium"></i>
+					<% end %>
+
+					<% (5 - resource.average_rating).times do %>
+						<i class="icon-star-empty rating-no-colour-medium"></i>
+					<% end %>
+
+				<% else %>			
+					Not yet rated
+				<% end %>
+			
+			</h5>
 			<%= resource.description %>
 		</div>					
 	</td>

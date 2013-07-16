@@ -896,8 +896,7 @@ dd {
   margin-left: 180px;
 }
 
-/*Added by CL*/
-.dl-horizontal da {
+.dl-horizontal da {     /* Added for ESG */
   float: left;
   width: 160px;
   overflow: hidden;
@@ -4375,7 +4374,7 @@ input[type="submit"].btn.btn-mini {
   overflow: visible;
 }
 
-.navbar-inner {
+.navbar-inner {     
   min-height: 60px;     
   padding-right: 20px;
   padding-left: 20px;

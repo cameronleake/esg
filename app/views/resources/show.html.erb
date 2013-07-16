@@ -16,12 +16,11 @@
 					<a href="<%= category_path(@resource.category_id) %>" class="btn btn-primary"><< <%= @resource.category.name.pluralize %></a>
 				</div>
 			<% end %>
-
-			<div class="page-header">
-				<h3>Reviews</h3>
-			</div>
+	
+			<% if @resource.reviews.count > 0 %>
+				<%= render "resource_reviews" %>
+			<% end %>
 			
-			<%= render "resource_reviews" %>
 			<%= render "add_resource_review" %>
 			
 		</div>

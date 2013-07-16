@@ -26,7 +26,7 @@
 					<% end %>
 				</td>
 				<% if download.expiry_time > Time.now %>
-					<td><b><a href="<%= resource_download_path(download.download_token) %>" target="_blank">Download</a></b></td>
+					<td><b><a href="<%= resource_download_path(download.download_token) %>" target="_blank"><i class="icon-download-alt"></i> Download</a></b></td>
 				<% else %>
 					<td>Expired</td>
 				<% end %>
