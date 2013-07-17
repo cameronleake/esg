@@ -39,8 +39,8 @@ class ResourceImageUploader < CarrierWave::Uploader::Base
   
   def create_resource_image_thumb
     manipulate! do |img|
-      img = img.resize_to_fill(200, 130)
-      img = img.crop(Magick::CenterGravity, 200, 130)      
+      img = img.resize_to_fill(150, 100)
+      img = img.crop(Magick::CenterGravity, 150, 100)      
     end
   end
 

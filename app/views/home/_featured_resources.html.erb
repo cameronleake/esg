@@ -1,35 +1,31 @@
-<div class="page-header">
-  	<h2>Featured Resources</h2>
-</div>
+<ul class="inline">
+	<li><h3>Newest Resources</h3></li>
+	<li><h4><a href=<%= categories_path %>>more</a></h4></li>
+</ul>
 
-<table class="table">
-	<% @featured_resources.each do |resource| %>
-		<tbody>
-			<tr>
-				<td>
-					<div class="media">
-						<h3><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h3>								
-						<a href=<%= "#{category_resource_path(resource.category_id, resource.id)}" %> class="pull-left">
-							<dd><%= image_tag resource.image_url(:thumb).to_s %></dd>
-						</a>
-						<h5>Type: <%= resource.category.name %> -- <%= display_category_tag_links(resource) %></h5>
-						<% if resource.reviews.count > 0 %>			
+<ul class="thumbnails">
+	<% @recent_resources.each do |resource| %>
+  		<li class="span3" align="center">
+    		<div class="thumbnail">
+      		<h4><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h4> 
+      		<a href=<%= "#{category_resource_path(resource.category_id, resource.id)}" %>>
+					<dd><%= image_tag resource.image_url(:thumb).to_s, :class => "img-polaroid" %></dd>
+				</a>
+				<% if resource.reviews.count > 0 %>			
 
-							<% resource.average_rating.times do %>
-								<i class="icon-star rating-colour-medium"></i>
-							<% end %>
+					<% resource.average_rating.times do %>
+						<i class="icon-star rating-colour-medium"></i>
+					<% end %>
 
-							<% (5 - resource.average_rating).times do %>
-								<i class="icon-star-empty rating-no-colour-medium"></i>
-							<% end %>
+					<% (5 - resource.average_rating).times do %>
+						<i class="icon-star-empty rating-no-colour-medium"></i>
+					<% end %>
 
-						<% else %>			
-							Not yet rated
-						<% end %>
-						<%= resource.description %>
-					</div>
-				</td>
-			</tr>
-		</tbody>
+				<% else %>			
+					<h5>Not yet rated</h5>
+				<% end %>
+      		<p><%= resource.description %></p>
+    		</div>
+  		</li>
 	<% end %>
-</table>
+</ul>

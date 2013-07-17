@@ -9,8 +9,8 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<td><h4>Item</h4></td>
 						<td></td>
+						<td><h4>Item</h4></td>
 						<td><h4>Category</h4></td>
 						<td><h4>Price</h4></td>														
 						<td><h4>Remove</h4></td>	
@@ -18,8 +18,12 @@
 				</thead>
 				<tbody>
 				<% @cart_items.each do |resource| %>
-					<tr>
-						<td><%= image_tag resource.image_url(:icon).to_s %></td>
+					<tr> 
+						<td>
+							<a href="<%= category_resource_path(resource.category_id, resource.id) %>">
+								<%= image_tag resource.image_url(:icon).to_s, :class => "img-polaroid" %> 
+							</a>
+						</td>	
 						<td><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></td>
 						<td><%= resource.category.name %></td>
 						<% if resource.price_type == "Free" %>

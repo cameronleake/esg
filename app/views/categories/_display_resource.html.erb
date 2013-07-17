@@ -3,13 +3,13 @@
 		<div class="media">
 		
 			<% if @tag_name != nil %>
-				<h3><%= link_to resource.name, show_resource_tag_path(resource.category_id, resource.id) %></h3>
+				<h4><%= link_to resource.name, show_resource_tag_path(resource.category_id, resource.id) %></h4>
 				<a href="<%= show_resource_tag_path(resource.category_id, resource.id) %>" class="pull-left">
 					<dd><%= image_tag resource.image_url(:thumb).to_s %></dd>
 				</a>
 			<% else %>
-				<h3><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h3>
-			<a href="<%= category_resource_path(resource.category_id, resource.id) %>" class="pull-left">
+				<h4><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h4>
+   			<a href="<%= category_resource_path(resource.category_id, resource.id) %>" class="pull-left">
 				<dd><%= image_tag resource.image_url(:thumb).to_s %></dd>
 			</a>
 			<% end %>
