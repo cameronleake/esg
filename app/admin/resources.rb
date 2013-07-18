@@ -71,9 +71,15 @@ ActiveAdmin.register Resource do
       row :file do |resource|
         link_to "View File", resource.file_url if resource.file?
       end
-      row "Preview Image" do |resource|
-        image_tag(resource.image.url(:preview)) if resource.image?
+      row "Preview Image 1" do |resource|
+        image_tag(resource.image_1.url(:preview)) if resource.image_1?
       end
+      row "Preview Image 2" do |resource|
+        image_tag(resource.image_2.url(:preview)) if resource.image_2?
+      end
+      row "Preview Image 3" do |resource|
+        image_tag(resource.image_3.url(:preview)) if resource.image_3?
+      end      
       row :created_at
     end
     active_admin_comments
@@ -91,7 +97,9 @@ ActiveAdmin.register Resource do
      f.input :price_in_cents
      f.input :tag_list  #  <TODO>: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
      f.input :file, :as => :file, :input_html => { :accept => "application/pdf" }, hint: resource.file_url
-     f.input :image, :as => :file, :input_html => { :accept => "image/*" }, hint: resource.image_url
+     f.input :image_1, :as => :file, :input_html => { :accept => "image/*" }, hint: resource.image_1_url
+     f.input :image_2, :as => :file, :input_html => { :accept => "image/*" }, hint: resource.image_2_url     
+     f.input :image_3, :as => :file, :input_html => { :accept => "image/*" }, hint: resource.image_3_url          
      f.input :featured_resource, :as => :select, :include_blank => false
    end                               
    f.actions                         

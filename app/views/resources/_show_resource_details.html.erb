@@ -2,10 +2,10 @@
 	<h2><%= @resource.name %></h2>
 	<p><%= @resource.category.name %> | <%= display_category_tag_links(@resource) %></p>	
 </div>
-
+	
 <div class="media">				
 	<a href="#resource-preview" role="button" data-toggle="modal" class="pull-left">
-		<dd><%= image_tag @resource.image_url(:medium).to_s, :class => "img-polaroid" %></dd>
+		<dd><%= image_tag @resource.image_1_url(:medium).to_s, :class => "img-polaroid" %></dd>
 	</a>
 	<p><b>Description:</b> <%= @resource.description %></p>
 	<p><b>Price:</b>
@@ -17,7 +17,7 @@
 	</p>
 	<p><b>Downloads:</b> <%= @resource.number_of_downloads %></p>
 	<p><b>Reviews:</b> <%= @resource.number_of_reviews %></p>
-	
+
 		<p><b>Avg. Rating:</b> 
 			<% if @resource.reviews.count > 0 %>			
 
@@ -33,7 +33,7 @@
 				Not yet rated
 			<% end %>
 		</p>
-	
+
 	<% if already_in_cart(@resource) %>
 		<h4>Item is already in Shopping Cart.</h4> 
 		<a href="#resource-preview" role="button" class="btn" data-toggle="modal">Preview</a>
@@ -42,9 +42,9 @@
 		<a href="#resource-preview" role="button" class="btn" data-toggle="modal">Preview</a> 
 		<a href="<%= add_to_cart_path %>" class="btn btn-success">Add to Cart</a>	       
 	<% end %>
-</div>
+</div>  
+      
 
- 
 <!-- Modal -->
 <div id="resource-preview" class="modal hide fade resource-preview-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
@@ -53,7 +53,26 @@
   	</div>
  	
 	<div class="modal-body resource-preview-modal-body">
-   	<p><%= image_tag(@resource.image.url(:preview)) %></p>
+		<div id="myCarousel" class="carousel slide">
+			<ol class="carousel-indicators">
+		   	<% unless @resource.image_1.blank? %><li data-target="#myCarousel" data-slide-to="0" class="active"></li><% end %>
+		    	<% unless @resource.image_2.blank? %><li data-target="#myCarousel" data-slide-to="1"></li><% end %> 
+		    	<% unless @resource.image_3.blank? %><li data-target="#myCarousel" data-slide-to="2"></li><% end %> 
+		  	</ol>
+
+		  	<!-- Carousel items -->
+		  	<div class="carousel-inner">
+		    	<% unless @resource.image_1.blank? %><div class="active item"><p><%= image_tag(@resource.image_1.url(:preview)) %></p></div><% end %>
+		    	<% unless @resource.image_2.blank? %><div class="item"><%= image_tag(@resource.image_2.url(:preview)) %></div><% end %>
+		    	<% unless @resource.image_3.blank? %><div class="item"><%= image_tag(@resource.image_3.url(:preview)) %></div><% end %>
+		  	</div>
+
+		  	<!-- Carousel nav -->
+		  	<% unless @resource.image_2.blank? && @resource.image_3.blank? %>
+				<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+		  		<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			<% end %>
+		</div>   	
 	</div>
 </div>
 <br>    

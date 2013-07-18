@@ -1,11 +1,13 @@
 class Resource < ActiveRecord::Base
   acts_as_taggable
-  mount_uploader :image, ResourceImageUploader
+  mount_uploader :image_1, ResourceImageUploader
+  mount_uploader :image_2, ResourceImageUploader
+  mount_uploader :image_3, ResourceImageUploader  
   mount_uploader :file, ResourceFileUploader
   attr_accessible :category
   attr_accessible :description
   attr_accessible :file
-  attr_accessible :image
+  attr_accessible :image_1, :image_2, :image_3
   attr_accessible :name
   attr_accessible :price_in_cents
   attr_accessible :price_type

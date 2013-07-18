@@ -9,7 +9,7 @@
     		<div class="thumbnail">
       		<h4><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h4> 
       		<a href=<%= "#{category_resource_path(resource.category_id, resource.id)}" %>>
-					<dd><%= image_tag resource.image_url(:thumb).to_s, :class => "img-polaroid" %></dd>
+					<dd><%= image_tag resource.image_1_url(:thumb).to_s, :class => "img-polaroid" %></dd>
 				</a>
 				<% if resource.reviews.count > 0 %>			
 

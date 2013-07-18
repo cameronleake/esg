@@ -17,7 +17,7 @@
 				<tbody>
 					<% @cart_items.each do |resource| %>
 						<tr>
-							<td><%= image_tag resource.image_url(:icon).to_s %></td>
+							<td><%= image_tag resource.image_1_url(:icon).to_s %></td>
 							<td><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></td>
 							<td><%= resource.category.name %></td>
 							<% if resource.price_type == "Free" %>
