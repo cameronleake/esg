@@ -28,7 +28,8 @@ DOWNLOAD_EXPIRY_HOURS = 24
 
 
 # Tickets
-CONTACT_TICKET_STATUSES = ["Open", "Closed", "Abandoned"]
+CONTACT_TICKET_STATUSES = ["Open", "Closed", "Abandoned"]   
+CONTACT_TICKET_TOPICS = ["Suggestion", "Bug Report", "Blog", "Resources", "Payments", "Other"]
 
 
 # Users

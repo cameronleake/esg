@@ -19,6 +19,7 @@
 				  	<%= f.input :name %>
 				  	<%= f.input :email %>
 				<% end %>
+				<%= f.input :topic, :as => :select, :include_blank => false, :collection => CONTACT_TICKET_TOPICS %>
 			  	<%= f.input :subject, :input_html => { :class => 'subject-field' } %>
 			  	<%= f.input :body, as: :text, :label => "Message", :input_html => { :class => 'message-field' } %>
 

@@ -30,7 +30,8 @@ ActiveAdmin.register Contact do
        div :class => "admin-center-column" do 
           contact.status
        end
-    end  
+    end                        
+    column :topic
     column :email       
     column :subject  
     column :created_at          
@@ -45,7 +46,8 @@ ActiveAdmin.register Contact do
       row :status
       row :spam do |contact|
         contact.spam.yesno
-      end
+      end              
+      row :topic
       row :name
       row :email
       row :subject
@@ -56,11 +58,12 @@ ActiveAdmin.register Contact do
   end
     
   
-  # Configuration for Tickets Index Page
+  # Configuration for Tickets Edit Page
   form do |f|                         
     f.inputs "New Contact Ticket" do       
       f.input :status, :as => :select, :include_blank => false, :collection => CONTACT_TICKET_STATUSES
-      f.input :spam, :as => :select, :include_blank => false
+      f.input :spam, :as => :select, :include_blank => false                    
+      f.input :topic, :as => :select, :include_blank => false, :collection => CONTACT_TICKET_TOPICS
       f.input :name                
       f.input :email
       f.input :subject

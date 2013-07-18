@@ -14,8 +14,8 @@ class Resource < ActiveRecord::Base
   attr_accessible :tag_list
   attr_accessible :user_id
   attr_accessible :category_id
-  attr_accessible :featured_resource
   attr_accessible :number_of_downloads
+  attr_accessible :number_of_pages    
   belongs_to :user
   belongs_to :category
   has_many :downloads, :dependent => :destroy

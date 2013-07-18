@@ -2,9 +2,6 @@ ActiveAdmin.register Article do
   menu :parent => "ESG BLOG", :priority => 1   
   config.filters = false  
   scope :all, :default => true
-  scope :featured_articles do |articles|
-    articles.where(:featured_article => true)
-  end
   scope :draft_articles do |articles|
     articles.where(:published => false)
   end
@@ -27,11 +24,6 @@ ActiveAdmin.register Article do
     column :published, :sortable => :published do |article|
        div :class => "admin-center-column" do 
           article.published.published_status
-       end
-    end
-    column :featured_article, :sortable => :featured_article do |article|
-       div :class => "admin-center-column" do 
-          article.featured_article.featured_article
        end
     end
     column :distributed_at
@@ -59,9 +51,6 @@ ActiveAdmin.register Article do
       row "PUBLISHED TO BLOG?" do |article|
         article.published.published_status
       end
-      row "FEATURED ARTICLE?" do |article|
-        article.featured_article.featured_article
-      end
       row :distributed_at
       row :created_at
       row :updated_at
@@ -79,7 +68,6 @@ ActiveAdmin.register Article do
       f.input :body, as: :text, :input_html => { :rows => 12 }   
       f.input :featured_image, :as => :file, :input_html => { :accept => "image/*" }
       f.input :tag_list  #  <TODO>: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
-      f.input :featured_article, :as => :select, :include_blank => false, :collection => [["Featured", true], ["No", false]]
       f.input :published, :as => :select, :include_blank => false, :collection => [["Published", true], ["Draft", false]]
     end                               
     f.actions                         
@@ -99,22 +87,6 @@ ActiveAdmin.register Article do
     batch_action :draft, :priority => 2 do |selection|
       Article.find(selection).each do |article|
         article.published = false
-        article.save
-      end
-      redirect_to admin_articles_path
-    end
-    
-    batch_action :feature, :priority => 2 do |selection|
-      Article.find(selection).each do |article|
-        article.featured_article = true
-        article.save
-      end
-      redirect_to admin_articles_path
-    end
-    
-    batch_action "Un-Feature", :priority => 2 do |selection|
-      Article.find(selection).each do |article|
-        article.featured_article = false
         article.save
       end
       redirect_to admin_articles_path

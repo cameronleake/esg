@@ -1,23 +1,28 @@
 class ArticlesController < ApplicationController
   before_filter :authorize_user_logged_in, only: [:edit, :update]
+           
   
   def index     
     if params[:tag]
       @articles = Article.where(:published => true).tagged_with(params[:tag]).order("created_at DESC").page(params[:page]).per(10)
+      @tag_name = params[:tag]
     elsif params[:query].present?
       @articles = Article.where(:published => true).text_search(params[:query]).page(params[:page]).per(10)
     else
       @articles = Article.where(:published => true).order("created_at DESC").page(params[:page]).per(10)
     end
   end
+      
 
   def show
     @article = Article.find(params[:id])
-  end
+  end    
+  
 
   def edit
     @article = Article.find(params[:id])
-  end
+  end       
+  
 
   def update
     @article = Article.find(params[:id])
@@ -26,12 +31,8 @@ class ArticlesController < ApplicationController
     else
       render "edit"
     end
-  end
+  end        
   
-  def featured_articles
-    @articles = Article.where(:published => true).order("created_at DESC")
-    render :partial => 'featured_articles'
-  end
   
   def mercury_update
     @article = Article.find(params[:id])

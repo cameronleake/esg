@@ -21,15 +21,3 @@ class FalseClass
     "Draft"
   end
 end
-
-class TrueClass
-  def featured_article
-    "Featured"
-  end
-end
-
-class FalseClass
-  def featured_article
-    "No"
-  end
-end

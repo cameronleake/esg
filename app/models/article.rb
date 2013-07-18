@@ -6,7 +6,6 @@ class Article < ActiveRecord::Base
   attr_accessible :title
   attr_accessible :featured_image
   attr_accessible :tag_list
-  attr_accessible :featured_article
   attr_accessible :published
   attr_accessible :distributed_at              
   attr_accessible :author

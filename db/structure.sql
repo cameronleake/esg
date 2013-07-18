@@ -147,7 +147,6 @@ CREATE TABLE articles (
     updated_at timestamp without time zone NOT NULL,
     featured_image character varying(255),
     blurb character varying(255),
-    featured_article boolean DEFAULT false,
     published boolean DEFAULT false,
     distributed_at timestamp without time zone,
     author character varying(255)
@@ -251,7 +250,8 @@ CREATE TABLE contacts (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     spam boolean DEFAULT false,
-    status character varying(255) DEFAULT 'OPEN'::character varying
+    status character varying(255) DEFAULT 'OPEN'::character varying,
+    topic character varying(255)
 );
 
 
@@ -452,12 +452,12 @@ CREATE TABLE resources (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     category_id integer,
-    featured_resource boolean DEFAULT false,
     price_in_cents integer DEFAULT 0,
     currency character varying(255) DEFAULT 'USD'::character varying,
     number_of_downloads integer DEFAULT 0,
     image_2 character varying(255),
-    image_3 character varying(255)
+    image_3 character varying(255),
+    number_of_pages integer
 );
 
 
@@ -1220,3 +1220,9 @@ INSERT INTO schema_migrations (version) VALUES ('20130716044103');
 INSERT INTO schema_migrations (version) VALUES ('20130716052817');
 
 INSERT INTO schema_migrations (version) VALUES ('20130718071528');
+
+INSERT INTO schema_migrations (version) VALUES ('20130718102234');
+
+INSERT INTO schema_migrations (version) VALUES ('20130718104713');
+
+INSERT INTO schema_migrations (version) VALUES ('20130718110855');

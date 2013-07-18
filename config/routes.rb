@@ -30,7 +30,7 @@ Esg::Application.routes.draw do
    # ARTICLES / BLOG_COMMENTS
    match 'blog' => 'articles#index'
    get 'articles/tags/:tag', to: 'articles#index', as: :article_tag
-   resources :articles, :only => [:index, :show, :edit, :update, :featured_articles] do
+   resources :articles, :only => [:index, :show, :edit, :update] do
     resources :blog_comments, :only => [:create]
     member { post :mercury_update }
    end
