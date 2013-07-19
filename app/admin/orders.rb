@@ -72,7 +72,9 @@ ActiveAdmin.register Order do
             column :success, :sortable => :success do |transaction|
               transaction.success.yesno
             end            
-            column :error_codes
+            column :error_codes do |transaction|
+              transaction.error_codes if transaction.error_codes != 0
+            end
             column :message           
             column "View" do |transaction|
               link_to "View", admin_order_transaction_path(transaction.id)
