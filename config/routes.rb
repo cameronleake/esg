@@ -63,7 +63,8 @@ Esg::Application.routes.draw do
    match 'payment_redirect' => 'orders#payment_redirect'
    match 'express' => 'orders#express'           
    match 'confirm_email' => 'orders#confirm_email'      
-   match 'free_order' => 'orders#free_order'
+   match 'free_order' => 'orders#free_order'    
+   match 'payment_failure' => 'orders#failure'
    
 
    # CONTACT_TICKETS

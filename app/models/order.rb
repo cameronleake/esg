@@ -90,8 +90,8 @@ class Order < ActiveRecord::Base
   end                             
      
   
-  def send_download_links_email
-    OrderMailer.download_links_email(self).deliver
+  def send_order_receipt
+    OrderMailer.order_receipt(self).deliver
   end     
   
   

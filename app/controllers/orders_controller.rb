@@ -40,71 +40,73 @@ class OrdersController < ApplicationController
     if params[:token]
       @order.update_attributes(:express_token => params[:token])
       @order.save!(:validate => false)
-    end                 
-    @order.street1 = @user.street1           # <TODO> Refactor and move into model.
-    @order.street2 = @user.street2
-    @order.city = @user.city
-    @order.state = @user.state
-    @order.country = @user.country
-    @order.zip = @user.zip
+    else                 
+      @order.street1 = @user.street1           # <TODO> Refactor and move into model.
+      @order.street2 = @user.street2
+      @order.city = @user.city
+      @order.state = @user.state
+      @order.country = @user.country
+      @order.zip = @user.zip
+    end
   end
 
                     
-  def update
+  def update                                        # <TODO> REVISE AND REFACTOR!
     @user = current_user
     @cart = current_shopping_cart
     @order = @cart.order         
     @order.ip_address = request.remote_ip        
+    
     if params[:order] 
       @order.update_attributes(params[:order])
     end    
+    
     if @order.express_token
       @order.payment_method = "PayPal Express"
       unless @order.save!(:validate => false)
-        flash[:error] = "Error with PayPal Express Gateway."
-        render :action => 'new'
+        flash[:error] = "Error with PayPal Express Gateway."             # <TODO> Redirect to Contact Form with Populated Info.
+        redirect_to payment_failure_path
       end
     else
       @order.payment_method = "Standard"
       if @order.valid?
         @order.save!
-        @user.save_address(@order)
-        
-        if @order.purchase(@cart) 
-          @order.generate_download_links
-          if @order.delay.send_download_links_email
-            @order.email_sent = true
-          end
-          @order.status = "Payment Confirmed"
-          @cart.status = "Closed" 
-          @order.save!(:validate => false)
-          @cart.save!
-          cookies.delete(:cart_token)  
-          redirect_to order_completed_path, :notice => "Order processed successfully!"
-        else             
-          @order.status = "Error"
-          @cart.status = "Error"
-          @order.save!(:validate => false) 
-          @cart.save! 
-          
-          case @order.transactions.last.error_codes
-          when 10527
-            flash[:error] = "Please enter a valid credit card number & type"
-            render :action => 'new'    
-          when 10508
-            flash[:error] = "Please enter a valid credit card expiration date"
-            render :action => 'new'            
-          else
-            flash[:error] = "#{@order.transactions.last.message}"
-            render :action => "failure"            
-          end            
-
-        end
+        @user.save_address(@order)   
       else
         flash[:error] = "Please fill in all required fields."
         render :action => 'new'
+      end    
+    end      
+      
+    if @order.purchase(@cart) 
+      @order.generate_download_links
+      if @order.delay.send_order_receipt
+        @order.email_sent = true
       end
-    end     
+      @order.status = "Payment Confirmed"
+      @cart.status = "Paid" 
+      @order.save!(:validate => false)
+      @cart.save!
+      cookies.delete(:cart_token)  
+      redirect_to order_completed_path, :notice => "Order processed successfully!"
+    else             
+      @order.status = "Error"
+      @cart.status = "Error"
+      @order.save!(:validate => false) 
+      @cart.save! 
+      
+      case @order.transactions.last.error_codes
+      when 10527
+        flash[:error] = "Please enter a valid credit card number & type"
+        render :action => 'new'    
+      when 10508
+        flash[:error] = "Please enter a valid credit card expiration date"
+        render :action => 'new'            
+      else
+        flash[:error] = "#{@order.transactions.last.message}"
+        redirect_to payment_failure_path
+      end            
+    end    
   end    
   
   
@@ -124,7 +126,7 @@ class OrdersController < ApplicationController
     @order.status = "Closed"
         
     @order.generate_download_links
-    if @order.delay.send_download_links_email
+    if @order.delay.send_order_receipt
       @order.email_sent = true
     end                            
     

@@ -3,11 +3,12 @@
 
    	<div class="span9">
 			<div class="page-header">
-				<h2>Payment Failed!</h2>
+				<h2>Payment Error!</h2>
 			</div>
                    
-			<p>An error has occurred with your payment details.</p>
-			<p>Please return to re-enter your payment details, or contact us to process your order.</p>     
+			<p>We're sorry, an error has occurred with your payment that our automated system cannot handle.</p>
+			<p>If you would like to re-enter your payment details, please click <strong>Return</strong>.</p>
+			<p>Alternatively, please send us a Support Ticket so we can manually process your order, via the <strong>Contact</strong> button and quote <strong>Order No: #<%= @order.id %></strong>.</p>
 			  
 		  	<div class="form-actions"> 			
 				<a href="<%= new_order_path %>" class="btn btn-warning"><< Return</a> 
