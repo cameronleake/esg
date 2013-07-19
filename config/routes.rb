@@ -1,5 +1,8 @@
 Esg::Application.routes.draw do
 
+   match "*path" => redirect("https://www.engineeringsurvivalguide.com/%{path}"), :constraints => { :protocol => "http://" }
+   match "*path" => redirect("https://www.engineeringsurvivalguide.com/%{path}"), :constraints => { :subdomain => "" }
+
    root :to => "home#index"
 
    # HOME
