@@ -4,12 +4,12 @@ class ArticlesController < ApplicationController
   
   def index     
     if params[:tag]
-      @articles = Article.where(:published => true).tagged_with(params[:tag]).order("created_at DESC").page(params[:page]).per(10)
+      @articles = Article.where(:published => true).tagged_with(params[:tag]).order("created_at DESC").page(params[:page]).per(NUMBER_ARTICLES_PER_PAGE)
       @tag_name = params[:tag]
     elsif params[:query].present?
-      @articles = Article.where(:published => true).text_search(params[:query]).page(params[:page]).per(10)
+      @articles = Article.where(:published => true).text_search(params[:query]).page(params[:page]).per(NUMBER_ARTICLES_PER_PAGE)
     else
-      @articles = Article.where(:published => true).order("created_at DESC").page(params[:page]).per(10)
+      @articles = Article.where(:published => true).order("created_at DESC").page(params[:page]).per(NUMBER_ARTICLES_PER_PAGE)
     end
   end
       

@@ -6,11 +6,15 @@
 <ul class="thumbnails">
 	<% @recent_resources.each do |resource| %>
   		<li class="span3" align="center">
-    		<div class="thumbnail">
+    		<div class="thumbnail" align="center">
       		<h4><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h4> 
-      		<a href=<%= "#{category_resource_path(resource.category_id, resource.id)}" %>>
-					<dd><%= image_tag resource.image_1_url(:thumb).to_s, :class => "img-polaroid" %></dd>
-				</a>
+      		
+				<% unless resource.image_1.blank? %>
+					<a href=<%= "#{category_resource_path(resource.category_id, resource.id)}" %>>
+						<dd><%= image_tag resource.image_1_url(:thumb).to_s, :class => "img-polaroid" %></dd>
+					</a>
+				<% end %>
+					
 				<% if resource.reviews.count > 0 %>			
 
 					<% resource.average_rating.times do %>

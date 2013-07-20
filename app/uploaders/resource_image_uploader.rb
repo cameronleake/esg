@@ -26,8 +26,8 @@ class ResourceImageUploader < CarrierWave::Uploader::Base
   
   def create_resource_image_icon
     manipulate! do |img|
-      img = img.resize_to_fill(100, 60)
-      img = img.crop(Magick::CenterGravity, 100, 60)      
+      img = img.resize_to_fill(120, 75)
+      img = img.crop(Magick::CenterGravity, 120, 75)      
     end
   end
 

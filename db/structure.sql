@@ -516,7 +516,7 @@ ALTER SEQUENCE resources_shopping_carts_id_seq OWNED BY resources_shopping_carts
 
 CREATE TABLE reviews (
     id integer NOT NULL,
-    body character varying(255),
+    body text,
     rating integer,
     resource_id integer,
     user_id integer,
@@ -1226,3 +1226,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130718102234');
 INSERT INTO schema_migrations (version) VALUES ('20130718104713');
 
 INSERT INTO schema_migrations (version) VALUES ('20130718110855');
+
+INSERT INTO schema_migrations (version) VALUES ('20130720055053');

@@ -10,7 +10,13 @@ class User < ActiveRecord::Base
   attr_accessible :email_verification_token
   attr_accessible :blog_subscription
   attr_accessible :resources_subscription
-  attr_accessible :avatar
+  attr_accessible :avatar  
+  attr_accessible :street1
+  attr_accessible :street2
+  attr_accessible :city
+  attr_accessible :state
+  attr_accessible :country
+  attr_accessible :zip
   attr_writer :password_required
   validates_presence_of :first_name, :last_name, :email
   validates_presence_of :password, :on => :create

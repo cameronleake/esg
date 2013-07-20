@@ -1,42 +1,41 @@
 <div class="page-header">
 	<h3>Reviews</h3>
-</div>
+</div> 
 
-<table class="table table-striped">
-	<% @resource.reviews.where(:spam => false).order("created_at ASC").each do |review| %>
-		<thead>
-			<tr>
-				<td>
-					<div class="row-fluid">
-						<div class="span6">
-							<div class="blog-article-list">
-								<div class="media">
-									<a class="pull-left">
-										<dd><%= image_tag(review.user.avatar.url(:avatar)) %></dd>
-									</a>
-									<h4><%= review.title %></h4>
-									<h5>By: <%= "#{review.user.first_name} #{review.user.last_name}" %>, <%= review.created_at.time %></h5>
-								</div>
-							</div>
-						</div>
-						<div class="span2">
-							<% review.rating.times do %>
-								<i class="icon-star rating-colour-large"></i>
-							<% end %>
+<div class="row-fluid">
+	<ul class="thumbnails">    
 
-							<% (5 - review.rating).times do %>
-								<i class="icon-star-empty rating-no-colour-large"></i>
-							<% end %>
-							<h5>Rated: <%= review.rating %>/5</h5>
-						</div>
-					</div>
-				</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><%= review.body %></td>
-			</tr>
-		</tbody>
-	<% end %>
-</table>
+		<% @resource.reviews.where(:spam => false).order("created_at ASC").each_with_index do |review, index| %> 	 
+
+	 		<li class="span6"> 
+				<div class="thumbnail blog-article-list media">
+			    	<a class="pull-left">
+						<dd><%= image_tag(review.user.avatar.url(:avatar)) %></dd>
+					</a>
+					<h4><%= review.title %></h4>
+					<h5>By: <%= "#{review.user.first_name} #{review.user.last_name}" %>, <%= review.created_at.time %></h5>    
+	
+					<% review.rating.times do %>
+						<i class="icon-star rating-colour-medium"></i>
+					<% end %>
+
+					<% (5 - review.rating).times do %>
+						<i class="icon-star-empty rating-no-colour-medium"></i>
+					<% end %>
+
+					<p><%= review.body %></p>   			     
+		
+				</div>  
+	   	</li>      
+	
+			<% if ( index % 2 == 1 ) && ( index != 0 ) %>
+			   
+			   </ul>
+    	  		<ul class="thumbnails"> 
+			
+			<% end %>
+	
+		<% end %>
+		       
+	</ul>  
+</div> 

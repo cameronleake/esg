@@ -5,10 +5,10 @@
 <% end %>  
 
 <div class="page-header">
-  	<h3>Tags</h3>
+  	<h4>Tags</h4>
 </div>
 <% tag_cloud Resource.tag_counts.sort { |x, y| x.name <=> y.name }, %w{s m l} do |tag| %>
- 	<h4><%= link_to tag.name, category_tag_path(tag.name) %></h4>
+ 	<h5><%= link_to tag.name, category_tag_path(tag.name) %></h5>
 <% end %>
 <br>
 
@@ -21,12 +21,11 @@
 		<% end %>
 	</div>
 </div>
-<br>
 
 <% unless current_user && current_user.resources_subscription %>
 
 	<div class="page-header">
-	  	<h3>Subscribe</h3>
+	  	<h4>Subscribe</h4>
 	</div>
 	<p>Sign up to receive updates of the latest resources directly to your inbox!</p>
 

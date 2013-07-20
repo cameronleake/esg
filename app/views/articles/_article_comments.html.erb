@@ -1,60 +1,63 @@
-<div class="page-header">
-	<h3>Comments</h3>
-</div>
+<% if !@article.blog_comments.where(:spam => false).nil? %>
 
-<table class="table table-striped">
-	<% @article.blog_comments.where(:spam => false).order("created_at ASC").each do |comment| %>
-		<thead>
-			<tr>
-				<td class="blog-article-list">
-					<div class="media">
-						<a class="pull-left">
-							<dd><%= image_tag(comment.user.avatar.url(:avatar)) %></dd>
-						</a>
-						<h4><%= "#{comment.user.first_name} #{comment.user.last_name}" %></h4>
-						<h5><%= comment.created_at.time.to_formatted_s(:long) %></h5>
-					</div>					
-				</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr><td><%= comment.body %></td></tr>
-		</tbody>
-	<% end %>
-</table>
+	<div class="page-header">
+		<h3>Comments</h3>
+	</div>
 
-<div class="form-actions">
-	<% if current_user %>
-		<h3>Add a comment:</h3>
-		<%= simple_form_for([@article, @article.blog_comments.build]) do |f| %>
-			<%= f.input :body, as: :text, :label => false, :required => true, :input_html => { :class => "blog-comments", :maxlength => 2000 } %>					
-		  	<div class="form-actions">
-				<a href="#submit_comment" role="button" class="btn btn-primary" data-toggle="modal">Submit</a>
-		  	</div>
-
-			<!-- Modal Window -->
-			<div id="submit_comment" class="modal hide fade blog-subscription-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-header">
-			   	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			    	<h3 id="myModalLabel">The Engineering Survival Guide</h3>
-			  	</div>
-
-				<div class="modal-body">
-			   	<p>Are you sure you want to post this comment?</p>
-			  	</div>
-
-				<div class="modal-footer">
-			    	<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-				  	<%= f.button :submit, :value => "Post Comment", :class => 'btn-warning' %>
-			  	</div>
-			</div>
+	<table class="table table-striped">
+		<% @article.blog_comments.where(:spam => false).order("created_at ASC").each do |comment| %>
+			<thead>
+				<tr>
+					<td class="blog-article-list">
+						<div class="media">
+							<a class="pull-left">
+								<dd><%= image_tag(comment.user.avatar.url(:avatar)) %></dd>
+							</a>
+							<h4><%= "#{comment.user.first_name} #{comment.user.last_name}" %></h4>
+							<h5><%= comment.created_at.time.to_formatted_s(:long) %></h5>
+						</div>					
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td><%= comment.body %></td></tr>
+			</tbody>
 		<% end %>
-	<% else %>
-		<div class="form-horizontal comments-links">
-			<p>Sign up or Login to leave a comment!</p>
-			<a href=<%= signup_path %> class="btn btn-info">Sign Up</a>
-			<a href=<%= login_path %> class="btn">Login</a>	
-		</div>					
-	<% end %>
-</div>
+	</table>
+	
+<% end %> 	
 
+	<div class="form-actions">
+		<% if current_user %>
+			<h3>Add a comment:</h3>
+			<%= simple_form_for([@article, @article.blog_comments.build]) do |f| %>
+				<%= f.input :body, as: :text, :label => false, :required => true, :input_html => { :class => "blog-comments", :maxlength => 2000 } %>					
+			  	<div class="form-actions">
+					<a href="#submit_comment" role="button" class="btn btn-primary" data-toggle="modal">Submit</a>
+			  	</div>
+
+				<!-- Modal Window -->
+				<div id="submit_comment" class="modal hide fade blog-subscription-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-header">
+				   	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				    	<h3 id="myModalLabel">The Engineering Survival Guide</h3>
+				  	</div>
+
+					<div class="modal-body">
+				   	<p>Are you sure you want to post this comment?</p>
+				  	</div>
+
+					<div class="modal-footer">
+				    	<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+					  	<%= f.button :submit, :value => "Post Comment", :class => 'btn-warning' %>
+				  	</div>
+				</div>
+			<% end %>
+		<% else %>
+			<div class="form-horizontal comments-links">
+				<p>Sign up or Login to leave a comment!</p>
+				<a href=<%= signup_path %> class="btn btn-info">Sign Up</a>
+				<a href=<%= login_path %> class="btn">Login</a>	
+			</div>					
+		<% end %>
+	</div>

@@ -16,11 +16,14 @@ MAILCHIMP_ESG_BLOG = { :API_key => "46321100908d098dcb744572daac886b-us7", :list
 # Resources
 RESOURCE_PRICE_TYPES = ["Paid", "Free"]
 SHOPPING_CART_STATUSES = ["OPEN", "CLOSED"]
-RESOURCE_RATINGS = [0, 1, 2, 3, 4, 5]   
+RESOURCE_RATINGS = [0, 1, 2, 3, 4, 5]  
+NUMBER_RELATED_RESOURCES = 3  
+NUMBER_RESOURCES_PER_PAGE = 10
 
 
 # Articles
-DEFAULT_ARTICLE_AUTHOR = "EngineeringSurvivalGuide"
+DEFAULT_ARTICLE_AUTHOR = "EngineeringSurvivalGuide"  
+NUMBER_ARTICLES_PER_PAGE = 10
                                                   
 
 # Downloads

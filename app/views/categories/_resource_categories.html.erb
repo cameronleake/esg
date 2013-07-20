@@ -3,7 +3,7 @@
 	
 		<% @filtered_categories.each do |category| %>	
 			<div class="span4" align="center">  
-		   	<h4><%= link_to "#{category.name.pluralize} (#{category.resources_with_tag_count(@tag_name)})", show_category_tag_path(category) %></h4>
+		   	<h5><%= link_to "#{category.name.pluralize} (#{category.resources_with_tag_count(@tag_name)})", show_category_tag_path(category) %></h5>
 			</div>
 		<% end %>
 
@@ -11,7 +11,7 @@
 	
 		<% @categories.each do |category| %>	
 			<div class="span4" align="center">     
-		   	<h4><%= link_to "#{category.name.pluralize} (#{category.resources_count})", category_path(category) %></h4>
+		   	<h5><%= link_to "#{category.name.pluralize} (#{category.resources_count})", category_path(category) %></h5>
 			</div>
 		<% end %>    
 	

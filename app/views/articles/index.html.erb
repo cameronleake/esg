@@ -9,10 +9,14 @@
 						<tr>
 							<td>
 								<div class="media">
-									<h3><%= link_to article.title, article_path(article) %></h3>								
-									<a href="<%= article_path(article) %>" class="pull-left">
-										<dd><%= image_tag article.featured_image_url(:thumb).to_s %></dd>
-									</a>
+									<h4><%= link_to article.title, article_path(article) %></h4>								
+
+									<% unless article.featured_image.blank? %>									
+										<a href="<%= article_path(article) %>" class="pull-left">
+											<dd><%= image_tag article.featured_image_url(:thumb).to_s %></dd>
+										</a>
+									<% end %>
+
 									<h5>
 										<%= article.created_at.time.to_formatted_s(:default) %> -- 
 										<%= display_article_tag_links(article) %>

@@ -1,0 +1,28 @@
+<div class="page-header"> 
+	<h4>Related Resources</h4>
+</div>                   
+
+<% @related_resources.each do |resource| %> 	
+	<h5><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h5>
+
+	<% unless resource.image_1.blank? %>
+		<a href="<%= category_resource_path(resource.category_id, resource.id) %>">
+			<dd><%= image_tag resource.image_1_url(:icon).to_s, :class => "img-polaroid" %></dd>
+		</a>
+	<% end %>
+	
+	<% if resource.reviews.count > 0 %>			
+
+		<% resource.average_rating.times do %>
+			<i class="icon-star rating-colour-medium"></i>
+		<% end %>
+
+		<% (5 - resource.average_rating).times do %>
+			<i class="icon-star-empty rating-no-colour-medium"></i>
+		<% end %>
+
+	<% end %>
+	<br>  
+	<br>  	
+
+<% end %>	
