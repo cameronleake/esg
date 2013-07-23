@@ -4,7 +4,7 @@
 </ul>
 
 <ul class="thumbnails">
-	<% @recent_resources.each do |resource| %>
+	<% @newest_resources.each do |resource| %>
   		<li class="span3" align="center">
     		<div class="thumbnail" align="center">
       		<h4><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h4> 

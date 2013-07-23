@@ -1,4 +1,0 @@
-<h4>Recent Resources</h4>   
-<% @recent_resources.each do |resource| %>
-	<p><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %> - <%= resource.created_at %></p>
-<% end %>
