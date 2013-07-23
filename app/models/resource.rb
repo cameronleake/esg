@@ -24,7 +24,7 @@ class Resource < ActiveRecord::Base
   include PgSearch
   pg_search_scope :search, against: [:name, :description],
     using: { tsearch: {dictionary: "english", :prefix => true} }
-    
+                                                                             
     
   def number_of_reviews
     self.reviews.where(:spam => false).count

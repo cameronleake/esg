@@ -31,6 +31,8 @@ gem 'mercury-rails'         # For editing HTML in the browser
 gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'    # For JS Datatables
 gem 'activemerchant'        # For Paypal Integeration
 gem 'country_select'        # For Country Selection DropDowns      
+gem 'groupdate'             # To Records by Date
+gem 'chartkick'             # Creating Charts
 
 group :test, :development do
   gem "rspec-rails"

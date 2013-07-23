@@ -1,0 +1,4 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+
+<% sum = 0 %>
+<%= line_chart User.group_by_day(:created_at).count.to_a.sort{|x,y| x[0] <=> y[0]}.map { |x,y| { x => (sum += y)} }.reduce({}, :merge) %>

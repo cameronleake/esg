@@ -7,7 +7,7 @@
 				<h4><%= link_to resource.name, show_resource_tag_path(resource.category_id, resource.id) %></h4>
 				<% unless resource.image_1.blank? %>
 					<a href="<%= show_resource_tag_path(resource.category_id, resource.id) %>" class="pull-left">
-						<dd><%= image_tag resource.image_1_url(:thumb).to_s, :class => "img-polaroid" %></dd>
+						<dd><%= image_tag resource.image_1_url(:icon).to_s, :class => "img-polaroid" %></dd>
 					</a>
 				<% end %>
 				
@@ -16,7 +16,7 @@
 				<h4><%= link_to resource.name, category_resource_path(resource.category_id, resource.id) %></h4>
 				<% unless resource.image_1.blank? %>
    				<a href="<%= category_resource_path(resource.category_id, resource.id) %>" class="pull-left">
-						<dd><%= image_tag resource.image_1_url(:thumb).to_s, :class => "img-polaroid" %></dd>
+						<dd><%= image_tag resource.image_1_url(:icon).to_s, :class => "img-polaroid" %></dd>
 					</a>
 				<% end %>
 				

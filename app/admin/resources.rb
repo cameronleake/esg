@@ -6,7 +6,7 @@ ActiveAdmin.register Resource do
     scope "#{category.name.pluralize}" do |resource|
       resource.where(:category_id => category.id)
     end
-  end
+  end  
 
 
   # Configuration for Resources Index Page
@@ -42,11 +42,13 @@ ActiveAdmin.register Resource do
       row :category
       row :name
       row :description
-      row :tag_list     
+      row :tag_list    
       row :number_of_pages
       row :price_type
-      row "Price" do
-         "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2)
+      if resource.price_type == "Paid"
+        row "Price" do
+           "$" + number_with_precision(resource.price_in_cents.to_f/100, :precision => 2)
+        end
       end
       row :number_of_downloads
       row :file do |resource|
@@ -70,13 +72,20 @@ ActiveAdmin.register Resource do
   # Configuration for Resources Edit Page
   form do |f|                         
    f.inputs "New Resource" do       
-     f.input :user
+     f.input :user, :as => :select, :collection => options_from_collection_for_select(User.all, :id, :email), :include_blank => false
      f.input :category, :as => :select, :include_blank => false
      f.input :name
      f.input :description
      f.input :price_type, :as => :select, :include_blank => false, :collection => RESOURCE_PRICE_TYPES
      f.input :price_in_cents
-     f.input :tag_list  #  <TODO>: Fix Tag List as Checkboxes, ie. (, as: :check_boxes, :collection => Tag.order("name ASC").all)
+     f.input :tag_list
+     # f.input :tags, :as => :check_boxes, :multiple => true, :collection => @tags              # <TODO>
+     # f.input :tag_list, :as => :check_boxes, 
+     #   :collection => ActsAsTaggableOn::Tag.all.map(&:name)  
+     # f.input :tag_list, :as => :select,
+     #                    :multiple => :true,
+     #                    :collection => options_from_collection_for_select(Tag.all, :id, :name)      
+     # f.input :tag_list, :as => :check_boxes, :collection => Tag.all, :value_method => :name   
      f.input :number_of_pages
      f.input :file, :as => :file, :input_html => { :accept => "application/pdf" }, hint: resource.file_url
      f.input :image_1, :as => :file, :input_html => { :accept => "image/*" }, hint: resource.image_1_url
