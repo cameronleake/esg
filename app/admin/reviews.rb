@@ -1,17 +1,22 @@
 ActiveAdmin.register Review do
   menu :parent => "RESOURCES", :priority => 3
+  actions :index, :show, :destroy     
   scope :all, :default => true  
-  scope :spam do |review|
-    review.where(:spam => true)
+  scope "Valid" do |review|
+    review.where(:spam => false)
   end
+  scope "Spam" do |review|
+    review.where(:spam => true)
+  end      
 
 
   # Configuration for Sidebar Filters
   filter :resource
-  filter :user
-  filter :rating, as: :select, :include_blank => false, :collection => RESOURCE_RATINGS
-  filter :spam
-  filter :body
+  filter :user    
+  filter :rating, :as => :select, :include_blank => false, :collection => RESOURCE_RATINGS
+  filter :spam, :as => :select   
+  filter :title
+  filter :body     
 
 
   # Configuration for Reviews Index Page

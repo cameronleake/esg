@@ -1,27 +1,33 @@
 ActiveAdmin.register Order do
   menu :parent => "ORDERS", :priority => 2
-  actions :index, :show
-  # scope :all, :default => true    # <TODO>
-          
+  actions :index, :show, :destroy
+  scope :all, :default => true
+  scope "Standard" do |orders|
+    orders.where(:payment_method => "Standard")
+  end  
+  scope "PayPal Express" do |orders|
+    orders.where(:payment_method => "PayPal Express")
+  end  
+  scope "Free" do |orders|
+    orders.where(:payment_method => "Free")
+  end  
+
   
   # Configuration for Sidebar Filters
-  filter :shopping_cart               
-  filter :order_number
-  filter :email_sent, :as => :select  
-  filter :first_name
-  filter :last_name
-  filter :email
-  filter :country
+  filter :shopping_cart          
+  filter :status, :as => :select, :collecrtion => ORDER_STATUSES   
   filter :card_type, as: :select, :collection => CREDIT_CARD_TYPE_SELECTION
-  filter :status
-  
+  filter :email_sent, :as => :select                                       
+  filter :email                                                            
+  filter :order_number 
+                                                                           
   
   # Configuration for Orders Index Page
   config.sort_order = "created_at_desc"
   config.per_page = 15
 
-  index do       
-    selectable_column     # <TODO>
+  index do 
+    selectable_column      
     column :shopping_cart do |order|   
       link_to "Cart ##{order.shopping_cart_id}", admin_shopping_cart_path(order.shopping_cart_id)
     end

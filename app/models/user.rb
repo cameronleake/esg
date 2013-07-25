@@ -31,6 +31,11 @@ class User < ActiveRecord::Base
   has_many :downloads, :through => :shopping_carts
   has_many :reviews, :dependent => :destroy
   has_many :shopping_carts, :dependent => :destroy
+      
+    
+  def display_name   # Fix for ActiveAdmin Filters
+    self.email
+  end    
     
     
   def password_required

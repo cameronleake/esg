@@ -1,6 +1,5 @@
 ActiveAdmin.register Article do
   menu :parent => "ESG BLOG", :priority => 1   
-  config.filters = false  
   scope :all, :default => true
   scope :draft_articles do |articles|
     articles.where(:published => false)
@@ -10,7 +9,15 @@ ActiveAdmin.register Article do
   end
   scope :not_yet_distributed do |articles|
     articles.where(:distributed_at => nil)
-  end
+  end           
+  
+  
+  # Configuration for Sidebar Filters
+  filter :title
+  filter :blurb
+  filter :body
+  filter :author
+  filter :published, :as => :select
   
   
   # Configuration for Articles Index Page

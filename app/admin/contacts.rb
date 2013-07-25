@@ -14,6 +14,7 @@ ActiveAdmin.register Contact do
   
   # Configuration for Sidebar Filters
   filter :status, :as => :select, :collection => CONTACT_TICKET_STATUSES
+  filter :topic, :as => :select, :collection => CONTACT_TICKET_TOPICS
   filter :spam, :as => :select
   filter :name
   filter :email
@@ -32,7 +33,6 @@ ActiveAdmin.register Contact do
        end
     end                        
     column :topic
-    column :email       
     column :subject  
     column :created_at          
     default_actions                   

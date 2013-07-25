@@ -11,6 +11,11 @@ class ShoppingCart < ActiveRecord::Base
   has_many :downloads, :through => :order
   
   after_create :build_default_order 
+                 
+  
+  def display_name   # Fix for ActiveAdmin Filters
+    "Cart ##{self.id}"
+  end
   
 
   def total_cart_cost

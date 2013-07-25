@@ -13,13 +13,13 @@ ActiveAdmin.register User do
 
 
   # Configuration for Sidebar Filters
-  filter :first_name
-  filter :last_name
-  filter :email
-  filter :created_at
   filter :email_verified, :as => :select
   filter :blog_subscription, :as => :select
   filter :resources_subscription, :as => :select
+  filter :first_name
+  filter :last_name
+  filter :email
+  filter :created_at     
 
 
   # Configuration for Users Index Page

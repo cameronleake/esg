@@ -1,6 +1,6 @@
 ActiveAdmin.register ShoppingCart do
-  menu :parent => "ORDERS", :priority => 1
-  actions :index, :show
+  menu :parent => "ORDERS", :priority => 1               
+  actions :index, :show, :destroy      
   scope :all, :default => true
   scope "Open" do |cart|
     cart.where(:status => "Open")
@@ -15,7 +15,7 @@ ActiveAdmin.register ShoppingCart do
 
   # Configuration for Sidebar Filters
   filter :user
-  filter :status, :as => :select, :include_blank => false, :collection => SHOPPING_CART_STATUSES
+  filter :status, :as => :select, :include_blank => false, :collection => SHOPPING_CART_STATUSES       
 
 
   # Configuration for Shopping Carts Index Page

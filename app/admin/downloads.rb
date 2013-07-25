@@ -2,13 +2,19 @@ ActiveAdmin.register Download do
   menu :parent => "RESOURCES", :priority => 4
   actions :index, :show, :destroy
   scope :all, :default => true  
+  scope "Active" do |download|
+    download.where("expiry_time >= ?", Time.now.yesterday)
+  end
+  scope "Expired" do |download|
+    download.where("expiry_time < ?", Time.now.yesterday)
+  end                                         
+                  
   
-
-  # Configuration for Sidebar Filters
-  filter :resource
-  filter :shopping_cart
-  filter :link_expired, :as => :select
-  filter :expiry_time
+  # Configuration for Sidebar Filters     
+  filter :resource      
+  filter :order
+  filter :times_accessed
+  filter :expiry_time   
   
   
   # Configuration for Downloads Index Page
@@ -28,9 +34,13 @@ ActiveAdmin.register Download do
        download.times_accessed
      end
    end
-   column :link_expired, :sortable => :link_expired do |download|
+   column "Link Expired" do |download|
      div :class => "admin-center-column" do 
-       download.link_expired.yesno
+       if download.expiry_time >= Time.now.yesterday
+         "Active"
+       elsif download.expiry_time < Time.now.yesterday
+         "Expired"
+       end
      end
    end
    column :expiry_time

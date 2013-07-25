@@ -1,8 +1,6 @@
 ActiveAdmin.register OrderTransaction do
   menu :parent => "ORDERS", :priority => 3     
-  config.filters = false       
-  actions :index, :show
-  # config.batch_actions = false      # <TODO>
+  actions :index, :show, :destroy
   scope :all, :default => true
   scope :successful do |transaction|
     transaction.where(:success => true)
@@ -12,12 +10,20 @@ ActiveAdmin.register OrderTransaction do
   end
 
 
+  # Configuration for Sidebar Filters
+  filter :order, :as => :select             
+  filter :success, :as => :select     
+  filter :error_codes
+  filter :amount
+  filter :action 
+
+
   # Configuration for Transactions Index Page
   config.sort_order = "created_at_desc"
   config.per_page = 15
   
   index do  
-    selectable_column     # <TODO> 
+    selectable_column  
     column "Order", :sortable => :order_id do |transaction|
       link_to "##{transaction.order.order_number}", admin_order_path(transaction.order_id)
     end
@@ -32,7 +38,9 @@ ActiveAdmin.register OrderTransaction do
       end
     end  
     column "Error Code" do |transaction|
-      transaction.error_codes if transaction.error_codes != 0
+      div :class => "admin-center-column" do   
+        transaction.error_codes if transaction.error_codes != 0
+      end
     end
     default_actions
   end    

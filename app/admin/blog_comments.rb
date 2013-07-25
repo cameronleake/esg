@@ -10,11 +10,10 @@ ActiveAdmin.register BlogComment do
   
   
   # Configuration for Sidebar Filters
-  filter :comment
-  filter :article
+  filter :article  
   filter :user
   filter :spam, :as => :select
-  filter :created_at
+  filter :body            
 
 
   # Configuration for Blog Comments Index Page  

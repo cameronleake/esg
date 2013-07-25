@@ -1,12 +1,21 @@
 ActiveAdmin.register Resource do
   menu :parent => "RESOURCES", :priority => 2 
-  config.filters = false    
   scope :all, :default => true 
   Category.all.each do |category|
     scope "#{category.name.pluralize}" do |resource|
       resource.where(:category_id => category.id)
     end
-  end  
+  end                         
+  
+  
+  # Configuration for Sidebar Filters   
+  filter :user
+  filter :category
+  filter :price_type, :as => :select, :collection => RESOURCE_PRICE_TYPES   
+  filter :name
+  filter :description
+  filter :price_in_cents
+  filter :number_of_downloads
 
 
   # Configuration for Resources Index Page

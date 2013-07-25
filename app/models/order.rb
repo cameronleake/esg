@@ -37,8 +37,12 @@ class Order < ActiveRecord::Base
   has_many :transactions, :class_name => "OrderTransaction", :dependent => :destroy   
   has_many :downloads, :dependent => :destroy     
 
-  # validate :validate_card, :on => :update   # <TODO>
   after_create :initalize_order
+          
+  
+  def display_name   # Fix for ActiveAdmin Filters
+    "##{self.order_number}"
+  end
   
   
   def initalize_order
