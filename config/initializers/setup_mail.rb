@@ -1,11 +1,11 @@
 require 'development_mail_interceptor'
 
 ActionMailer::Base.smtp_settings = {
-  :address              => "webcloud45.au.syrahost.com",
-  :port                 => 25,
+  :address              => "smtp.mandrillapp.com",
+  :port                 => 587,
   :domain               => "engineeringsurvivalguide.com", 
-  :user_name            => "noreply@engineeringsurvivalguide.com", 
-  :password             => "survive99",
+  :user_name            => "cameronleake7@gmail.com", 
+  :password             => "OXULi_m29JHaU8pME2-VlQ",
   :authentication       => :login,
   :enable_starttls_auto => true
 }

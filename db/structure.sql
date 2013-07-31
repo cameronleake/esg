@@ -438,6 +438,40 @@ ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
 
 
 --
+-- Name: requests; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE requests (
+    id integer NOT NULL,
+    user_id integer,
+    category_id integer,
+    title character varying(255),
+    description character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: requests_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE requests_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE requests_id_seq OWNED BY requests.id;
+
+
+--
 -- Name: resources; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -783,6 +817,13 @@ ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY requests ALTER COLUMN id SET DEFAULT nextval('requests_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY resources ALTER COLUMN id SET DEFAULT nextval('resources_id_seq'::regclass);
 
 
@@ -914,6 +955,14 @@ ALTER TABLE ONLY order_transactions
 
 ALTER TABLE ONLY orders
     ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY requests
+    ADD CONSTRAINT requests_pkey PRIMARY KEY (id);
 
 
 --
@@ -1228,3 +1277,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130718104713');
 INSERT INTO schema_migrations (version) VALUES ('20130718110855');
 
 INSERT INTO schema_migrations (version) VALUES ('20130720055053');
+
+INSERT INTO schema_migrations (version) VALUES ('20130731043859');

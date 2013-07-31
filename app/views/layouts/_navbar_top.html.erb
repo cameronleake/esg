@@ -14,10 +14,11 @@
     			<ul class="nav" role="navigation">
        			<li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Home", root_path %></li>	
       			<li class="<%= 'active' if current_page?(categories_path) %>"><%= link_to "Resources", categories_path %></li>
+      			<li class="<%= 'active' if current_page?(requests_path) %>"><%= link_to "Requests", requests_path %></li>   
       			<li class="<%= 'active' if current_page?(blog_path) %>"><%= link_to "Blog", blog_path %></li>
       			<li class="<%= 'active' if current_page?(faq_path) %>"><%= link_to "FAQ", faq_path %></li>
 	    		</ul>
-	
+	                                                                 
 				<ul class="nav-collapse collapse pull-right">
 		    		<ul class="nav pull-right">
 						<li id="fat-menu" class="dropdown">

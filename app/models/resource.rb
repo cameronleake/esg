@@ -15,7 +15,8 @@ class Resource < ActiveRecord::Base
   attr_accessible :user_id
   attr_accessible :category_id
   attr_accessible :number_of_downloads
-  attr_accessible :number_of_pages    
+  attr_accessible :number_of_pages 
+  validates :category, :user, :name, :description, :price_type, :file, :image_1, presence: true
   belongs_to :user
   belongs_to :category
   has_many :downloads, :dependent => :destroy

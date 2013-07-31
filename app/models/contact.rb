@@ -9,6 +9,11 @@ class Contact < ActiveRecord::Base
   
   def send_contact_form
     ContactMailer.contact_us(self).deliver
-  end
+  end  
+  
+ 
+  def send_contact_notification
+    ContactMailer.contact_notification(self).deliver
+  end      
   
 end

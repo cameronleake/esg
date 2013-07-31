@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
   attr_accessible :password_confirmation
   attr_accessible :email_verified
   attr_accessible :email_verification_token
-  attr_accessible :blog_subscription
-  attr_accessible :resources_subscription
   attr_accessible :avatar  
   attr_accessible :street1
   attr_accessible :street2
@@ -31,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :downloads, :through => :shopping_carts
   has_many :reviews, :dependent => :destroy
   has_many :shopping_carts, :dependent => :destroy
+  has_many :requests
       
     
   def display_name   # Fix for ActiveAdmin Filters

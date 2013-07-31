@@ -1,6 +1,7 @@
 class Category < ActiveRecord::Base
   attr_accessible :name
-  has_many :resources
+  has_many :resources           
+  has_many :requests
   
   
   def resources_count

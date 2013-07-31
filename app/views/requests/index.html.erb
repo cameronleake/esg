@@ -1,0 +1,29 @@
+<div id="container">	
+	<div class="row">
+		
+		<div class="span9">   
+			<div class="page-header">
+		  		<h2>Requested Resources</h2>
+			</div>                                          
+			<br> 
+			<% if @requests %>
+				<% @requests.each do |request| %>
+					<p><strong>Category: </strong><%= request.category.name %></p>
+					<p><%= request.title %></p>
+					<p><%= request.description %></p>
+					<br>
+				<% end %>
+			<% end %>
+
+		</div>
+		
+		<div class="span3" align="center">
+			<%= render "request_index_sidebar" %>  	
+		</div>
+		
+		<div class="span12">
+			<%= render "add_new_request" %> 
+		</div>
+
+	</div>
+</div>

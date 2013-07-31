@@ -11,9 +11,7 @@ Esg::Application.routes.draw do
 
    # USERS / SESSIONS / PASSWORD_RESETS / EMAIL_VERIFICATIONS
    match "profile" => "users#edit"
-   match 'signup' => 'users#new'
-   match 'subscribe_blog' => 'users#subscribe_blog'
-   match 'subscribe_resources' => 'users#subscribe_resources'  
+   match 'signup' => 'users#new' 
    match 'login' => 'sessions#new'
    match 'logout' => 'sessions#destroy'
    get 'reset_password', to: 'password_resets#new', as: 'reset_password'
@@ -36,7 +34,7 @@ Esg::Application.routes.draw do
    end
 
 
-   # CATEGORIES / RESOURCES / REVIEWS
+   # CATEGORIES / RESOURCES / REVIEWS / REQUESTS
    get 'categories/tags/:tag', to: 'categories#index', as: :category_tag
    get 'categories/:id/tags/:tag', to: 'categories#show', as: :show_category_tag
    get 'categories/:category_id/resources/:id/tags/:tag', to: 'resources#show', as: :show_resource_tag
@@ -45,7 +43,8 @@ Esg::Application.routes.draw do
     resources :resources, :only => [:show, :search] do
       resources :reviews, :only => [:new, :create]
     end
-   end
+   end                                          
+   resources :requests
 
 
    # SHOPPING_CARTS / DOWNLOADS
@@ -70,6 +69,11 @@ Esg::Application.routes.draw do
    # CONTACT_TICKETS
    match 'contact' => 'contacts#new'
    resources :contacts, :only => [:new, :create]
+                                                     
+
+   # BULK EMAIL
+   match 'create_campaign' => 'bulk_email#create_campaign' 
+   match 'send_campaign' => 'bulk_email#send_campaign' 
 
 
    # MERCURY_EDITOR

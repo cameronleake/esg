@@ -9,8 +9,9 @@ NUMBER_NEWEST_ARTICLES = 3
 NUMBER_POPULAR_RESOURCES = 4
 
 
-# Mailers
-MAILCHIMP_ESG_BLOG = { :API_key => "46321100908d098dcb744572daac886b-us7", :list_id => "81ad01eabe" }
+# MailChimp 
+MAILCHIMP_API_KEY = "46321100908d098dcb744572daac886b-us7" 
+ESG_MAILING_LIST_ID = "81ad01eabe"
 
 
 # Resources

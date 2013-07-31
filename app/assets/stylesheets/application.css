@@ -14,7 +14,8 @@
  *= require home
  *= require users
  *= require resources
- *= require orders
+ *= require orders   
+ *= require requests
 */
 
 
@@ -77,4 +78,4 @@ html {
 .footer h2 a:hover { 
 	color: #FFFFFF;      
 	text-decoration: none;
-}
+}                      

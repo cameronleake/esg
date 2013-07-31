@@ -21,33 +21,8 @@
 		<% end %>				
 	</div>
 </form>
+<br>    
 <br>
-
-
-<% unless current_user && current_user.blog_subscription %>
-	<div class="page-header">
-	  	<h4>Subscribe</h4>
-	</div>
-	<p>Sign up to receive the latest Blog Posts directly to your inbox!</p>
-	<a href="#blog-subscription" role="button" class="btn btn-warning" data-toggle="modal">Subscribe</a>
- 
-	<!-- Modal -->
-	<div id="blog-subscription" class="modal hide fade blog-subscription-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-header">
-	   	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	    	<h3 id="myModalLabel">The Engineering Survival Guide</h3>
-	  	</div>
- 	
-		<div class="modal-body">
-	   	<p>Subscription to The Engineering Survival Guide Blog is free and will entitle you to receive new articles delivered directly to your inbox!</p></br>
-			<p>You can unsubscribe at any time by changing your subscription preferences in your Profile.</p>
-	  	</div>
- 	
-		<div class="modal-footer">
-	    	<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-			<a href=<%= subscribe_blog_path %> class="btn btn-warning">Subscribe Me</a>
-	  	</div>
-	</div>
-	<br>
-	<br>
-<% end %>
+<%= render "layouts/mailchimp_signup_form" %>
+<br>
+<br>    

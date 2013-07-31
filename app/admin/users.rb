@@ -4,18 +4,10 @@ ActiveAdmin.register User do
   scope :email_not_verified do |users|
     users.where(:email_verified => false)
   end
-  scope :blog_subscriptions do |users|
-    users.where(:blog_subscription => true)
-  end
-  scope :resources_subscriptions do |users|
-    users.where(:resources_subscription => true)
-  end
 
 
   # Configuration for Sidebar Filters
   filter :email_verified, :as => :select
-  filter :blog_subscription, :as => :select
-  filter :resources_subscription, :as => :select
   filter :first_name
   filter :last_name
   filter :email
@@ -45,12 +37,6 @@ ActiveAdmin.register User do
       row :email_verified do |user|
         user.email_verified.yesno
       end
-      row :blog_subscription do |user|
-        user.blog_subscription.yesno
-      end
-      row :resources_subscription do |user|
-        user.resources_subscription.yesno
-      end
       row :created_at
       row :updated_at
       row :password_reset_sent_at
@@ -77,8 +63,6 @@ ActiveAdmin.register User do
      f.input :password
      f.input :password_confirmation
      f.input :email_verified, :as => :select, :include_blank => false
-     f.input :blog_subscription, :as => :select, :include_blank => false
-     f.input :resources_subscription, :as => :select, :include_blank => false
      f.input :avatar, :as => :file  
      f.input :street1
      f.input :street2

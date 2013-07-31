@@ -20,35 +20,8 @@
 			<%= submit_tag "Search", name: nil, :class => "btn btn-primary" %>
 		<% end %>
 	</div>
-</div>
+</div>              
 
-<% unless current_user && current_user.resources_subscription %>
-
-	<div class="page-header">
-	  	<h4>Subscribe</h4>
-	</div>
-	<p>Sign up to receive updates of the latest resources directly to your inbox!</p>
-
-	<a href="#resources-subscription" role="button" class="btn btn-warning" data-toggle="modal">Subscribe</a>
- 
-	<!-- Modal -->
-	<div id="resources-subscription" class="modal hide fade resources-subscription-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-header">
-	   	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	    	<h3 id="myModalLabel">ESG - Resource Centre Subscription</h3>
-	  	</div>
- 	
-		<div class="modal-body">
-	   	<p>Subscription to the ESG - Resource Centre is free and will entitle you to receive a weekly digest of new resources, delivered directly to your inbox!</p></br>
-			<p>You can unsubscribe at any time by changing your subscription preferences in your Profile.</p>
-	  	</div>
- 	
-		<div class="modal-footer">
-	    	<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-			<a href=<%= subscribe_resources_path %> class="btn btn-warning">Subscribe Me</a>
-	  	</div>
-	</div>
-	<br>
-	<br>
-	
-<% end %>
+<%= render "layouts/mailchimp_signup_form" %>
+<br>
+<br>

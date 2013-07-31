@@ -10,9 +10,8 @@
 	  <ul class="nav nav-tabs">
 	    <li class="active"><a href="#user_details" id="tab1" data-toggle="tab"><h4>User Details</h4></a></li>
 	    <li><a href="#password" id="tab2" data-toggle="tab"><h4>Password</h4></a></li>
-	    <li><a href="#subscriptions" id="tab3" data-toggle="tab"><h4>Subscriptions</h4></a></li>
-	    <li><a href="#avatar" id="tab4" data-toggle="tab"><h4>Avatar</h4></a></li>
-	    <li><a href="#downloads" id="tab5" data-toggle="tab"><h4>Downloads</h4></a></li>
+	    <li><a href="#avatar" id="tab3" data-toggle="tab"><h4>Avatar</h4></a></li>
+	    <li><a href="#downloads" id="tab4" data-toggle="tab"><h4>Downloads</h4></a></li>
 	  </ul>
 	
 	  <div class="tab-content">
@@ -23,10 +22,6 @@
 	    <div class="tab-pane" id="password">
 			<%= render :partial => "profile_password", :locals => { :f => f } %>
 		</div>
-
-	    <div class="tab-pane" id="subscriptions">
-			<%= render :partial => "profile_subscriptions", :locals => { :f => f } %>
-	    </div>
 
 	    <div class="tab-pane" id="avatar">
 			<%= render :partial => "profile_avatar", :locals => { :f => f } %>

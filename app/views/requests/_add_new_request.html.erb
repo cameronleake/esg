@@ -1,0 +1,36 @@
+<div class="form-actions">
+	<% if current_user %>
+		<h3>Create a Request:</h3>
+		<%= simple_form_for @request, :html => { :class => 'form-horizontal' } do |f| %>
+			<%= f.input :category_id, as: :select, :collection => @categories %>					
+			<%= f.input :title, :input_html => { :class => 'title-field' } %>					
+			<%= f.input :description, as: :text, :label => "Message", :input_html => { :class => 'description-field' } %>														
+
+		  	<div class="form-actions">
+				<a href="#submit_request" role="button" class="btn btn-primary" data-toggle="modal">Submit</a>
+		  	</div>
+
+			<!-- Modal Window -->
+			<div id="submit_request" class="modal hide fade blog-subscription-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-header">
+			   	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			  	</div>
+
+				<div class="modal-body">
+			   	<p>Are you sure you want to submit this request?</p>
+			  	</div>
+
+				<div class="modal-footer">
+			    	<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+				  	<%= f.button :submit, :value => "Submit Request", :class => 'btn-warning' %>
+			  	</div>
+			</div>
+		<% end %>  			
+	<% else %>
+		<div class="form-horizontal comments-links">
+			<p>Sign up or Login to create a request!</p>
+			<a href=<%= signup_path %> class="btn btn-info">Sign Up</a>
+			<a href=<%= login_path %> class="btn">Login</a>	
+		</div>					
+	<% end %>  
+</div>
