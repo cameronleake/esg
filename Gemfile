@@ -1,11 +1,16 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails'#, '3.2.13'
 gem 'pg'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
+#gem 'bcrypt-ruby'#, '~> 3.0.0'                
+#gem "bcrypt-ruby", :require => "bcrypt" 
+#gem 'bcrypt_ext'
+#gem 'bcrypt-ruby', '3.1.5', :require => 'bcrypt'
+gem 'bcrypt'                          
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'unicorn'
 gem 'capistrano'
@@ -21,7 +26,7 @@ gem "delayed_job_web"
 gem "daemons"
 gem "simple_form"
 gem "carrierwave"           # For image uploading
-gem "rmagick"               # For image editing on upload
+gem "rmagick", '2.13.2'               # For image editing on upload  
 gem "acts-as-taggable-on"   # For blog post tags
 gem "kaminari"              # For pagination
 gem 'pg_search'             # For full-text search using Postgres
