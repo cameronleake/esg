@@ -31,7 +31,7 @@ gem "acts-as-taggable-on"   # For blog post tags
 gem "kaminari"              # For pagination
 gem 'pg_search'             # For full-text search using Postgres
 gem 'rakismet'              # For interacting with the Akisment API for spam filtering 
-gem 'gibbon', git: 'git://github.com/amro/gibbon.git'                # For interacting with the MailChimp API
+#gem 'gibbon', git: 'git://github.com/amro/gibbon.git'                # For interacting with the MailChimp API
 gem 'mercury-rails'         # For editing HTML in the browser
 gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'    # For JS Datatables
 gem 'activemerchant'        # For Paypal Integeration
