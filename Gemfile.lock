@@ -335,7 +335,7 @@ DEPENDENCIES
   activemerchant
   acts-as-taggable-on
   bcrypt
-  bcrypt-ruby (~> 3.0.0)
+  bcrypt-ruby
   bootstrap-sass
   bootswatch-rails
   capistrano
