@@ -58,8 +58,6 @@ GEM
       activesupport (>= 3.0.0)
     arel (3.0.2)
       sass (~> 3.2)
-    bcrypt (3.1.11)
-    bcrypt-ruby (3.0.1)
     bootstrap-sass (3.3.1.0)
       sass (~> 3.2)
     bootswatch-rails (0.4.0)
@@ -335,7 +333,6 @@ DEPENDENCIES
   activemerchant
   acts-as-taggable-on
   bcrypt
-  bcrypt-ruby
   bootstrap-sass
   bootswatch-rails
   capistrano
