@@ -3,7 +3,9 @@ require "delayed/recipes"
 
 server "103.42.224.175", :web, :app, :db, primary: true
 
-set :rails_env, "production" #added for delayed job  
+set :rails_env, "production" #added for delayed job       
+
+set :normalize_asset_timestamps, false #added for cap deploy
 
 set :application, "esg"
 set :user, "deployer"
