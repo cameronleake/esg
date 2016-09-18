@@ -10,7 +10,7 @@ gem 'jquery-rails'
 #gem "bcrypt-ruby", :require => "bcrypt" 
 #gem 'bcrypt_ext'
 #gem 'bcrypt-ruby', '3.1.5', :require => 'bcrypt'
-gem 'bcrypt'                          
+#gem 'bcrypt'                          
 #gem 'bcrypt-ruby'#, '~> 3.0.0'
 gem 'unicorn'
 gem 'capistrano'
@@ -33,7 +33,8 @@ gem 'pg_search'             # For full-text search using Postgres
 gem 'rakismet'              # For interacting with the Akisment API for spam filtering 
 #gem 'gibbon', git: 'git://github.com/amro/gibbon.git'                # For interacting with the MailChimp API
 gem 'mercury-rails'         # For editing HTML in the browser
-gem 'jquery-datatables-rails' #, git: 'git://github.com/rweng/jquery-datatables-rails.git'    # For JS Datatables
+#gem 'jquery-datatables-rails' #, git: 'git://github.com/rweng/jquery-datatables-rails.git'    # For JS Datatables
+gem 'jquery-datatables-rails', '~> 1.12.2'
 gem 'activemerchant'        # For Paypal Integeration
 gem 'country_select'        # For Country Selection DropDowns      
 gem 'groupdate'             # To Records by Date
