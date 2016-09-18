@@ -67,7 +67,7 @@ GEM
       sass (>= 3.2.0)
       thor
     builder (3.0.4)
-    capistrano (2.15.4)
+    capistrano (2.13.5)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -154,7 +154,7 @@ GEM
     haml (4.0.2)
       tilt
     has_scope (0.5.1)
-    highline (1.6.18)
+    highline (1.6.19)
     hike (1.2.2)
     http_parser.rb (0.5.3)
     i18n (0.6.1)
@@ -205,9 +205,9 @@ GEM
     money (5.1.1)
       i18n (~> 0.6.0)
     multi_json (1.7.3)
-    net-scp (1.1.0)
+    net-scp (1.1.1)
       net-ssh (>= 2.6.5)
-    net-sftp (2.1.1)
+    net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.6.7)
     net-ssh-gateway (1.2.0)
@@ -332,7 +332,7 @@ DEPENDENCIES
   acts-as-taggable-on
   bootstrap-sass
   bootswatch-rails
-  capistrano
+  capistrano (= 2.13.5)
   capybara
   carrierwave
   chartkick
