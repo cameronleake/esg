@@ -28,7 +28,7 @@ gem "simple_form"
 gem "carrierwave"           # For image uploading
 gem "rmagick", '2.13.2'               # For image editing on upload  
 gem "acts-as-taggable-on"   # For blog post tags
-gem "kaminari"              # For pagination
+gem "kaminari", '0.13.0'              # For pagination
 gem 'pg_search'             # For full-text search using Postgres
 gem 'rakismet'              # For interacting with the Akisment API for spam filtering 
 #gem 'gibbon', git: 'git://github.com/amro/gibbon.git'                # For interacting with the MailChimp API
