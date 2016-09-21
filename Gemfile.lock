@@ -349,7 +349,7 @@ DEPENDENCIES
   guard-spork
   jquery-datatables-rails (~> 1.12.2)
   jquery-rails
-  kaminari
+  kaminari (= 0.14.1)
   launchy
   less-rails
   mandrill-api
