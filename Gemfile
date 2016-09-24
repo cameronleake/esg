@@ -10,10 +10,10 @@ gem 'jquery-rails'
 #gem "bcrypt-ruby", :require => "bcrypt" 
 #gem 'bcrypt_ext'
 #gem 'bcrypt-ruby', '3.1.5', :require => 'bcrypt'
-#gem 'bcrypt'                          
-#gem 'bcrypt-ruby'#, '~> 3.0.0'
+gem 'bcrypt'                          
+gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'unicorn'
-gem 'capistrano', '2.13.5'
+gem 'capistrano'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-sass'
 gem 'bootswatch-rails'
@@ -28,13 +28,12 @@ gem "simple_form"
 gem "carrierwave"           # For image uploading
 gem "rmagick", '2.13.2'               # For image editing on upload  
 gem "acts-as-taggable-on"   # For blog post tags
-gem "kaminari", '0.14.1'              # For pagination
+gem "kaminari"              # For pagination
 gem 'pg_search'             # For full-text search using Postgres
 gem 'rakismet'              # For interacting with the Akisment API for spam filtering 
-#gem 'gibbon', git: 'git://github.com/amro/gibbon.git'                # For interacting with the MailChimp API
+gem 'gibbon', git: 'git://github.com/amro/gibbon.git'                # For interacting with the MailChimp API
 gem 'mercury-rails'         # For editing HTML in the browser
-#gem 'jquery-datatables-rails' #, git: 'git://github.com/rweng/jquery-datatables-rails.git'    # For JS Datatables
-gem 'jquery-datatables-rails', '~> 1.12.2'
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'    # For JS Datatables
 gem 'activemerchant'        # For Paypal Integeration
 gem 'country_select'        # For Country Selection DropDowns      
 gem 'groupdate'             # To Records by Date

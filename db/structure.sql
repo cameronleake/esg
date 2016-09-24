@@ -1116,8 +1116,6 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO schema_migrations (version) VALUES ('20130506134334');
-
 INSERT INTO schema_migrations (version) VALUES ('20130507112135');
 
 INSERT INTO schema_migrations (version) VALUES ('20130507130039');
@@ -1187,6 +1185,8 @@ INSERT INTO schema_migrations (version) VALUES ('20130521135242');
 INSERT INTO schema_migrations (version) VALUES ('20130521140527');
 
 INSERT INTO schema_migrations (version) VALUES ('20130521141044');
+
+INSERT INTO schema_migrations (version) VALUES ('20130523134334');
 
 INSERT INTO schema_migrations (version) VALUES ('20130523135439');
 
